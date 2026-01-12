@@ -6,10 +6,17 @@
 <style>
     .form-section {
         background: white;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 25px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
+    }
+
+    .form-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .form-section h5 {
@@ -18,15 +25,42 @@
         color: #2b2b2b;
         margin-bottom: 20px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #0f7b2a;
+        border-bottom: 2px solid #4A7C2C;
     }
 
     .current-image {
         max-width: 400px;
         height: auto;
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         margin-bottom: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .current-image:hover {
+        box-shadow: 0 6px 25px rgba(74, 124, 44, 0.2);
+        transform: scale(1.02);
+    }
+
+    .btn-primary {
+        background: #4A7C2C;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #355719;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(74, 124, 44, 0.3);
+    }
+
+    .btn-secondary {
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 </style>
 @endpush

@@ -4,11 +4,55 @@
 
 @push('styles')
 <style>
-    /* Hero Section */
+    /* Hero Carousel Section */
+    .hero-carousel {
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+    }
+    
+    .hero-carousel .carousel-item {
+        height: 600px;
+        position: relative;
+    }
+    
+    .hero-carousel .carousel-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(45, 80, 22, 0.85), rgba(74, 124, 44, 0.85));
+        z-index: 1;
+    }
+    
+    .hero-carousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation: kenburns 10s ease-out infinite;
+    }
+    
+    @keyframes kenburns {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .hero-carousel .carousel-caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 90%;
+        max-width: 800px;
+        text-align: center;
+    }
+    
     .hero-section {
-        background: linear-gradient(135deg, rgba(45, 80, 22, 0.9), rgba(74, 124, 44, 0.9)), 
-                    url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920') center/cover;
-        min-height: 500px;
+        min-height: 600px;
         display: flex;
         align-items: center;
         color: white;
@@ -19,7 +63,7 @@
     .hero-content {
         position: relative;
         z-index: 2;
-        animation: fadeInUp 1s ease;
+        animation: fadeInUp 1.2s ease;
     }
     
     .hero-title {
@@ -217,31 +261,114 @@
 </div>
 @endif
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 hero-content">
-                <h1 class="hero-title">Selamat Datang di Website<br>Desa Badran Sari</h1>
-                <p class="hero-subtitle">Portal Informasi & Layanan Digital untuk Masyarakat Desa</p>
-                <div class="d-flex flex-wrap gap-3">
-                    @auth
-                        <a href="{{ route('layanan.index') }}" class="btn btn-light btn-lg mr-3">
-                            <i class="fas fa-file-alt"></i> Layanan Online
+<!-- Hero Carousel Section -->
+<div id="heroCarousel" class="carousel slide hero-carousel" data-ride="carousel" data-interval="5000">
+    <ol class="carousel-indicators">
+        <li data-target="#heroCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#heroCarousel" data-slide-to="1"></li>
+        <li data-target="#heroCarousel" data-slide-to="2"></li>
+        <li data-target="#heroCarousel" data-slide-to="3"></li>
+    </ol>
+    
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=600&fit=crop" alt="Pemandangan Desa" class="d-block w-100">
+            <div class="carousel-caption">
+                <div class="hero-content">
+                    <h1 class="hero-title">Selamat Datang di Website<br>Desa Badran Sari</h1>
+                    <p class="hero-subtitle">Portal Informasi & Layanan Digital untuk Masyarakat Desa</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        @auth
+                            <a href="{{ route('layanan.index') }}" class="btn btn-light btn-lg mr-3">
+                                <i class="fas fa-file-alt"></i> Layanan Online
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-light btn-lg mr-3">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        @endauth
+                        <a href="{{ route('profil-desa') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-info-circle"></i> Profil Desa
                         </a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-light btn-lg mr-3">
-                            <i class="fas fa-sign-in-alt"></i> Login
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1920&h=600&fit=crop" alt="Pertanian Desa" class="d-block w-100">
+            <div class="carousel-caption">
+                <div class="hero-content">
+                    <h1 class="hero-title">Desa Maju, Masyarakat Sejahtera</h1>
+                    <p class="hero-subtitle">Membangun Desa Bersama untuk Masa Depan yang Lebih Baik</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a href="{{ route('profil-desa') }}" class="btn btn-light btn-lg mr-3">
+                            <i class="fas fa-info-circle"></i> Tentang Kami
                         </a>
-                    @endauth
-                    <a href="{{ route('profil-desa') }}" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-info-circle"></i> Profil Desa
-                    </a>
+                        <a href="{{ route('berita.index') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-newspaper"></i> Berita Desa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&h=600&fit=crop" alt="Alam Desa" class="d-block w-100">
+            <div class="carousel-caption">
+                <div class="hero-content">
+                    <h1 class="hero-title">Pelayanan Digital Terpadu</h1>
+                    <p class="hero-subtitle">Kemudahan Akses Layanan Administrasi Secara Online</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        @auth
+                            <a href="{{ route('layanan.index') }}" class="btn btn-light btn-lg mr-3">
+                                <i class="fas fa-laptop"></i> Layanan Digital
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-light btn-lg mr-3">
+                                <i class="fas fa-sign-in-alt"></i> Masuk Sekarang
+                            </a>
+                        @endauth
+                        <a href="{{ route('lembaga-desa') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-building"></i> Lembaga Desa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4 -->
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920&h=600&fit=crop" alt="Gotong Royong" class="d-block w-100">
+            <div class="carousel-caption">
+                <div class="hero-content">
+                    <h1 class="hero-title">Transparansi & Akuntabilitas</h1>
+                    <p class="hero-subtitle">Informasi Publik yang Terbuka dan Dapat Dipertanggungjawabkan</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a href="{{ route('berita.index') }}" class="btn btn-light btn-lg mr-3">
+                            <i class="fas fa-newspaper"></i> Info Terkini
+                        </a>
+                        <a href="{{ route('profil-desa') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-chart-bar"></i> Data Desa
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+    
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
 <!-- Statistik Desa -->
 <section class="stats-section">
@@ -364,11 +491,11 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title">Peta Wilayah Desa</h2>
-            <p class="text-muted">Lokasi dan batas wilayah Desa Badran Sari</p>
+            <p class="text-muted">Lokasi Desa Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
         </div>
         <div class="map-container">
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d107.57311709999999!3d-6.903444399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31783.89!2d105.1526!3d-4.9526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40c0c7e7bb7c43%3A0x4b3e4e8e5e5e5e5e!2sPunggur%2C%20Lampung%20Tengah%20Regency%2C%20Lampung!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" 
                 width="100%" 
                 height="450" 
                 style="border:0;" 

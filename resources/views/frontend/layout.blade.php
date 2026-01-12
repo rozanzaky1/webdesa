@@ -21,51 +21,154 @@
         /* Navbar Styling */
         .navbar-custom {
             background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
         }
         
         .navbar-brand {
-            font-size: 1.4rem;
-            font-weight: 700;
             color: #fff !important;
             display: flex;
             align-items: center;
+            padding: 0.5rem 0;
         }
         
         .navbar-brand img {
-            height: 45px;
-            margin-right: 12px;
+            height: 50px;
+            width: 50px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover img {
+            transform: rotate(10deg) scale(1.05);
+        }
+        
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        
+        .brand-location {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            margin-top: -2px;
+        }
+        
+        .navbar-nav {
+            align-items: center;
         }
         
         .navbar-nav .nav-link {
             color: rgba(255,255,255,0.9) !important;
             font-weight: 500;
-            margin: 0 8px;
+            font-size: 0.95rem;
+            margin: 0 5px;
             padding: 8px 16px !important;
-            transition: all 0.3s;
-            border-radius: 5px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            position: relative;
         }
         
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            background: rgba(255,255,255,0.15);
+        .navbar-nav .nav-link i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background: rgba(255,255,255,0.2);
             color: #fff !important;
+            transform: translateY(-1px);
+        }
+        
+        .navbar-nav .nav-link.active {
+            background: rgba(255,255,255,0.25);
+            color: #fff !important;
+            font-weight: 600;
+        }
+        
+        .navbar-nav .dropdown-toggle::after {
+            margin-left: 8px;
+        }
+        
+        .dropdown-menu {
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border: none;
+            margin-top: 10px;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dropdown-item {
+            padding: 10px 20px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(45, 80, 22, 0.1);
+            padding-left: 25px;
+        }
+        
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
         }
         
         .btn-login {
             background: #fff;
             color: #2d5016;
             font-weight: 600;
-            padding: 8px 20px;
+            padding: 8px 24px;
             border-radius: 25px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .btn-login:hover {
-            background: #f8f9fa;
+            background: transparent;
+            color: #fff;
+            border-color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+        }
+        
+        /* Responsive Navbar */
+        @media (max-width: 991px) {
+            .navbar-nav .nav-link {
+                margin: 5px 0;
+            }
+            .btn-login {
+                margin-top: 10px;
+                display: inline-block;
+            }
+            .brand-name {
+                font-size: 1.1rem;
+            }
+            .brand-location {
+                font-size: 0.7rem;
+            }
         }
         
         /* Footer Styling */
@@ -158,14 +261,17 @@
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo-desa.png') }}" alt="Logo" onerror="this.src='https://via.placeholder.com/45x45/2d5016/ffffff?text=DS'">
-                Desa Badran Sari
+                <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%232d5016%22/%3E%3Ctext x=%2250%22 y=%2260%22 font-size=%2240%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22%3EDS%3C/text%3E%3C/svg%3E'">
+                <div class="brand-text">
+                    <span class="brand-name">Desa Badran Sari</span>
+                    <span class="brand-location">Kec. Punggur, Kab. Lampung Tengah</span>
+                </div>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"><i class="fas fa-bars text-white"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto align-items-center">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="fas fa-home"></i> Beranda
@@ -186,11 +292,6 @@
                             <i class="fas fa-newspaper"></i> Berita
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('peta-desa') ? 'active' : '' }}" href="{{ route('peta-desa') }}">
-                            <i class="fas fa-map-marked-alt"></i> Peta
-                        </a>
-                    </li>
                     
                     @auth
                         <li class="nav-item">
@@ -199,10 +300,10 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                 @if(Auth::user()->role === 'admin')
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">
                                         <i class="fas fa-tachometer-alt"></i> Dashboard Admin
@@ -213,7 +314,7 @@
                                     <i class="fas fa-history"></i> Riwayat Pengajuan
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form action="{{ route('logout') }}" method="POST">
+                                <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">
                                         <i class="fas fa-sign-out-alt"></i> Logout

@@ -115,12 +115,12 @@
             <tr>
                 <td width="150">Nama</td>
                 <td width="20">:</td>
-                <td><strong>{{ $submission['applicant_name'] }}</strong></td>
+                <td><strong>{{ $submission['name'] ?? $submission['applicant_name'] ?? '-' }}</strong></td>
             </tr>
             <tr>
                 <td>NIK</td>
                 <td>:</td>
-                <td>{{ $submission['applicant_nik'] }}</td>
+                <td>{{ $submission['nik'] ?? $submission['applicant_nik'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Tempat/Tgl. Lahir</td>
@@ -163,7 +163,7 @@
             <p>Badran Sari, {{ date('d F Y') }}</p>
             <p style="font-weight: bold;">Kepala Desa Badran Sari</p>
             <div class="signature-line">
-                <p style="font-weight: bold;">(__________________)</p>
+                <p style="font-weight: bold;">Pak Suronto</p>
             </div>
         </div>
     </div>

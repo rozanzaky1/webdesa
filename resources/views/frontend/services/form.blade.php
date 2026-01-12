@@ -28,12 +28,65 @@
                     <form action="{{ route('layanan.store') }}" method="POST">
                         @csrf
                         
+                        <!-- Pilih Pemohon Section -->
+                        @if($resident && $familyMembers->count() > 0)
+                        <div class="alert alert-success mb-4">
+                            <h6 class="font-weight-bold mb-3">
+                                <i class="fas fa-users"></i> Pilih Pemohon Surat
+                            </h6>
+                            <div class="form-group mb-0">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input applicant-radio" 
+                                           type="radio" 
+                                           name="applicant_type" 
+                                           id="self" 
+                                           value="self" 
+                                           checked
+                                           data-nik="{{ $resident->nik }}"
+                                           data-name="{{ $resident->name }}"
+                                           data-gender="{{ $resident->gender }}"
+                                           data-birth-place="{{ $resident->birth_place }}"
+                                           data-birth-date="{{ $resident->birth_date ? \Carbon\Carbon::parse($resident->birth_date)->format('d-m-Y') : '' }}"
+                                           data-address="{{ $resident->address }}"
+                                           data-occupation="{{ $resident->occupation }}"
+                                           data-phone="{{ $resident->phone }}">
+                                    <label class="form-check-label" for="self">
+                                        <strong>Diri Sendiri</strong> - {{ $resident->name }} ({{ $resident->nik }})
+                                    </label>
+                                </div>
+                                @foreach($familyMembers as $member)
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input applicant-radio" 
+                                           type="radio" 
+                                           name="applicant_type" 
+                                           id="member_{{ $member->id }}" 
+                                           value="{{ $member->id }}"
+                                           data-nik="{{ $member->nik }}"
+                                           data-name="{{ $member->name }}"
+                                           data-gender="{{ $member->gender }}"
+                                           data-birth-place="{{ $member->birth_place }}"
+                                           data-birth-date="{{ $member->birth_date ? \Carbon\Carbon::parse($member->birth_date)->format('d-m-Y') : '' }}"
+                                           data-address="{{ $member->address }}"
+                                           data-occupation="{{ $member->occupation }}"
+                                           data-phone="{{ $member->phone }}">
+                                    <label class="form-check-label" for="member_{{ $member->id }}">
+                                        <strong>Anggota Keluarga</strong> - {{ $member->name }} ({{ $member->nik }})
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
+                            <input type="hidden" name="resident_id" id="resident_id" value="">
+                        </div>
+                        @endif
+
                         <div class="form-group mb-3">
                             <label class="font-weight-bold">Nama Lengkap <span class="text-danger">*</span></label>
                             <input type="text" 
                                    name="name" 
+                                   id="applicant_name"
                                    class="form-control @error('name') is-invalid @enderror" 
-                                   value="{{ old('name', auth()->user()->name) }}" 
+                                   value="{{ old('name', $resident->name ?? auth()->user()->name) }}" 
+                                   readonly
                                    required>
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -44,14 +97,110 @@
                             <label class="font-weight-bold">NIK <span class="text-danger">*</span></label>
                             <input type="text" 
                                    name="nik" 
+                                   id="applicant_nik"
                                    class="form-control @error('nik') is-invalid @enderror" 
-                                   value="{{ old('nik') }}" 
+                                   value="{{ old('nik', $resident->nik ?? '') }}" 
                                    placeholder="Masukkan NIK 16 digit"
                                    maxlength="16"
+                                   readonly
                                    required>
                             @error('nik')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">Jenis Kelamin <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="gender" 
+                                           id="applicant_gender"
+                                           class="form-control @error('gender') is-invalid @enderror" 
+                                           value="{{ old('gender', $resident->gender ?? '') }}" 
+                                           readonly
+                                           required>
+                                    @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">Tempat Lahir <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="birth_place" 
+                                           id="applicant_birth_place"
+                                           class="form-control @error('birth_place') is-invalid @enderror" 
+                                           value="{{ old('birth_place', $resident->birth_place ?? '') }}" 
+                                           readonly
+                                           required>
+                                    @error('birth_place')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Tanggal Lahir <span class="text-danger">*</span></label>
+                            <input type="text" 
+                                   name="birth_date" 
+                                   id="applicant_birth_date"
+                                   class="form-control @error('birth_date') is-invalid @enderror" 
+                                   value="{{ old('birth_date', $resident->birth_date ? \Carbon\Carbon::parse($resident->birth_date)->format('d-m-Y') : '') }}" 
+                                   placeholder="DD-MM-YYYY"
+                                   readonly
+                                   required>
+                            @error('birth_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Alamat Lengkap <span class="text-danger">*</span></label>
+                            <textarea name="address" 
+                                      id="applicant_address"
+                                      class="form-control @error('address') is-invalid @enderror" 
+                                      rows="3" 
+                                      readonly
+                                      required>{{ old('address', $resident->address ?? '') }}</textarea>
+                            @error('address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">Pekerjaan <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="occupation" 
+                                           id="applicant_occupation"
+                                           class="form-control @error('occupation') is-invalid @enderror" 
+                                           value="{{ old('occupation', $resident->occupation ?? '') }}" 
+                                           readonly
+                                           required>
+                                    @error('occupation')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">No. Telepon <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           name="phone" 
+                                           id="applicant_phone"
+                                           class="form-control @error('phone') is-invalid @enderror" 
+                                           value="{{ old('phone', $resident->phone ?? '') }}" 
+                                           readonly
+                                           required>
+                                    @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="form-group mb-3">
@@ -140,6 +289,12 @@
     color: #2d5016;
 }
 
+.alert-success {
+    background-color: #e8f5e9;
+    border-color: #4a7c2c;
+    color: #2d5016;
+}
+
 .card {
     border: none;
     border-radius: 10px;
@@ -150,5 +305,70 @@
     border-bottom: none;
     padding: 1.25rem 1.5rem;
 }
+
+.form-check-input:checked {
+    background-color: #4a7c2c;
+    border-color: #4a7c2c;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const applicantRadios = document.querySelectorAll('.applicant-radio');
+    const residentIdInput = document.getElementById('resident_id');
+    const nameInput = document.getElementById('applicant_name');
+    const nikInput = document.getElementById('applicant_nik');
+    const genderInput = document.getElementById('applicant_gender');
+    const birthPlaceInput = document.getElementById('applicant_birth_place');
+    const birthDateInput = document.getElementById('applicant_birth_date');
+    const addressInput = document.getElementById('applicant_address');
+    const occupationInput = document.getElementById('applicant_occupation');
+    const phoneInput = document.getElementById('applicant_phone');
+
+    // Initialize with selected value
+    const selectedRadio = document.querySelector('.applicant-radio:checked');
+    if (selectedRadio) {
+        updateFormFields(selectedRadio);
+    }
+
+    // Handle radio change
+    applicantRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                updateFormFields(this);
+            }
+        });
+    });
+
+    function updateFormFields(radio) {
+        const nik = radio.dataset.nik || '';
+        const name = radio.dataset.name || '';
+        const gender = radio.dataset.gender || '';
+        const birthPlace = radio.dataset.birthPlace || '';
+        const birthDate = radio.dataset.birthDate || '';
+        const address = radio.dataset.address || '';
+        const occupation = radio.dataset.occupation || '';
+        const phone = radio.dataset.phone || '';
+
+        // Update form fields
+        if (nameInput) nameInput.value = name;
+        if (nikInput) nikInput.value = nik;
+        if (genderInput) genderInput.value = gender;
+        if (birthPlaceInput) birthPlaceInput.value = birthPlace;
+        if (birthDateInput) birthDateInput.value = birthDate;
+        if (addressInput) addressInput.value = address;
+        if (occupationInput) occupationInput.value = occupation;
+        if (phoneInput) phoneInput.value = phone;
+
+        // Update resident_id (for self, use empty; for family member, use member ID)
+        if (residentIdInput) {
+            if (radio.value === 'self') {
+                residentIdInput.value = '';
+            } else {
+                residentIdInput.value = radio.value;
+            }
+        }
+    }
+});
+</script>
 @endsection

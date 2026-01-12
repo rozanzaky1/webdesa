@@ -1,180 +1,126 @@
-<style>
-    .custom-sidebar {
-        width: 250px;
-        background: #1f1c1d;
-        min-height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        overflow-y: auto;
-    }
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    .sidebar-header {
-        padding: 20px 15px;
-        text-align: center;
-        border-bottom: 1px solid #333;
-    }
-
-    .sidebar-logo {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 12px;
-        background: #0f7b2a;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .sidebar-logo img {
-        width: 45px;
-        height: 45px;
-        object-fit: contain;
-    }
-
-    .sidebar-title {
-        font-size: 11px;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: 0.5px;
-        line-height: 1.4;
-        text-transform: uppercase;
-        margin-bottom: 2px;
-    }
-
-    .sidebar-subtitle {
-        font-size: 9px;
-        font-weight: 600;
-        color: #b0b0b0;
-        letter-spacing: 0.3px;
-        line-height: 1.3;
-        text-transform: uppercase;
-    }
-
-    .sidebar-menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .sidebar-menu li {
-        border-bottom: 1px solid #2b2728;
-    }
-
-    .sidebar-menu a {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 20px;
-        color: #d6d6d6;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-        transition: background 0.2s;
-    }
-
-    .sidebar-menu a:hover {
-        background: #2a2728;
-        color: #fff;
-    }
-
-    .sidebar-menu a.active {
-        background: #0f7b2a;
-        color: #fff;
-    }
-
-    .sidebar-menu .dropdown-arrow {
-        font-size: 10px;
-        transition: transform 0.3s;
-    }
-
-    .sidebar-menu .dropdown-arrow.expanded {
-        transform: rotate(180deg);
-    }
-
-    .sidebar-submenu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        background: #191718;
-        display: none;
-    }
-
-    .sidebar-submenu.show {
-        display: block;
-    }
-
-    .sidebar-submenu a {
-        padding: 12px 20px 12px 40px;
-        font-size: 12px;
-    }
-</style>
-
-<ul class="navbar-nav custom-sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar Header -->
-    <div class="sidebar-header">
-        <div class="sidebar-logo">
-            <i class="fas fa-landmark" style="color: #fff; font-size: 28px;"></i>
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}" style="flex-direction: column; padding: 0.8rem 0; height: auto; min-height: 4.375rem;">
+        <div class="sidebar-brand-icon" style="margin-bottom: 0.3rem;">
+            <i class="fas fa-landmark" style="font-size: 1.5rem;"></i>
         </div>
-        <div class="sidebar-title">DESA BADRAN SARI</div>
-        <div class="sidebar-subtitle">KECAMATAN PUNGGUR</div>
-        <div class="sidebar-subtitle">KABUPATEN LAMPUNG TENGAH</div>
+        <div class="sidebar-brand-text" style="font-size: 0.7rem; line-height: 1.2; text-align: center; padding: 0 0.5rem;">
+            <div style="font-weight: 700; margin-bottom: 0.1rem;">DESA BADRAN SARI</div>
+            <div style="font-size: 0.6rem; font-weight: 400; opacity: 0.9;">Kecamatan Punggur</div>
+            <div style="font-size: 0.6rem; font-weight: 400; opacity: 0.9;">Kabupaten Lampung Tengah</div>
+        </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item {{ Request::is('dashboard') || Request::is('/') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Data Desa
     </div>
 
-    <!-- Sidebar Menu -->
-    <ul class="sidebar-menu">
-        <li>
-            <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard') || Request::is('/') ? 'active' : '' }}">
-                BERANDA
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('village-profile.index') }}" class="{{ Request::is('village-profile*') ? 'active' : '' }}">
-                PROFIL DESA
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('village-institutions.index') }}" class="{{ Request::is('village-institutions*') ? 'active' : '' }}">
-                LEMBAGA DESA
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('news.index') }}" class="{{ Request::is('news*') ? 'active' : '' }}">
-                BERITA
-            </a>
-        </li>
-        <li>
-            <a href="#" onclick="toggleDropdown(event, 'layanan')">
-                <span>LAYANAN</span>
-                <i class="fas fa-chevron-down dropdown-arrow" id="arrow-layanan"></i>
-            </a>
-            <ul class="sidebar-submenu" id="submenu-layanan">
-                <li><a href="{{ route('letter-archive.index') }}" class="{{ Request::is('letter-archive*') ? 'active' : '' }}">Surat Keterangan</a></li>
-                <li><a href="{{ route('online-submission.index') }}" class="{{ Request::is('online-submission*') ? 'active' : '' }}">Pengajuan Online</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" onclick="toggleDropdown(event, 'kependudukan')">
-                <span>KEPENDUDUKAN</span>
-                <i class="fas fa-chevron-down dropdown-arrow" id="arrow-kependudukan"></i>
-            </a>
-            <ul class="sidebar-submenu" id="submenu-kependudukan">
-                <li><a href="{{ route('residents.index') }}" class="{{ Request::is('residents*') ? 'active' : '' }}">Penduduk</a></li>
-                <li><a href="{{ route('families.index') }}" class="{{ Request::is('families*') ? 'active' : '' }}">Keluarga</a></li>
-                <li><a href="{{ route('hamlets.index') }}" class="{{ Request::is('hamlets*') ? 'active' : '' }}">Dusun</a></li>
-            </ul>
-        </li>
-    </ul>
-</ul>
+    <!-- Nav Item - Profil Desa -->
+    <li class="nav-item {{ Request::is('village-profile*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('village-profile.index') }}">
+            <i class="fas fa-fw fa-building"></i>
+            <span>Profil Desa</span></a>
+    </li>
 
-<script>
-    function toggleDropdown(event, id) {
-        event.preventDefault();
-        const submenu = document.getElementById('submenu-' + id);
-        const arrow = document.getElementById('arrow-' + id);
-        submenu.classList.toggle('show');
-        arrow.classList.toggle('expanded');
-    }
-</script>
+    <!-- Nav Item - Lembaga Desa -->
+    <li class="nav-item {{ Request::is('village-institutions*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('village-institutions.index') }}">
+            <i class="fas fa-fw fa-handshake"></i>
+            <span>Lembaga Desa</span></a>
+    </li>
+
+    <!-- Nav Item - Berita -->
+    <li class="nav-item {{ Request::is('news*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('news.index') }}">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Berita</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Kependudukan
+    </div>
+
+    <!-- Nav Item - Data Penduduk Collapse Menu -->
+    <li class="nav-item {{ Request::is('residents*') || Request::is('families*') || Request::is('hamlets*') ? 'active' : '' }}">
+        <a class="nav-link {{ Request::is('residents*') || Request::is('families*') || Request::is('hamlets*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseKependudukan"
+            aria-expanded="{{ Request::is('residents*') || Request::is('families*') || Request::is('hamlets*') ? 'true' : 'false' }}" aria-controls="collapseKependudukan">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Penduduk</span>
+        </a>
+        <div id="collapseKependudukan" class="collapse {{ Request::is('residents*') || Request::is('families*') || Request::is('hamlets*') ? 'show' : '' }}" aria-labelledby="headingKependudukan" data-parent="#accordionSidebar">
+            <div class="bg-white py-1 collapse-inner rounded">
+                <a class="collapse-item {{ Request::is('residents*') ? 'active' : '' }}" href="{{ route('residents.index') }}">Penduduk</a>
+                <a class="collapse-item {{ Request::is('families*') ? 'active' : '' }}" href="{{ route('families.index') }}">Keluarga</a>
+                <a class="collapse-item {{ Request::is('hamlets*') ? 'active' : '' }}" href="{{ route('hamlets.index') }}">Dusun</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Layanan
+    </div>
+
+    <!-- Nav Item - Layanan Collapse Menu -->
+    <li class="nav-item {{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'active' : '' }}">
+        <a class="nav-link {{ Request::is('letter-archive*') || Request::is('online-submission*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseLayanan"
+            aria-expanded="{{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'true' : 'false' }}" aria-controls="collapseLayanan">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Surat & Dokumen</span>
+        </a>
+        <div id="collapseLayanan" class="collapse {{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'show' : '' }}" aria-labelledby="headingLayanan" data-parent="#accordionSidebar">
+            <div class="bg-white py-1 collapse-inner rounded">
+                <a class="collapse-item {{ Request::is('letter-archive*') ? 'active' : '' }}" href="{{ route('letter-archive.index') }}">Surat Keterangan</a>
+                <a class="collapse-item {{ Request::is('online-submission*') ? 'active' : '' }}" href="{{ route('online-submission.index') }}">Pengajuan Online</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Verifikasi
+    </div>
+
+    <!-- Nav Item - Verifikasi User -->
+    <li class="nav-item {{ Request::is('user-verification*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('user-verification.index') }}">
+            <i class="fas fa-fw fa-user-check"></i>
+            <span>Verifikasi User</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->

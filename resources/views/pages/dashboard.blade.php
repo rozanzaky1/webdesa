@@ -7,7 +7,7 @@
 <style>
     /* Dashboard Container */
     .dashboard-container {
-        background: #f4f6f9;
+        background: transparent;
         min-height: 100vh;
         padding: 20px;
     }
@@ -34,18 +34,18 @@
     /* Stat Card Styling */
     .stat-card {
         width: 260px;
-        border-radius: 6px;
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
         color: white;
     }
 
     .stat-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
     }
 
     /* Card Body */
@@ -117,40 +117,76 @@
         font-size: 11px;
     }
 
-    /* Card Colors */
-    .card-purple { background: #685bc7; }
-    .card-cyan { background: #00b5f2; }
-    .card-green { background: #009f52; }
-    .card-orange { background: #f1a52a; }
-    .card-teal { background: #15b1b8; }
+    /* Card Colors - Subtle & Elegant */
+    .icon-primary {
+        background: #f0f5ed;
+        color: #556b2f;
+    }
+
+    .icon-info {
+        background: #ebf5fb;
+        color: #3498db;
+    }
+
+    .icon-success {
+        background: #eafaf1;
+        color: #27ae60;
+    }
+
+    .icon-warning {
+        background: #fef5e7;
+        color: #f39c12;
+    }
+
+    .icon-danger {
+        background: #fadbd8;
+        color: #e74c3c;
+    }
+
+    /* Colorful Card Variations - Harmonious with Olive Green Theme */
+    .stat-card.card-purple {
+        background: #6c63ff;
+    }
+    
+    .stat-card.card-cyan {
+        background: #17a2b8;
+    }
+    
+    .stat-card.card-green {
+        background: #4A7C2C;
+    }
+    
+    .stat-card.card-orange {
+        background: #fd7e14;
+    }
+    
+    .stat-card.card-teal {
+        background: #20c997;
+    }
 
     /* Responsive */
     @media (max-width: 1200px) {
         .stats-grid {
-            gap: 15px;
-        }
-        .stat-card {
-            width: calc(50% - 8px);
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         }
     }
 
     @media (max-width: 768px) {
-        .stat-card {
-            width: 100%;
+        .stats-grid {
+            grid-template-columns: 1fr;
         }
         
         .stat-value {
-            font-size: 32px;
+            font-size: 24px;
+        }
+
+        .stat-icon-wrapper {
+            width: 42px;
+            height: 42px;
         }
 
         .stat-icon {
-            font-size: 36px;
-        }
-    }
-
-    @media (min-width: 1400px) {
-        .stat-card {
-            width: 280px;
+            font-size: 18px;
         }
     }
 </style>

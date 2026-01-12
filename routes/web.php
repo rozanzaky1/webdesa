@@ -13,6 +13,8 @@ use App\Http\Controllers\UserSubmissionController;
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Frontend Routes (Public Access)
@@ -24,7 +26,6 @@ use App\Http\Controllers\Frontend\ServiceController as FrontendServiceController
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profil-desa', [HomeController::class, 'profile'])->name('profil-desa');
 Route::get('/lembaga-desa', [HomeController::class, 'institutions'])->name('lembaga-desa');
-Route::get('/peta-desa', [HomeController::class, 'map'])->name('peta-desa');
 
 // News Routes (Public)
 Route::get('/berita', [FrontendNewsController::class, 'index'])->name('berita.index');
@@ -98,6 +99,12 @@ Route::get('/news/{id}/edit', [App\Http\Controllers\NewsController::class, 'edit
 Route::put('/news/{id}', [App\Http\Controllers\NewsController::class, 'update'])->name('news.update');
 Route::delete('/news/{id}', [App\Http\Controllers\NewsController::class, 'destroy'])->name('news.destroy');
 Route::patch('/news/{id}/toggle-featured', [App\Http\Controllers\NewsController::class, 'toggleFeatured'])->name('news.toggle-featured');
+
+// User Verification - Verifikasi User Warga
+Route::get('/user-verification', [App\Http\Controllers\UserVerificationController::class, 'index'])->name('user-verification.index');
+Route::post('/user-verification/{id}/approve', [App\Http\Controllers\UserVerificationController::class, 'approve'])->name('user-verification.approve');
+Route::post('/user-verification/{id}/reject', [App\Http\Controllers\UserVerificationController::class, 'reject'])->name('user-verification.reject');
+Route::delete('/user-verification/{id}', [App\Http\Controllers\UserVerificationController::class, 'destroy'])->name('user-verification.destroy');
 
 // Letter Archive - Arsip Surat Keterangan
 Route::get('/letter-archive', [App\Http\Controllers\LetterArchiveController::class, 'index'])->name('letter-archive.index');

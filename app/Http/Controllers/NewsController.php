@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
-    private $newsPath = 'village_news.json';
+    private $newsPath = 'news.json';
     private $categoriesPath = 'news_categories.json';
 
     public function index(Request $request)

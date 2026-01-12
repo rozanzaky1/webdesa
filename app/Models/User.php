@@ -23,6 +23,9 @@ class User extends Authenticatable
         'nik',
         'role',
         'password',
+        'is_approved',
+        'approved_at',
+        'approved_by',
     ];
 
     /**
@@ -45,6 +48,16 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_approved' => 'boolean',
+            'approved_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the resident data associated with the user
+     */
+    public function resident()
+    {
+        return $this->hasOne(Resident::class);
     }
 }

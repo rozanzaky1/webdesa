@@ -17,14 +17,34 @@ class ServiceController extends Controller
     public function create()
     {
         $letterTypes = $this->getLetterTypes();
-        return view('frontend.services.form', compact('letterTypes'));
+        
+        // Get resident data of logged-in user
+        $resident = auth()->user()->resident;
+        
+        // Get family members if family_card_number exists
+        $familyMembers = [];
+        if ($resident && $resident->family_card_number) {
+            $familyMembers = \App\Models\Resident::where('family_card_number', $resident->family_card_number)
+                ->where('id', '!=', $resident->id)
+                ->where('status', 'active')
+                ->get();
+        }
+        
+        return view('frontend.services.form', compact('letterTypes', 'resident', 'familyMembers'));
     }
     
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'resident_id' => 'nullable|exists:residents,id',
             'name' => 'required|string|max:255',
             'nik' => 'required|numeric|digits:16',
+            'gender' => 'required|string',
+            'birth_place' => 'required|string|max:100',
+            'birth_date' => 'required|string',
+            'address' => 'required|string',
+            'occupation' => 'required|string|max:100',
+            'phone' => 'required|string|max:15',
             'letter_type' => 'required|string',
             'purpose' => 'required|string|min:10',
             'notes' => 'nullable|string',
@@ -33,6 +53,12 @@ class ServiceController extends Controller
             'nik.required' => 'NIK wajib diisi',
             'nik.numeric' => 'NIK harus berupa angka',
             'nik.digits' => 'NIK harus 16 digit',
+            'gender.required' => 'Jenis kelamin wajib diisi',
+            'birth_place.required' => 'Tempat lahir wajib diisi',
+            'birth_date.required' => 'Tanggal lahir wajib diisi',
+            'address.required' => 'Alamat wajib diisi',
+            'occupation.required' => 'Pekerjaan wajib diisi',
+            'phone.required' => 'No. telepon wajib diisi',
             'letter_type.required' => 'Jenis surat wajib dipilih',
             'purpose.required' => 'Keperluan wajib diisi',
             'purpose.min' => 'Keperluan minimal 10 karakter',
@@ -44,8 +70,15 @@ class ServiceController extends Controller
         $submission = [
             'id' => uniqid('sub_'),
             'user_id' => $user->id,
+            'resident_id' => $validated['resident_id'] ?? $user->resident->id ?? null,
             'name' => $validated['name'],
             'nik' => $validated['nik'],
+            'gender' => $validated['gender'],
+            'birth_place' => $validated['birth_place'],
+            'birth_date' => $validated['birth_date'],
+            'address' => $validated['address'],
+            'occupation' => $validated['occupation'],
+            'phone' => $validated['phone'],
             'user_email' => $user->email,
             'letter_type' => $validated['letter_type'],
             'purpose' => $validated['purpose'],
@@ -61,7 +94,7 @@ class ServiceController extends Controller
         
         Storage::disk('local')->put('online_submissions.json', json_encode($submissions, JSON_PRETTY_PRINT));
         
-        return redirect()->route('frontend.services.history')->with('success', 'Pengajuan surat berhasil dikirim! Silakan tunggu proses persetujuan dari admin.');
+        return redirect()->route('layanan.history')->with('success', 'Pengajuan surat berhasil dikirim! Silakan tunggu proses persetujuan dari admin.');
     }
     
     public function history()

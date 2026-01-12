@@ -43,15 +43,6 @@ class HomeController extends Controller
         return view('frontend.institutions', compact('institutions'));
     }
 
-    public function map()
-    {
-        $profile = $this->getVillageProfile();
-        $hamletsCount = $this->getHamletsCount();
-        $residentsCount = Resident::count();
-        
-        return view('frontend.map', compact('profile', 'hamletsCount', 'residentsCount'));
-    }
-
     private function getHamletsCount()
     {
         if (!Storage::disk('local')->exists('hamlets.json')) {

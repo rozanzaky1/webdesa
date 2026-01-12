@@ -178,8 +178,10 @@
 
                 <div class="text-center mt-4">
                     <small class="text-muted">
-                        <i class="fas fa-info-circle me-1"></i>
-                        Gunakan email dan password yang telah terdaftar
+                        Belum punya akun? 
+                        <a href="{{ route('register') }}" class="text-decoration-none fw-bold" style="color: #0f7b2a;">
+                            Daftar disini
+                        </a>
                     </small>
                 </div>
             </div>

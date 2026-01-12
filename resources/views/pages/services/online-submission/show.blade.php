@@ -73,25 +73,25 @@
             <div class="col-md-6">
                 <div class="detail-item">
                     <div class="detail-label">Nama Lengkap</div>
-                    <div class="detail-value">{{ $submission['applicant_name'] }}</div>
+                    <div class="detail-value">{{ $submission['name'] ?? $submission['applicant_name'] ?? '-' }}</div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="detail-item">
                     <div class="detail-label">NIK</div>
-                    <div class="detail-value">{{ $submission['applicant_nik'] }}</div>
+                    <div class="detail-value">{{ $submission['nik'] ?? $submission['applicant_nik'] ?? '-' }}</div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="detail-item">
                     <div class="detail-label">No. Telepon</div>
-                    <div class="detail-value">{{ $submission['applicant_phone'] }}</div>
+                    <div class="detail-value">{{ $submission['phone'] ?? $submission['applicant_phone'] ?? '-' }}</div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="detail-item">
                     <div class="detail-label">Email</div>
-                    <div class="detail-value">{{ $submission['applicant_email'] ?? '-' }}</div>
+                    <div class="detail-value">{{ $submission['user_email'] ?? $submission['applicant_email'] ?? '-' }}</div>
                 </div>
             </div>
         </div>

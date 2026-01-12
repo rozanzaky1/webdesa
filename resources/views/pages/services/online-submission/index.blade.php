@@ -7,23 +7,31 @@
     .filter-section {
         background: white;
         padding: 15px;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
+    }
+
+    .filter-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .submission-card {
         background: white;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 20px;
         margin-bottom: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        transition: transform 0.2s;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
     }
 
     .submission-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .submission-header {
@@ -32,7 +40,7 @@
         align-items: start;
         margin-bottom: 15px;
         padding-bottom: 12px;
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 2px solid #4A7C2C;
     }
 
     .submission-title {
@@ -51,22 +59,22 @@
     }
 
     .badge-pending {
-        background: #ffc107;
-        color: #000;
+        background: #fd7e14;
+        color: #fff;
     }
 
     .badge-approved {
-        background: #28a745;
+        background: #4A7C2C;
         color: #fff;
     }
 
     .badge-rejected {
-        background: #dc3545;
+        background: #e74c3c;
         color: #fff;
     }
 
     .badge-completed {
-        background: #17a2b8;
+        background: #20c997;
         color: #fff;
     }
 
@@ -74,6 +82,8 @@
         text-align: center;
         padding: 60px 20px;
         color: #999;
+        background: #f8f9fa;
+        border-radius: 12px;
     }
 
     .empty-state i {
@@ -144,9 +154,9 @@
                 <div>
                     <h5 class="submission-title">{{ $submission['letter_type'] }}</h5>
                     <div class="submission-meta">
-                        <span><i class="far fa-user"></i> {{ $submission['applicant_name'] }}</span>
+                        <span><i class="far fa-user"></i> {{ $submission['name'] ?? $submission['applicant_name'] ?? 'N/A' }}</span>
                         <span><i class="far fa-calendar"></i> {{ date('d M Y', strtotime($submission['created_at'])) }}</span>
-                        <span><i class="far fa-id-card"></i> {{ $submission['applicant_nik'] }}</span>
+                        <span><i class="far fa-id-card"></i> {{ $submission['nik'] ?? $submission['applicant_nik'] ?? 'N/A' }}</span>
                     </div>
                     @if($submission['status'] === 'pending')
                         <span class="badge badge-pending">Menunggu</span>

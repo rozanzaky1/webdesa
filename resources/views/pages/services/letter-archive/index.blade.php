@@ -7,28 +7,51 @@
     .filter-section {
         background: white;
         padding: 15px;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
+    }
+
+    .filter-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .archive-table {
         background: white;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
     }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
         color: #999;
+        background: #f8f9fa;
+        border-radius: 12px;
     }
 
     .empty-state i {
         font-size: 48px;
         margin-bottom: 15px;
         opacity: 0.5;
+        color: #4A7C2C;
+    }
+
+    .btn-primary {
+        background: #4A7C2C;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #355719;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(74, 124, 44, 0.3);
     }
 </style>
 @endpush

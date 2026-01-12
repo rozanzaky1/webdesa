@@ -174,7 +174,7 @@
         <div class="signature-box">
             <p>Kepala Desa Badran Sari</p>
             <div class="signature-name">
-                [Nama Kepala Desa]
+                Pak Suronto
             </div>
         </div>
     </div>

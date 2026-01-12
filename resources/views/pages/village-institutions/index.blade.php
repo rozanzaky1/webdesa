@@ -6,16 +6,17 @@
 <style>
     .institution-card {
         background: white;
-        border-radius: 8px;
-        padding: 20px;
+        border-radius: 12px;
+        padding: 25px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        transition: transform 0.2s;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
     }
 
     .institution-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .institution-header {
@@ -24,7 +25,7 @@
         align-items: start;
         margin-bottom: 15px;
         padding-bottom: 12px;
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 2px solid #4A7C2C;
     }
 
     .institution-name {
@@ -44,26 +45,71 @@
         line-height: 1.7;
         margin-bottom: 15px;
         white-space: pre-line;
+        padding: 15px;
+        background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%);
+        border-radius: 8px;
+        border: 1px solid #e8f5e9;
     }
 
     .structure-preview {
         max-width: 100%;
         height: auto;
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .structure-preview:hover {
+        box-shadow: 0 6px 25px rgba(74, 124, 44, 0.2);
+        transform: scale(1.02);
     }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
         color: #999;
+        background: #f8f9fa;
+        border-radius: 12px;
     }
 
     .empty-state i {
         font-size: 48px;
         margin-bottom: 15px;
         opacity: 0.5;
+        color: #4A7C2C;
+    }
+
+    .btn-primary {
+        background: #4A7C2C;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #355719;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(74, 124, 44, 0.3);
+    }
+
+    .btn-warning {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        border: none;
+        color: white;
+    }
+
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+        color: white;
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
     }
 </style>
 @endpush

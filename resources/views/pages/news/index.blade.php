@@ -7,44 +7,52 @@
     .filter-section {
         background: white;
         padding: 15px;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
+        transition: all 0.3s ease;
+    }
+
+    .filter-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .news-card {
         background: white;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 20px;
         margin-bottom: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        border-left: 4px solid #4A7C2C;
         display: flex;
         gap: 20px;
-        transition: transform 0.2s;
+        transition: all 0.3s ease;
     }
 
     .news-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        box-shadow: 0 5px 20px rgba(74, 124, 44, 0.15);
     }
 
     .news-image {
         width: 180px;
         height: 120px;
         object-fit: cover;
-        border-radius: 6px;
+        border-radius: 8px;
         flex-shrink: 0;
     }
 
     .news-image-placeholder {
         width: 180px;
         height: 120px;
-        background: #e9ecef;
-        border-radius: 6px;
+        background: linear-gradient(135deg, #f8fdf9 0%, #e8f5e9 100%);
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #adb5bd;
+        color: #4A7C2C;
         font-size: 48px;
         flex-shrink: 0;
     }
@@ -97,7 +105,7 @@
     }
 
     .badge-featured {
-        background: #ffc107;
+        background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
         color: #000;
         padding: 4px 10px;
         border-radius: 4px;
@@ -106,7 +114,7 @@
     }
 
     .badge-draft {
-        background: #6c757d;
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
         color: #fff;
         padding: 4px 10px;
         border-radius: 4px;
@@ -115,7 +123,7 @@
     }
 
     .badge-published {
-        background: #28a745;
+        background: linear-gradient(135deg, #4a7c2c 0%, #6ab04c 100%);
         color: #fff;
         padding: 4px 10px;
         border-radius: 4px;
