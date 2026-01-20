@@ -113,12 +113,13 @@ Route::post('/letter-archive', [App\Http\Controllers\LetterArchiveController::cl
 Route::get('/letter-archive/{id}', [App\Http\Controllers\LetterArchiveController::class, 'show'])->name('letter-archive.show');
 Route::delete('/letter-archive/{id}', [App\Http\Controllers\LetterArchiveController::class, 'destroy'])->name('letter-archive.destroy');
 
-    // Online Submission - Pengajuan Surat Online (Admin)
-    Route::get('/online-submission', [App\Http\Controllers\OnlineSubmissionController::class, 'index'])->name('online-submission.index');
-    Route::get('/online-submission/{id}', [App\Http\Controllers\OnlineSubmissionController::class, 'show'])->name('online-submission.show');
-    Route::patch('/online-submission/{id}/status', [App\Http\Controllers\OnlineSubmissionController::class, 'updateStatus'])->name('online-submission.update-status');
-    Route::get('/online-submission/{id}/print', [App\Http\Controllers\OnlineSubmissionController::class, 'print'])->name('online-submission.print');
-    Route::delete('/online-submission/{id}', [App\Http\Controllers\OnlineSubmissionController::class, 'destroy'])->name('online-submission.destroy');
+// Online Submission - Pengajuan Surat Online (Admin)
+Route::get('/online-submission', [App\Http\Controllers\OnlineSubmissionController::class, 'index'])->name('online-submission.index');
+Route::get('/online-submission/{id}', [App\Http\Controllers\OnlineSubmissionController::class, 'show'])->name('online-submission.show');
+Route::patch('/online-submission/{id}/status', [App\Http\Controllers\OnlineSubmissionController::class, 'updateStatus'])->name('online-submission.update-status');
+Route::post('/online-submission/{id}/update-letter', [App\Http\Controllers\OnlineSubmissionController::class, 'updateLetter'])->name('online-submission.update-letter');
+Route::get('/online-submission/{id}/print', [App\Http\Controllers\OnlineSubmissionController::class, 'print'])->name('online-submission.print');
+Route::delete('/online-submission/{id}', [App\Http\Controllers\OnlineSubmissionController::class, 'destroy'])->name('online-submission.destroy');
 });
 
 // User Routes (Protected by user middleware)

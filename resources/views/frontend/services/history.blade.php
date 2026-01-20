@@ -64,6 +64,10 @@
                                 <span class="badge badge-success badge-lg px-3 py-2">
                                     <i class="fas fa-check-circle mr-1"></i> Disetujui
                                 </span>
+                            @elseif($submission['status'] === 'completed')
+                                <span class="badge badge-info badge-lg px-3 py-2">
+                                    <i class="fas fa-check-double mr-1"></i> Selesai
+                                </span>
                             @elseif($submission['status'] === 'rejected')
                                 <span class="badge badge-danger badge-lg px-3 py-2">
                                     <i class="fas fa-times-circle mr-1"></i> Ditolak
@@ -75,7 +79,7 @@
                                class="btn btn-sm btn-info">
                                 <i class="fas fa-eye mr-1"></i> Detail
                             </a>
-                            @if($submission['status'] === 'approved')
+                            @if(in_array($submission['status'], ['approved', 'completed']))
                                 <a href="#" class="btn btn-sm btn-success" onclick="alert('Fitur cetak dalam pengembangan')">
                                     <i class="fas fa-print mr-1"></i> Cetak
                                 </a>

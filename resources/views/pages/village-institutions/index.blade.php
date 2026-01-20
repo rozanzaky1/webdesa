@@ -168,9 +168,28 @@
             @if(!empty($institution['structure_image']))
                 <div>
                     <strong class="d-block mb-2">Struktur Organisasi:</strong>
+                    
+                    @if(request()->get('debug'))
+                        {{-- Debug Info (hanya tampil jika ?debug=1 di URL) --}}
+                        <div class="alert alert-info" style="font-size: 12px; margin-bottom: 15px;">
+                            <strong><i class="fas fa-bug"></i> Debug Info:</strong><br>
+                            <code>
+                            - Path: {{ $institution['structure_image'] }}<br>
+                            - Full URL: {{ asset('storage/' . $institution['structure_image']) }}<br>
+                            - File exists: {{ file_exists(storage_path('app/public/' . $institution['structure_image'])) ? '✅ YES' : '❌ NO' }}<br>
+                            - Storage path: {{ storage_path('app/public/' . $institution['structure_image']) }}
+                            </code>
+                        </div>
+                    @endif
+                    
                     <img src="{{ asset('storage/' . $institution['structure_image']) }}" 
                          alt="Struktur {{ $institution['name'] }}" 
-                         class="structure-preview">
+                         class="structure-preview"
+                         onerror="this.style.border='3px solid red'; console.error('Failed to load image:', this.src); this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'alert alert-danger\'><i class=\'fas fa-exclamation-triangle\'></i> Gagal memuat gambar. URL: ' + this.src + '</div>');">
+                </div>
+            @else
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle"></i> Belum ada gambar struktur organisasi untuk lembaga ini.
                 </div>
             @endif
         </div>

@@ -122,7 +122,16 @@ class VillageInstitutionController extends Controller
     private function getInstitutions()
     {
         if (Storage::disk('local')->exists($this->institutionsPath)) {
-            return json_decode(Storage::disk('local')->get($this->institutionsPath), true);
+            $institutions = json_decode(Storage::disk('local')->get($this->institutionsPath), true);
+            
+            // Ensure all institutions have structure_image field for backward compatibility
+            foreach ($institutions as &$institution) {
+                if (!isset($institution['structure_image'])) {
+                    $institution['structure_image'] = null;
+                }
+            }
+            
+            return $institutions;
         }
 
         return [];

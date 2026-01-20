@@ -4,56 +4,97 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Resident;
+use App\Models\Family;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FamilyController extends Controller
 {
     public function index()
     {
-        // Hitung statistik keluarga
-        $totalFamilies = Resident::distinct('address')->count('address');
-        $totalResidents = Resident::count();
-        $averageFamilySize = $totalFamilies > 0 ? round($totalResidents / $totalFamilies, 1) : 0;
+        // Ambil semua data keluarga dari database dengan eager loading members
+        $families = Family::with('members')->latest()->get();
         
-        // Data keluarga berdasarkan address (top 10)
-        $families = Resident::select('address', DB::raw('count(*) as members'))
-            ->whereNotNull('address')
-            ->groupBy('address')
-            ->orderBy('members', 'desc')
-            ->limit(10)
-            ->get();
-
-        // Statistik berdasarkan jumlah anggota keluarga
-        $familySizeStats = [
-            '1-2 Anggota' => 0,
-            '3-4 Anggota' => 0,
-            '5-6 Anggota' => 0,
-            '7+ Anggota' => 0,
-        ];
-
-        $allFamilies = Resident::select('address', DB::raw('count(*) as members'))
-            ->whereNotNull('address')
-            ->groupBy('address')
-            ->get();
-
-        foreach ($allFamilies as $family) {
-            if ($family->members <= 2) {
-                $familySizeStats['1-2 Anggota']++;
-            } elseif ($family->members <= 4) {
-                $familySizeStats['3-4 Anggota']++;
-            } elseif ($family->members <= 6) {
-                $familySizeStats['5-6 Anggota']++;
-            } else {
-                $familySizeStats['7+ Anggota']++;
-            }
-        }
+        // Hitung statistik
+        $totalFamilies = $families->count();
+        $totalMembers = $families->sum('total_members');
+        $averageFamilySize = $totalFamilies > 0 ? round($totalMembers / $totalFamilies, 1) : 0;
 
         return view('pages.families.index', compact(
-            'totalFamilies',
-            'totalResidents',
-            'averageFamilySize',
             'families',
-            'familySizeStats'
+            'totalFamilies',
+            'totalMembers',
+            'averageFamilySize'
         ));
+    }
+
+    public function create()
+    {
+        $hamlets = $this->getHamlets();
+        return view('pages.families.create', compact('hamlets'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'kk' => 'required|string|max:20|unique:families,kk',
+            'head_name' => 'required|string|max:150',
+            'head_nik' => 'nullable|string|max:16',
+            'hamlet' => 'nullable|string|max:100',
+            'rt' => 'nullable|string|max:10',
+            'rw' => 'nullable|string|max:10',
+            'address' => 'required|string',
+            'postal_code' => 'nullable|string|max:10',
+            'total_members' => 'required|integer|min:1',
+        ]);
+
+        Family::create($validated);
+
+        return redirect()->route('families.index')->with('success', 'Data keluarga berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $family = Family::findOrFail($id)->toArray();
+        $hamlets = $this->getHamlets();
+        return view('pages.families.edit', compact('family', 'hamlets'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $family = Family::findOrFail($id);
+
+        $validated = $request->validate([
+            'kk' => 'required|string|max:20|unique:families,kk,' . $id,
+            'head_name' => 'required|string|max:150',
+            'head_nik' => 'nullable|string|max:16',
+            'hamlet' => 'nullable|string|max:100',
+            'rt' => 'nullable|string|max:10',
+            'rw' => 'nullable|string|max:10',
+            'address' => 'required|string',
+            'postal_code' => 'nullable|string|max:10',
+            'total_members' => 'required|integer|min:1',
+        ]);
+
+        $family->update($validated);
+
+        return redirect()->route('families.index')->with('success', 'Data keluarga berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $family = Family::findOrFail($id);
+        $family->delete();
+
+        return redirect()->route('families.index')->with('success', 'Data keluarga berhasil dihapus');
+    }
+
+    private function getHamlets()
+    {
+        if (!Storage::disk('local')->exists('hamlets.json')) {
+            return [];
+        }
+        $hamlets = json_decode(Storage::disk('local')->get('hamlets.json'), true) ?? [];
+        return collect($hamlets)->pluck('name')->toArray();
     }
 }

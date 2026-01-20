@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Resident;
+use App\Models\Family;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,12 +29,16 @@ class DashboardController extends Controller
             return ($submission['status'] ?? '') === 'pending';
         }));
         
+        // User verification statistics
+        $pendingUsers = \App\Models\User::where('role', 'user')->where('is_approved', false)->count();
+        $approvedUsers = \App\Models\User::where('role', 'user')->where('is_approved', true)->count();
+        $totalUsers = \App\Models\User::where('role', 'user')->count();
+        
         // Hitung statistik dari database
         $totalResidents = Resident::count();
         
-        // Hitung jumlah keluarga - estimasi berdasarkan address yang unik
-        // Atau bisa menggunakan jumlah KK yang berbeda jika ada kolom tersebut
-        $familyCount = Resident::distinct('address')->count('address');
+        // Hitung jumlah keluarga dari tabel families
+        $familyCount = Family::count();
         
         // Statistik berdasarkan jenis kelamin (sesuai dengan enum: Male, Female)
         $maleCount = Resident::where('gender', 'Male')->count();
@@ -82,7 +87,10 @@ class DashboardController extends Controller
             'hamlets',
             'hamletCount',
             'printedLetters',
-            'pendingVerifications'
+            'pendingVerifications',
+            'pendingUsers',
+            'approvedUsers',
+            'totalUsers'
         ));
     }
     

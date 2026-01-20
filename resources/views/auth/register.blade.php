@@ -180,12 +180,13 @@
                             <label for="nik" class="form-label">
                                 NIK <span class="required">*</span>
                             </label>
-                            <input type="text" 
+                            <input type="number" 
                                    class="form-control @error('nik') is-invalid @enderror" 
                                    id="nik" 
                                    name="nik" 
                                    value="{{ old('nik') }}" 
                                    placeholder="Masukkan NIK 16 digit"
+                                   minlength="16"
                                    maxlength="16"
                                    required>
                             @error('nik')
@@ -195,19 +196,20 @@
                         
                         <div class="col-md-6 mb-3">
                             <label for="family_card_number" class="form-label">
-                                Nomor KK
+                                Nomor KK <span class="required">*</span>
                             </label>
-                            <input type="text" 
+                            <input type="number" 
                                    class="form-control @error('family_card_number') is-invalid @enderror" 
                                    id="family_card_number" 
                                    name="family_card_number" 
                                    value="{{ old('family_card_number') }}" 
-                                   placeholder="Masukkan Nomor KK (opsional)"
-                                   maxlength="16">
+                                   placeholder="Masukkan Nomor KK 16 digit"
+                                   minlength="16"
+                                   maxlength="16"
+                                   required>
                             @error('family_card_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="text-muted">Isi jika ingin terhubung dengan keluarga</small>
                         </div>
                     </div>
 

@@ -93,7 +93,7 @@
         </a>
         <div id="collapseLayanan" class="collapse {{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'show' : '' }}" aria-labelledby="headingLayanan" data-parent="#accordionSidebar">
             <div class="bg-white py-1 collapse-inner rounded">
-                <a class="collapse-item {{ Request::is('letter-archive*') ? 'active' : '' }}" href="{{ route('letter-archive.index') }}">Surat Keterangan</a>
+                <a class="collapse-item {{ Request::is('letter-archive*') ? 'active' : '' }}" href="{{ route('letter-archive.index') }}">Arsip Surat</a>
                 <a class="collapse-item {{ Request::is('online-submission*') ? 'active' : '' }}" href="{{ route('online-submission.index') }}">Pengajuan Online</a>
             </div>
         </div>

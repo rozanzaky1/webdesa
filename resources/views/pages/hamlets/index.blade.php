@@ -253,20 +253,43 @@
 
     .search-box {
         position: relative;
+        display: flex;
+        align-items: center;
     }
 
     .search-box input {
-        padding-left: 40px;
+        flex: 1;
+        padding-left: 15px;
+        padding-right: 60px;
+        border: 1px solid #ddd;
         border-radius: 8px;
-        border: 1px solid #e0e0e0;
+        height: 45px;
     }
 
-    .search-box i {
+    .search-box .search-btn {
         position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #999;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 50px;
+        background: linear-gradient(135deg, #4A7C2C 0%, #355719 100%);
+        border: none;
+        border-radius: 0 8px 8px 0;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-box .search-btn:hover {
+        background: linear-gradient(135deg, #355719 0%, #2a4513 100%);
+        transform: scale(1.05);
+    }
+
+    .search-box .search-btn i {
+        font-size: 16px;
     }
 
     .empty-state {
@@ -431,30 +454,19 @@
 
     <!-- Filter Card -->
     <div class="filters-card">
-        <form method="GET" action="{{ route('hamlets.index') }}">
-            <div class="row align-items-end">
-                <div class="col-md-8">
-                    <div class="search-box">
+        <div class="row align-items-end">
+            <div class="col-md-12">
+                <div class="search-box">
+                    <input type="text" 
+                           id="searchInput"
+                           class="form-control" 
+                           placeholder="Cari nama dusun, kode, kepala dusun...">
+                    <button type="button" class="search-btn" id="searchBtn">
                         <i class="fas fa-search"></i>
-                        <input type="text" 
-                               name="search" 
-                               class="form-control" 
-                               value="{{ request('search') }}" 
-                               placeholder="Cari nama dusun, kepala dusun...">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="d-flex" style="gap: 10px;">
-                        <button type="submit" class="btn btn-success flex-grow-1">
-                            <i class="fas fa-search mr-1"></i> Cari
-                        </button>
-                        <a href="{{ route('hamlets.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-redo"></i> Reset
-                        </a>
-                    </div>
+                    </button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <!-- Data Cards -->
@@ -583,3 +595,72 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+console.log('Loading hamlets search script...');
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing hamlets search...');
+    
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    
+    console.log('searchInput:', searchInput);
+    console.log('searchBtn:', searchBtn);
+    
+    if (!searchInput || !searchBtn) {
+        console.error('Element tidak ditemukan!');
+        return;
+    }
+
+    function performSearch() {
+        console.log('Searching hamlets...');
+        const searchTerm = searchInput.value.toLowerCase();
+        const hamletCards = document.querySelectorAll('.hamlet-card');
+        
+        console.log('Search term:', searchTerm);
+        console.log('Total cards:', hamletCards.length);
+        
+        let visibleCount = 0;
+
+        hamletCards.forEach(card => {
+            const cardParent = card.closest('.col-lg-6');
+            const cardText = card.textContent.toLowerCase();
+
+            if (searchTerm === '' || cardText.includes(searchTerm)) {
+                cardParent.style.display = '';
+                visibleCount++;
+            } else {
+                cardParent.style.display = 'none';
+            }
+        });
+        
+        console.log('Visible cards:', visibleCount);
+    }
+
+    // Search on keyup
+    searchInput.addEventListener('keyup', function() {
+        console.log('Keyup event triggered');
+        performSearch();
+    });
+    
+    // Search on button click
+    searchBtn.addEventListener('click', function() {
+        console.log('Search button clicked');
+        performSearch();
+    });
+    
+    // Search on Enter key
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            console.log('Enter key pressed');
+            performSearch();
+        }
+    });
+    
+    console.log('Hamlets search initialized successfully!');
+});
+</script>
+@endpush

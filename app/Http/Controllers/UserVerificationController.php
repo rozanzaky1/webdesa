@@ -11,19 +11,17 @@ class UserVerificationController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::where('role', 'user');
+        $query = User::with('resident')->where('role', 'user');
         
         // Filter berdasarkan status
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             if ($request->status === 'pending') {
                 $query->where('is_approved', false);
             } elseif ($request->status === 'approved') {
                 $query->where('is_approved', true);
             }
-        } else {
-            // Default: tampilkan yang pending dulu
-            $query->where('is_approved', false);
         }
+        // Jika tidak ada filter status, tampilkan semua user
         
         // Search
         if ($request->filled('search')) {
@@ -35,7 +33,8 @@ class UserVerificationController extends Controller
             });
         }
         
-        $users = $query->orderBy('created_at', 'desc')->paginate(15);
+        // Load all data for client-side search and pagination
+        $users = $query->orderBy('is_approved', 'asc')->orderBy('created_at', 'desc')->get();
         
         // Count statistics
         $stats = [

@@ -78,8 +78,8 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
             
             // Data Resident/Kependudukan
-            'nik' => 'required|string|size:16|unique:residents,nik',
-            'family_card_number' => 'nullable|string|max:16',
+            'nik' => 'required|string|size:16|unique:users,nik',
+            'family_card_number' => 'required|string|size:16',
             'gender' => 'required|in:Male,Female',
             'birth_date' => 'required|date',
             'birth_place' => 'required|string|max:100',
@@ -103,7 +103,9 @@ class AuthController extends Controller
             // Resident validation messages
             'nik.required' => 'NIK harus diisi',
             'nik.size' => 'NIK harus 16 digit',
-            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.unique' => 'NIK sudah digunakan untuk registrasi akun. Satu NIK hanya bisa registrasi 1 kali',
+            'family_card_number.required' => 'Nomor KK harus diisi',
+            'family_card_number.size' => 'Nomor KK harus 16 digit',
             'gender.required' => 'Jenis kelamin harus dipilih',
             'birth_date.required' => 'Tanggal lahir harus diisi',
             'birth_place.required' => 'Tempat lahir harus diisi',
@@ -113,6 +115,7 @@ class AuthController extends Controller
             'marital_status.required' => 'Status perkawinan harus dipilih',
             'occupation.required' => 'Pekerjaan harus diisi',
             'phone.required' => 'No. telepon harus diisi',
+            'phone.max' => 'No. telepon maksimal 15 karakter',
             'status.required' => 'Status penduduk harus dipilih',
         ]);
         
@@ -120,31 +123,91 @@ class AuthController extends Controller
         $user = \App\Models\User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'nik' => $validated['nik'],
             'password' => bcrypt($validated['password']),
             'role' => 'user',
             'is_approved' => false, // Menunggu verifikasi admin
         ]);
         
-        // Create Resident Data (linked to user)
-        \App\Models\Resident::create([
-            'user_id' => $user->id,
-            'nik' => $validated['nik'],
-            'family_card_number' => $validated['family_card_number'],
-            'name' => $validated['name'],
-            'gender' => $validated['gender'],
-            'birth_date' => $validated['birth_date'],
-            'birth_place' => $validated['birth_place'],
-            'address' => $validated['address'],
-            'hamlet' => $validated['hamlet'],
-            'religion' => $validated['religion'],
-            'marital_status' => $validated['marital_status'],
-            'occupation' => $validated['occupation'],
-            'phone' => $validated['phone'],
-            'status' => $validated['status'],
-        ]);
+        // Cek apakah NIK sudah ada di data penduduk
+        $existingResident = \App\Models\Resident::where('nik', $validated['nik'])->first();
+        
+        if ($existingResident) {
+            // Jika NIK sudah ada di data penduduk, update data dan link ke user
+            $existingResident->update([
+                'user_id' => $user->id,
+                'family_card_number' => $validated['family_card_number'] ?? $existingResident->family_card_number,
+                'name' => $validated['name'],
+                'gender' => $validated['gender'],
+                'birth_date' => $validated['birth_date'],
+                'birth_place' => $validated['birth_place'],
+                'address' => $validated['address'],
+                'hamlet' => $validated['hamlet'],
+                'religion' => $validated['religion'],
+                'marital_status' => $validated['marital_status'],
+                'occupation' => $validated['occupation'],
+                'phone' => $validated['phone'],
+                'status' => $validated['status'],
+            ]);
+            $resident = $existingResident;
+        } else {
+            // Jika NIK belum ada, create data penduduk baru
+            $resident = \App\Models\Resident::create([
+                'user_id' => $user->id,
+                'nik' => $validated['nik'],
+                'family_card_number' => $validated['family_card_number'],
+                'name' => $validated['name'],
+                'gender' => $validated['gender'],
+                'birth_date' => $validated['birth_date'],
+                'birth_place' => $validated['birth_place'],
+                'address' => $validated['address'],
+                'hamlet' => $validated['hamlet'],
+                'religion' => $validated['religion'],
+                'marital_status' => $validated['marital_status'],
+                'occupation' => $validated['occupation'],
+                'phone' => $validated['phone'],
+                'status' => $validated['status'],
+            ]);
+        }
+        
+        // Auto-manage family data berdasarkan No. KK
+        if ($validated['family_card_number']) {
+            $this->manageFamily($resident);
+        }
         
         // Tidak langsung login, user perlu diverifikasi dulu
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Akun Anda menunggu verifikasi dari administrator. Data kependudukan Anda telah tersimpan dan akan muncul di dashboard admin.');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Akun Anda menunggu verifikasi dari administrator dan silahkan cek email secara berkala untuk pemberitahuan aktivasi akun.');
+    }
+    
+    private function manageFamily($resident)
+    {
+        // Cek apakah keluarga dengan No. KK ini sudah ada
+        $family = \App\Models\Family::where('kk', $resident->family_card_number)->first();
+        
+        if (!$family) {
+            // Jika belum ada, buat data keluarga baru
+            // Cari kepala keluarga (biasanya yang pertama atau status Married/Male)
+            $headResident = \App\Models\Resident::where('family_card_number', $resident->family_card_number)
+                ->where('gender', 'Male')
+                ->where('marital_status', 'Married')
+                ->first() ?? $resident;
+            
+            // Hitung total anggota keluarga
+            $totalMembers = \App\Models\Resident::where('family_card_number', $resident->family_card_number)->count();
+            
+            \App\Models\Family::create([
+                'kk' => $resident->family_card_number,
+                'head_name' => $headResident->name,
+                'head_nik' => $headResident->nik,
+                'hamlet' => $resident->hamlet,
+                'address' => $resident->address,
+                'total_members' => $totalMembers,
+            ]);
+        } else {
+            // Jika sudah ada, update jumlah anggota
+            $totalMembers = \App\Models\Resident::where('family_card_number', $resident->family_card_number)->count();
+            $family->update(['total_members' => $totalMembers]);
+        }
     }
     
     private function redirectBasedOnRole($user)

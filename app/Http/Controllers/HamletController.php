@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Resident;
+use App\Models\Family;
 use Illuminate\Support\Facades\DB;
 
 class HamletController extends Controller
@@ -13,28 +14,15 @@ class HamletController extends Controller
     {
         $hamlets = $this->getHamlets();
         
-        // Integrate real-time data from residents table
+        // Integrate real-time data from residents and families table
         foreach ($hamlets as &$hamlet) {
-            // Count residents in this hamlet
+            // Count ALL residents in this hamlet (not just active)
             $hamlet['total_residents'] = Resident::where('hamlet', $hamlet['name'])
-                ->where('status', 'active')
                 ->count();
             
-            // Count unique family cards (KK) in this hamlet
-            $hamlet['total_families'] = Resident::where('hamlet', $hamlet['name'])
-                ->where('status', 'active')
-                ->whereNotNull('family_card_number')
-                ->distinct('family_card_number')
-                ->count('family_card_number');
-            
-            // If no family card, count by unique address as fallback
-            if ($hamlet['total_families'] == 0) {
-                $hamlet['total_families'] = Resident::where('hamlet', $hamlet['name'])
-                    ->where('status', 'active')
-                    ->whereNotNull('address')
-                    ->distinct('address')
-                    ->count('address');
-            }
+            // Count families from families table
+            $hamlet['total_families'] = Family::where('hamlet', $hamlet['name'])
+                ->count();
         }
         
         // Search by hamlet name
@@ -52,7 +40,7 @@ class HamletController extends Controller
     {
         return view('pages.hamlets.create');
     }
-    
+        
     public function store(Request $request)
     {
         $validated = $request->validate([

@@ -5,9 +5,20 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Tambah Penduduk</h1>
     </div>
-<!-- @if ($errors->any())
-        @dd ($errors->all())
-        @endif  -->
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Ada kesalahan dalam pengisian form:
+            <ul class="mb-0 mt-2">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     <div class="row">
         <div class="col">
@@ -18,98 +29,138 @@
                     <div class="card-body">
                       <div class="form-group mb-3">
                         <label for="nik">NIK</label>
-                        <input type="number" name="nik" id="nik" class="form-control @error ('nik') is-invalid @enderror" inputmode="numeric" required style="appearance: textfield; -moz-appearance: textfield;">
+                        <input type="number" name="nik" id="nik" value="{{ old('nik') }}" class="form-control @error('nik') is-invalid @enderror" inputmode="numeric" max="9999999999999999" required style="appearance: textfield; -moz-appearance: textfield;">
+                        <small class="text-muted">Harus tepat 16 digit</small>
+                        @error('nik')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                         <div class="form-group mb-3">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" name="name" id="name" class="form-control @error ('name') is-invalid @enderror" required>
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="gender">Jenis Kelamin</label>
-                            <select name="gender" id="gender" class="form-control @error ('gender') is-invalid @enderror" required>
+                            <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror" required>
                                 <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="Male">Laki-laki</option>
-                                <option value="Female">Perempuan</option>
+                                <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Perempuan</option>
                             </select>
+                            @error('gender')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="birth_place">Tempat Lahir</label>
-                            <input type="text" name="birth_place" id="birth_place" class="form-control @error ('birth_place') is-invalid @enderror" required>
+                            <input type="text" name="birth_place" id="birth_place" value="{{ old('birth_place') }}" class="form-control @error('birth_place') is-invalid @enderror" required>
+                            @error('birth_place')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="birth_date">Tanggal Lahir</label>
-                            <input type="date" name="birth_date" id="birth_date" class="form-control @error ('birth_date') is-invalid @enderror" required>
+                            <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date') }}" class="form-control @error('birth_date') is-invalid @enderror" required>
+                            @error('birth_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="address">Alamat</label>
-                            <textarea name="address" id="address" cols="30" rows="3" class="form-control @error ('address') is-invalid @enderror" required></textarea>
+                            <textarea name="address" id="address" cols="30" rows="3" class="form-control @error('address') is-invalid @enderror" required>{{ old('address') }}</textarea>
+                            @error('address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="hamlet">Dusun</label>
-                            <select name="hamlet" id="hamlet" class="form-control @error ('hamlet') is-invalid @enderror">
+                            <select name="hamlet" id="hamlet" class="form-control @error('hamlet') is-invalid @enderror">
                                 <option value="">-- Pilih Dusun --</option>
                                 @foreach($hamlets as $hamlet)
-                                    <option value="{{ $hamlet }}">{{ $hamlet }}</option>
+                                    <option value="{{ $hamlet }}" {{ old('hamlet') == $hamlet ? 'selected' : '' }}>{{ $hamlet }}</option>
                                 @endforeach
                             </select>
                             <small class="text-muted">Opsional - Pilih dusun tempat tinggal</small>
+                            @error('hamlet')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="family_card_number">Nomor Kartu Keluarga (KK)</label>
-                            <input type="text" name="family_card_number" id="family_card_number" class="form-control @error ('family_card_number') is-invalid @enderror" maxlength="20" inputmode="numeric">
-                            <small class="text-muted">Opsional - Nomor KK untuk pengelompokan keluarga</small>
+                            <input type="number" name="family_card_number" id="family_card_number" value="{{ old('family_card_number') }}" class="form-control @error('family_card_number') is-invalid @enderror" max="9999999999999999" inputmode="numeric" required style="appearance: textfield; -moz-appearance: textfield;">
+                            <small class="text-muted">Harus tepat 16 digit</small>
+                            @error('family_card_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="religion">Agama</label>
-                            <select name="religion" id="religion" class="form-control @error ('religion') is-invalid @enderror" required>
+                            <select name="religion" id="religion" class="form-control @error('religion') is-invalid @enderror" required>
                                 <option value="">-- Pilih Agama --</option>
-                                <option value="Islam">Islam</option>
-                                <option value="Kristen">Kristen</option>
-                                <option value="Katolik">Katolik</option>
-                                <option value="Hindu">Hindu</option>
-                                <option value="Buddha">Buddha</option>
-                                <option value="Konghucu">Konghucu</option>
+                                <option value="Islam" {{ old('religion') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                <option value="Kristen" {{ old('religion') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                <option value="Katolik" {{ old('religion') == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                                <option value="Hindu" {{ old('religion') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                <option value="Buddha" {{ old('religion') == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                                <option value="Konghucu" {{ old('religion') == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
                             </select>
+                            @error('religion')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="marital_status">Status Perkawinan</label>
-                            <select name="marital_status" id="marital_status" class="form-control @error ('marital_status') is-invalid @enderror" required>
+                            <select name="marital_status" id="marital_status" class="form-control @error('marital_status') is-invalid @enderror" required>
                                 <option value="">-- Pilih Status Perkawinan --</option>
-                                <option value="Single">Belum Menikah</option>
-                                <option value="Married">Sudah Menikah</option>
-                                <option value="Divorced">Cerai</option>
-                                <option value="Widowed">Duda/Janda</option>
+                                <option value="Single" {{ old('marital_status') == 'Single' ? 'selected' : '' }}>Belum Menikah</option>
+                                <option value="Married" {{ old('marital_status') == 'Married' ? 'selected' : '' }}>Sudah Menikah</option>
+                                <option value="Divorced" {{ old('marital_status') == 'Divorced' ? 'selected' : '' }}>Cerai</option>
+                                <option value="Widowed" {{ old('marital_status') == 'Widowed' ? 'selected' : '' }}>Duda/Janda</option>
                             </select>
+                            @error('marital_status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="occupation">Pekerjaan</label>
-                            <input type="text" name="occupation" id="occupation" class="form-control @error ('occupation') is-invalid @enderror" required>
+                            <input type="text" name="occupation" id="occupation" value="{{ old('occupation') }}" class="form-control @error('occupation') is-invalid @enderror" required>
+                            @error('occupation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="phone">Telepon</label>
-                            <input type="text" inputmode="numeric" name="phone" id="phone" class="form-control @error ('phone') is-invalid @enderror" maxlength="15">
+                            <input type="text" inputmode="numeric" name="phone" id="phone" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror" maxlength="15">
                             <small class="text-muted">Opsional - Nomor telepon/HP</small>
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="status">Status Penduduk</label>
-                            <select name="status" id="status" class="form-control @error ('status') is-invalid @enderror" required>
+                            <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
                                 <option value="">-- Pilih Status Penduduk --</option>
-                                <option value="active" selected>Aktif</option>
-                                <option value="moved">Pindah</option>
-                                <option value="deceased">Meninggal</option>
+                                <option value="active" {{ old('status', 'active') == 'active' ? 'selected' : '' }}>Aktif</option>
+                                <option value="moved" {{ old('status') == 'moved' ? 'selected' : '' }}>Pindah</option>
+                                <option value="deceased" {{ old('status') == 'deceased' ? 'selected' : '' }}>Meninggal</option>
                             </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 

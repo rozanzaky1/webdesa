@@ -13,11 +13,22 @@ class OnlineSubmissionController extends Controller
     {
         $submissions = $this->getSubmissions();
         
-        // Filter by status
+        // Filter by status (support multiple statuses separated by comma)
         if ($request->has('status') && $request->status !== '') {
-            $submissions = array_filter($submissions, function($item) use ($request) {
-                return $item['status'] === $request->status;
-            });
+            $statusParam = $request->status;
+            
+            // Check if multiple statuses (comma-separated)
+            if (strpos($statusParam, ',') !== false) {
+                $allowedStatuses = array_map('trim', explode(',', $statusParam));
+                $submissions = array_filter($submissions, function($item) use ($allowedStatuses) {
+                    return in_array($item['status'], $allowedStatuses);
+                });
+            } else {
+                // Single status
+                $submissions = array_filter($submissions, function($item) use ($request) {
+                    return $item['status'] === $request->status;
+                });
+            }
         }
 
         // Filter by type
@@ -74,9 +85,19 @@ class OnlineSubmissionController extends Controller
             $submissions[$index]['letter_number'] = $this->generateLetterNumber($submissions[$index]['letter_type']);
         }
 
+        // Auto-archive when status is completed
+        if ($request->status === 'completed' && !empty($submissions[$index]['letter_number'])) {
+            $this->archiveLetter($submissions[$index]);
+        }
+
         Storage::disk('local')->put($this->submissionsPath, json_encode(array_values($submissions), JSON_PRETTY_PRINT));
 
-        return redirect()->route('online-submission.show', $id)->with('success', 'Status permohonan berhasil diperbarui!');
+        $message = 'Status permohonan berhasil diperbarui!';
+        if ($request->status === 'completed') {
+            $message = 'Status permohonan berhasil diperbarui dan otomatis diarsipkan!';
+        }
+
+        return redirect()->route('online-submission.show', $id)->with('success', $message);
     }
 
     public function print($id)
@@ -93,6 +114,37 @@ class OnlineSubmissionController extends Controller
         }
 
         return view('pages.services.online-submission.print', compact('submission'));
+    }
+
+    public function updateLetter(Request $request, $id)
+    {
+        $submissions = $this->getSubmissions();
+        $index = collect($submissions)->search(function ($item) use ($id) {
+            return $item['id'] === $id;
+        });
+
+        if ($index === false) {
+            return response()->json(['success' => false, 'message' => 'Permohonan tidak ditemukan!'], 404);
+        }
+
+        // Update letter data
+        $submissions[$index]['letter_number'] = $request->input('letter_number');
+        $submissions[$index]['letter_type'] = $request->input('letter_type');
+        $submissions[$index]['name'] = $request->input('name');
+        $submissions[$index]['applicant_name'] = $request->input('name'); // Keep compatibility
+        $submissions[$index]['nik'] = $request->input('nik');
+        $submissions[$index]['applicant_nik'] = $request->input('nik'); // Keep compatibility
+        $submissions[$index]['birth_place'] = $request->input('birth_place');
+        $submissions[$index]['birth_date'] = $request->input('birth_date');
+        $submissions[$index]['gender'] = $request->input('gender');
+        $submissions[$index]['occupation'] = $request->input('occupation');
+        $submissions[$index]['address'] = $request->input('address');
+        $submissions[$index]['purpose'] = $request->input('purpose');
+        $submissions[$index]['updated_at'] = now()->toDateTimeString();
+
+        Storage::disk('local')->put($this->submissionsPath, json_encode(array_values($submissions), JSON_PRETTY_PRINT));
+
+        return response()->json(['success' => true, 'message' => 'Data surat berhasil diperbarui!']);
     }
 
     public function destroy($id)
@@ -161,5 +213,44 @@ class OnlineSubmissionController extends Controller
         $year = date('Y');
         
         return "{$code}/{$number}/{$month}/{$year}";
+    }
+
+    private function archiveLetter($submission)
+    {
+        $archivePath = 'letter_archives.json';
+        
+        // Get existing archives
+        $archives = [];
+        if (Storage::disk('local')->exists($archivePath)) {
+            $archives = json_decode(Storage::disk('local')->get($archivePath), true);
+        }
+
+        // Check if already archived
+        $exists = collect($archives)->contains(function ($item) use ($submission) {
+            return $item['letter_number'] === $submission['letter_number'];
+        });
+
+        if ($exists) {
+            return; // Already archived, skip
+        }
+
+        // Create archive entry
+        $newArchive = [
+            'id' => uniqid(),
+            'letter_number' => $submission['letter_number'],
+            'letter_type' => $submission['letter_type'],
+            'recipient_name' => $submission['applicant_name'] ?? $submission['name'] ?? 'N/A',
+            'recipient_nik' => $submission['applicant_nik'] ?? $submission['nik'] ?? null,
+            'purpose' => $submission['purpose'] ?? null,
+            'notes' => 'Otomatis diarsipkan dari pengajuan online',
+            'letter_date' => now()->toDateString(),
+            'created_at' => now()->toDateTimeString(),
+            'source' => 'online_submission',
+            'submission_id' => $submission['id'],
+        ];
+
+        // Add to archives
+        $archives[] = $newArchive;
+        Storage::disk('local')->put($archivePath, json_encode($archives, JSON_PRETTY_PRINT));
     }
 }

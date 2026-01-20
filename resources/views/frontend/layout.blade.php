@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
         * {
@@ -51,17 +53,19 @@
         }
         
         .brand-name {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
             letter-spacing: 0.5px;
+            line-height: 1.3;
         }
         
         .brand-location {
             font-size: 0.75rem;
             font-weight: 400;
             color: rgba(255,255,255,0.85);
-            margin-top: -2px;
+            margin-top: 2px;
+            line-height: 1.2;
         }
         
         .navbar-nav {
@@ -77,11 +81,20 @@
             transition: all 0.3s ease;
             border-radius: 8px;
             position: relative;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
         }
         
         .navbar-nav .nav-link i {
-            margin-right: 6px;
+            margin-right: 8px;
             font-size: 0.9rem;
+            width: 16px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
         }
         
         .navbar-nav .nav-link:hover {
@@ -97,7 +110,8 @@
         }
         
         .navbar-nav .dropdown-toggle::after {
-            margin-left: 8px;
+            margin-left: 6px;
+            vertical-align: middle;
         }
         
         .dropdown-menu {
@@ -106,6 +120,7 @@
             border: none;
             margin-top: 10px;
             animation: slideDown 0.3s ease;
+            min-width: 200px;
         }
         
         @keyframes slideDown {
@@ -123,6 +138,8 @@
             padding: 10px 20px;
             transition: all 0.2s;
             font-size: 0.95rem;
+            display: flex;
+            align-items: center;
         }
         
         .dropdown-item:hover {
@@ -133,6 +150,11 @@
         .dropdown-item i {
             margin-right: 10px;
             width: 20px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
         }
         
         .btn-login {
@@ -144,6 +166,13 @@
             transition: all 0.3s ease;
             border: 2px solid #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-login i {
+            font-size: 0.9rem;
         }
         
         .btn-login:hover {
@@ -158,16 +187,39 @@
         @media (max-width: 991px) {
             .navbar-nav .nav-link {
                 margin: 5px 0;
+                justify-content: flex-start;
             }
             .btn-login {
                 margin-top: 10px;
-                display: inline-block;
+                display: inline-flex;
             }
             .brand-name {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
             }
             .brand-location {
                 font-size: 0.7rem;
+            }
+            .navbar-brand img {
+                height: 45px;
+                width: 45px;
+                margin-right: 12px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .brand-name {
+                font-size: 1rem;
+            }
+            .brand-location {
+                font-size: 0.65rem;
+            }
+            .navbar-brand img {
+                height: 40px;
+                width: 40px;
+                margin-right: 10px;
+            }
+            .navbar-nav .nav-link {
+                font-size: 0.9rem;
             }
         }
         
@@ -294,11 +346,13 @@
                     </li>
                     
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('layanan*') ? 'active' : '' }}" href="{{ route('layanan.index') }}">
-                                <i class="fas fa-file-alt"></i> Layanan
-                            </a>
-                        </li>
+                        @if(Auth::user()->role !== 'admin')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('layanan*') ? 'active' : '' }}" href="{{ route('layanan.index') }}">
+                                    <i class="fas fa-file-alt"></i> Layanan
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
@@ -308,11 +362,11 @@
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">
                                         <i class="fas fa-tachometer-alt"></i> Dashboard Admin
                                     </a>
-                                    <div class="dropdown-divider"></div>
+                                @else
+                                    <a class="dropdown-item" href="{{ route('layanan.history') }}">
+                                        <i class="fas fa-history"></i> Riwayat Pengajuan
+                                    </a>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('layanan.history') }}">
-                                    <i class="fas fa-history"></i> Riwayat Pengajuan
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                                     @csrf
@@ -381,6 +435,8 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     @stack('scripts')
 </body>

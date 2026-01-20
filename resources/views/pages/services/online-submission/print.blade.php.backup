@@ -161,6 +161,16 @@
             display: inline-block;
             vertical-align: middle;
         }
+
+        .editable-inline {
+            display: inline;
+        }
+
+        .table-cell-content {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
         
         .signature {
             margin-top: 50px;
@@ -233,7 +243,7 @@
         </div>
 
         <div class="letter-number">
-            <p>NOMOR: <input type="text" class="editable" id="letter_number" value="{{ $submission['letter_number'] ?? '..../..../.../.....' }}" readonly style="width: 200px;"></p>
+            <p>NOMOR: <span class="editable-inline"><input type="text" class="editable" id="letter_number" value="{{ $submission['letter_number'] ?? '..../..../.../.....' }}" readonly style="width: 200px;"></span></p>
             <h4><input type="text" class="editable" id="letter_type" value="{{ strtoupper($submission['letter_type']) }}" readonly style="text-align: center; width: 400px; font-size: 14pt; font-weight: bold;"></h4>
         </div>
 
@@ -296,6 +306,109 @@
         <div class="signature">
             <div class="signature-box">
                 <p>Badran Sari, <input type="text" class="editable" id="letter_date" value="{{ date('d F Y') }}" readonly style="width: 150px; text-align: center;"></p>
+                <p style="font-weight: bold;">Kepala Desa Badran Sari</p>
+                <div class="signature-line">
+                    <p style="font-weight: bold;"><input type="text" class="editable" id="signer_name" value="Pak Suronto" readonly style="font-weight: bold; width: 200px; text-align: center;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+                <td>{{ $submission['birth_place'] ?? '.....................' }}, {{ $submission['birth_date'] ?? '.../.../......' }}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td>{{ $submission['gender'] ?? '................' }}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{ $submission['occupation'] ?? '................' }}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>{{ $submission['address'] ?? 'Desa Badran Sari, Kec. Punggur, Kab. Lampung Tengah' }}</td>
+            </tr>
+        </table>
+
+        <p style="text-indent: 50px;">
+            Adalah benar warga Desa Badran Sari dan surat keterangan ini dibuat untuk keperluan:
+        </p>
+
+    <div class="paper" id="letterContent">
+        <div class="header">
+            <h3>PEMERINTAH KABUPATEN LAMPUNG TENGAH</h3>
+            <h3>KECAMATAN PUNGGUR</h3>
+            <h3>KANTOR DESA BADRAN SARI</h3>
+            <p>Jl. Raya Punggur KM. 5, Badran Sari, Kec. Punggur</p>
+            <p>Email: desabadransari@gmail.com | Telp: (0725) 123456</p>
+        </div>
+
+        <div class="letter-number">
+            <p>NOMOR: <input type="text" class="editable" id="letter_number" value="{{ $submission['letter_number'] ?? '..../..../.../.....' }}" readonly></p>
+            <h4><input type="text" class="editable" id="letter_type" value="{{ strtoupper($submission['letter_type']) }}" readonly style="text-align: center; width: 100%; font-size: 14pt; font-weight: bold;"></h4>
+        </div>
+
+        <div class="content">
+            <p style="text-indent: 50px;">
+                Yang bertanda tangan di bawah ini Kepala Desa Badran Sari, Kecamatan Punggur, 
+                Kabupaten Lampung Tengah, dengan ini menerangkan bahwa:
+            </p>
+
+            <table style="margin: 20px 0 20px 80px; line-height: 2;">
+                <tr>
+                    <td width="150">Nama</td>
+                    <td width="20">:</td>
+                    <td><strong><input type="text" class="editable" id="name" value="{{ $submission['name'] ?? $submission['applicant_name'] ?? '-' }}" readonly style="font-weight: bold; width: 300px;"></strong></td>
+                </tr>
+                <tr>
+                    <td>NIK</td>
+                    <td>:</td>
+                    <td><input type="text" class="editable" id="nik" value="{{ $submission['nik'] ?? $submission['applicant_nik'] ?? '-' }}" readonly style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td>Tempat/Tgl. Lahir</td>
+                    <td>:</td>
+                    <td>
+                        <input type="text" class="editable" id="birth_place" value="{{ $submission['birth_place'] ?? '.....................' }}" readonly style="width: 150px;">, 
+                        <input type="text" class="editable" id="birth_date" value="{{ $submission['birth_date'] ?? '.../.../......' }}" readonly style="width: 120px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>:</td>
+                    <td><input type="text" class="editable" id="gender" value="{{ $submission['gender'] ?? '................' }}" readonly style="width: 150px;"></td>
+                </tr>
+                <tr>
+                    <td>Pekerjaan</td>
+                    <td>:</td>
+                    <td><input type="text" class="editable" id="occupation" value="{{ $submission['occupation'] ?? '................' }}" readonly style="width: 200px;"></td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td><textarea class="editable" id="address" readonly style="width: 400px;">{{ $submission['address'] ?? 'Desa Badran Sari, Kec. Punggur, Kab. Lampung Tengah' }}</textarea></td>
+                </tr>
+            </table>
+
+            <p style="text-indent: 50px;">
+                Adalah benar warga Desa Badran Sari dan surat keterangan ini dibuat untuk keperluan:
+            </p>
+
+            <p style="margin: 20px 0 20px 80px; font-weight: bold;">
+                <textarea class="editable" id="purpose" readonly style="text-transform: uppercase; font-weight: bold;">{{ $submission['purpose'] }}</textarea>
+            </p>
+
+            <p style="text-indent: 50px;">
+                Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan 
+                sebagaimana mestinya.
+            </p>
+        </div>
+
+        <div class="signature">
+            <div class="signature-box">
+                <p>Badran Sari, <input type="text" class="editable" id="letter_date" value="{{ date('d F Y') }}" readonly style="width: 150px;"></p>
                 <p style="font-weight: bold;">Kepala Desa Badran Sari</p>
                 <div class="signature-line">
                     <p style="font-weight: bold;"><input type="text" class="editable" id="signer_name" value="Pak Suronto" readonly style="font-weight: bold; width: 200px; text-align: center;"></p>

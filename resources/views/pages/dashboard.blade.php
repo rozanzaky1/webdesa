@@ -163,6 +163,10 @@
     .stat-card.card-teal {
         background: #20c997;
     }
+    
+    .stat-card.card-warning {
+        background: #f39c12;
+    }
 
     /* Responsive */
     @media (max-width: 1200px) {
@@ -268,7 +272,7 @@
                 </div>
             </div>
             <div class="stat-card-footer">
-                <a href="{{ route('online-submission.index') }}?status=approved">
+                <a href="{{ route('online-submission.index') }}?status=approved,completed">
                     <span>Lihat Detail</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -293,6 +297,34 @@
                 </a>
             </div>
         </div>
+
+        <!-- Verifikasi User Card -->
+        <div class="stat-card card-warning">
+            <div class="stat-card-body">
+                <div class="stat-content">
+                    <div class="stat-text">
+                        <div class="stat-value">{{ $pendingUsers ?? 0 }}</div>
+                        <div class="stat-label">Verifikasi User Warga</div>
+                    </div>
+                    <i class="fas fa-user-check stat-icon"></i>
+                </div>
+            </div>
+            <div class="stat-card-footer">
+                <a href="{{ route('user-verification.index') }}?status=pending">
+                    <span>Lihat Detail</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
+
+@push('chart-scripts')
+    <!-- Page level plugins -->
+    <script src="{{ asset ('template/vendor/chart.js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset ('template/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset ('template/js/demo/chart-pie-demo.js') }}"></script>
+@endpush

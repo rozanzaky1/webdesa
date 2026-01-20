@@ -493,16 +493,14 @@
             <h2 class="section-title">Peta Wilayah Desa</h2>
             <p class="text-muted">Lokasi Desa Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
         </div>
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31783.89!2d105.1526!3d-4.9526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40c0c7e7bb7c43%3A0x4b3e4e8e5e5e5e5e!2sPunggur%2C%20Lampung%20Tengah%20Regency%2C%20Lampung!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" 
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="map-container" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <div id="villageMap" style="height: 500px; width: 100%;"></div>
+        </div>
+        <div class="mt-3 text-center">
+            <small class="text-muted">
+                <i class="fas fa-info-circle mr-1"></i>
+                Klik dan drag untuk menjelajahi peta | Scroll untuk zoom in/out
+            </small>
         </div>
     </div>
 </section>
@@ -531,5 +529,70 @@
     setTimeout(function() {
         $('.alert').fadeOut('slow');
     }, 5000);
+
+    // Initialize Leaflet Map for Desa Badran Sari
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create map centered on Desa Badran Sari, Kecamatan Punggur
+        var map = L.map('villageMap', {
+            center: [-4.9526, 105.1526],
+            zoom: 14,
+            zoomControl: true,
+            scrollWheelZoom: true
+        });
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Define village boundary polygon (approximate coordinates for Desa Badran Sari)
+        // These coordinates create a polygon around the village area
+        var villageBoundary = [
+            [-4.9420, 105.1420],  // North-West
+            [-4.9420, 105.1630],  // North-East
+            [-4.9630, 105.1630],  // South-East
+            [-4.9630, 105.1420],  // South-West
+            [-4.9420, 105.1420]   // Close polygon
+        ];
+
+        // Add village boundary polygon to map
+        var polygon = L.polygon(villageBoundary, {
+            color: '#4A7C2C',           // Olive green border
+            fillColor: '#4A7C2C',       // Olive green fill
+            fillOpacity: 0.2,           // Semi-transparent
+            weight: 3,                  // Border width
+            dashArray: '10, 5'          // Dashed border
+        }).addTo(map);
+
+        // Add popup to polygon
+        polygon.bindPopup('<div style="text-align: center;"><strong>Desa Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
+
+        // Add marker for village center
+        var villageCenter = L.marker([-4.9526, 105.1526], {
+            icon: L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            })
+        }).addTo(map);
+
+        // Add popup to marker
+        villageCenter.bindPopup('<div style="text-align: center;"><strong>📍 Kantor Desa Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
+
+        // Fit map to polygon bounds
+        map.fitBounds(polygon.getBounds(), {
+            padding: [50, 50]
+        });
+
+        // Add scale control
+        L.control.scale({
+            imperial: false,
+            metric: true
+        }).addTo(map);
+    });
 </script>
 @endpush
