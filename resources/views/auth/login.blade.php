@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Sistem Informasi Desa</title>
+    <title>Login - Sistem Informasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -32,19 +32,48 @@
             text-align: center;
             color: white;
         }
+        .btn-close-floating {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #0f7b2a;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 12px 16px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .btn-close-floating:hover {
+            background: white;
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            color: #0d6524;
+        }
         .login-logo {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: white;
             border-radius: 50%;
             margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 5px;
         }
-        .login-logo i {
-            font-size: 35px;
-            color: #0f7b2a;
+        .login-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .login-title {
             font-size: 20px;
@@ -103,14 +132,18 @@
     </style>
 </head>
 <body>
+    <a href="{{ route('home') }}" class="btn-close-floating" title="Kembali ke Beranda">
+        <i class="fas fa-times"></i>
+    </a>
+    
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
                 <div class="login-logo">
-                    <i class="fas fa-landmark"></i>
+                    <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah">
                 </div>
-                <div class="login-title">SISTEM INFORMASI DESA</div>
-                <div class="login-subtitle">Desa Badran Sari - Kec. Punggur - Kab. Lampung Tengah</div>
+                <div class="login-title">Sistem Informasi</div>
+                <div class="login-subtitle">Kampung Badran Sari - Kec. Punggur - Kab. Lampung Tengah</div>
             </div>
             <div class="login-body">
                 @if(session('success'))
@@ -189,7 +222,7 @@
 
         <div class="text-center mt-3">
             <small class="text-white">
-                © 2025 Desa Badran Sari. All rights reserved.
+                © 2025 Kampung Badran Sari. All rights reserved.
             </small>
         </div>
     </div>

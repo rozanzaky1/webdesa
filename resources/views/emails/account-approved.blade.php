@@ -84,7 +84,7 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>🏛️ Desa Badran Sari</h1>
+            <h1>🏛️ Kampung Badran Sari</h1>
             <p>Kec. Punggur - Kab. Lampung Tengah</p>
         </div>
         
@@ -104,11 +104,11 @@
                 <strong>📅 Tanggal Verifikasi:</strong> {{ now()->format('d F Y, H:i') }} WIB
             </div>
             
-            <p>Anda sekarang dapat mengakses semua layanan yang tersedia di Sistem Informasi Desa Badran Sari, termasuk:</p>
+            <p>Anda sekarang dapat mengakses semua layanan yang tersedia di Sistem Informasi Kampung Badran Sari, termasuk:</p>
             
             <ul>
                 <li>Pengajuan Surat Keterangan Online</li>
-                <li>Informasi & Berita Desa</li>
+                <li>Informasi & Berita Kampung</li>
                 <li>Layanan Administrasi Kependudukan</li>
                 <li>Dan layanan lainnya</li>
             </ul>
@@ -125,13 +125,13 @@
                 <li><strong>Password:</strong> Password yang Anda daftarkan</li>
             </ul>
             
-            <p>Jika Anda mengalami kendala dalam mengakses akun, silakan hubungi administrator desa atau datang langsung ke kantor desa.</p>
+            <p>Jika Anda mengalami kendala dalam mengakses akun, silakan hubungi administrator Kampung atau datang langsung ke kantor Kampung.</p>
             
-            <p>Terima kasih telah bergabung dengan Sistem Informasi Desa Badran Sari!</p>
+            <p>Terima kasih telah bergabung dengan Sistem Informasi Kampung Badran Sari!</p>
         </div>
         
         <div class="email-footer">
-            <p><strong>Desa Badran Sari</strong></p>
+            <p><strong>Kampung Badran Sari</strong></p>
             <p>Kecamatan Punggur, Kabupaten Lampung Tengah</p>
             <p>Email ini dikirim secara otomatis. Mohon tidak membalas email ini.</p>
         </div>

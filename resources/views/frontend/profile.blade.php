@@ -1,6 +1,6 @@
 @extends('frontend.layout')
 
-@section('title', 'Profil Desa')
+@section('title', 'Profil Kampung')
 
 @push('styles')
 <style>
@@ -53,8 +53,8 @@
 @section('content')
 <div class="page-header">
     <div class="container">
-        <h1 class="display-4 font-weight-bold">Profil Desa Badran Sari</h1>
-        <p class="mb-0">Informasi lengkap tentang Desa Badran Sari</p>
+        <h1 class="display-4 font-weight-bold">Profil Kampung Badran Sari</h1>
+        <p class="mb-0">Informasi lengkap tentang Kampung Badran Sari</p>
     </div>
 </div>
 
@@ -65,7 +65,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="info-row">
-                    <div class="info-label">Nama Desa</div>
+                    <div class="info-label">Nama Kampung</div>
                     <div>{{ $profile['village_name'] ?? 'Badran Sari' }}</div>
                 </div>
                 <div class="info-row">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Website</div>
-                    <div>www.badransari.desa.id</div>
+                    <div>www.badransari.Kampung.id</div>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
     <!-- Visi -->
     @if(!empty($profile['vision']))
     <div class="profile-section">
-        <h2 class="section-title"><i class="fas fa-eye"></i> Visi Desa</h2>
+        <h2 class="section-title"><i class="fas fa-eye"></i> Visi Kampung</h2>
         <p class="lead text-justify">{{ $profile['vision'] }}</p>
     </div>
     @endif
@@ -105,7 +105,7 @@
     <!-- Misi -->
     @if(!empty($profile['mission']))
     <div class="profile-section">
-        <h2 class="section-title"><i class="fas fa-bullseye"></i> Misi Desa</h2>
+        <h2 class="section-title"><i class="fas fa-bullseye"></i> Misi Kampung</h2>
         <div style="white-space: pre-line; line-height: 2;">{{ $profile['mission'] }}</div>
     </div>
     @endif
@@ -113,7 +113,7 @@
     <!-- Sejarah -->
     @if(!empty($profile['history']))
     <div class="profile-section">
-        <h2 class="section-title"><i class="fas fa-book"></i> Sejarah Desa</h2>
+        <h2 class="section-title"><i class="fas fa-book"></i> Sejarah Kampung</h2>
         <p class="text-justify" style="line-height: 1.8;">{{ $profile['history'] }}</p>
     </div>
     @endif

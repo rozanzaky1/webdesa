@@ -493,7 +493,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1><i class="fas fa-users mr-2"></i>Data Penduduk</h1>
-                <p>Kelola data penduduk Desa Badran Sari</p>
+                <p>Kelola data penduduk Kampung Badran Sari</p>
             </div>
             <a href="{{ route('residents.create') }}" class="btn btn-light btn-lg">
                 <i class="fas fa-plus mr-2"></i> Tambah Penduduk

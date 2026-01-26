@@ -47,7 +47,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('user.dashboard') }}">
                 <i class="fas fa-landmark me-2"></i>
-                SID - Desa Badran Sari
+                SID - Kampung Badran Sari
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>

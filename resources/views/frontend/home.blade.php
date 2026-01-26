@@ -111,7 +111,7 @@
         border-radius: 2px;
     }
     
-    /* Sambutan Kepala Desa */
+    /* Sambutan Kepala Kampung */
     .sambutan-section {
         padding: 60px 0;
         background: #f8f9fa;
@@ -195,7 +195,7 @@
         font-weight: 500;
     }
     
-    /* Statistik Desa */
+    /* Statistik Kampung */
     .stats-section {
         background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
         padding: 60px 0;
@@ -273,11 +273,11 @@
     <div class="carousel-inner">
         <!-- Slide 1 -->
         <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=600&fit=crop" alt="Pemandangan Desa" class="d-block w-100">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=600&fit=crop" alt="Pemandangan Kampung" class="d-block w-100">
             <div class="carousel-caption">
                 <div class="hero-content">
-                    <h1 class="hero-title">Selamat Datang di Website<br>Desa Badran Sari</h1>
-                    <p class="hero-subtitle">Portal Informasi & Layanan Digital untuk Masyarakat Desa</p>
+                    <h1 class="hero-title">Selamat Datang di Website<br>Kampung Badran Sari</h1>
+                    <p class="hero-subtitle">Portal Informasi & Layanan Digital untuk Masyarakat Kampung</p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
                         @auth
                             <a href="{{ route('layanan.index') }}" class="btn btn-light btn-lg mr-3">
@@ -289,7 +289,7 @@
                             </a>
                         @endauth
                         <a href="{{ route('profil-desa') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-info-circle"></i> Profil Desa
+                            <i class="fas fa-info-circle"></i> Profil Kampung
                         </a>
                     </div>
                 </div>
@@ -298,17 +298,17 @@
         
         <!-- Slide 2 -->
         <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1920&h=600&fit=crop" alt="Pertanian Desa" class="d-block w-100">
+            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1920&h=600&fit=crop" alt="Pertanian Kampung" class="d-block w-100">
             <div class="carousel-caption">
                 <div class="hero-content">
-                    <h1 class="hero-title">Desa Maju, Masyarakat Sejahtera</h1>
-                    <p class="hero-subtitle">Membangun Desa Bersama untuk Masa Depan yang Lebih Baik</p>
+                    <h1 class="hero-title">Kampung Maju, Masyarakat Sejahtera</h1>
+                    <p class="hero-subtitle">Membangun Kampung Bersama untuk Masa Depan yang Lebih Baik</p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
                         <a href="{{ route('profil-desa') }}" class="btn btn-light btn-lg mr-3">
                             <i class="fas fa-info-circle"></i> Tentang Kami
                         </a>
                         <a href="{{ route('berita.index') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-newspaper"></i> Berita Desa
+                            <i class="fas fa-newspaper"></i> Berita Kampung
                         </a>
                     </div>
                 </div>
@@ -317,7 +317,7 @@
         
         <!-- Slide 3 -->
         <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&h=600&fit=crop" alt="Alam Desa" class="d-block w-100">
+            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&h=600&fit=crop" alt="Alam Kampung" class="d-block w-100">
             <div class="carousel-caption">
                 <div class="hero-content">
                     <h1 class="hero-title">Pelayanan Digital Terpadu</h1>
@@ -333,7 +333,7 @@
                             </a>
                         @endauth
                         <a href="{{ route('lembaga-desa') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-building"></i> Lembaga Desa
+                            <i class="fas fa-building"></i> Lembaga Kampung
                         </a>
                     </div>
                 </div>
@@ -352,7 +352,7 @@
                             <i class="fas fa-newspaper"></i> Info Terkini
                         </a>
                         <a href="{{ route('profil-desa') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-chart-bar"></i> Data Desa
+                            <i class="fas fa-chart-bar"></i> Data Kampung
                         </a>
                     </div>
                 </div>
@@ -370,7 +370,7 @@
     </a>
 </div>
 
-<!-- Statistik Desa -->
+<!-- Statistik Kampung -->
 <section class="stats-section">
     <div class="container">
         <div class="row">
@@ -406,25 +406,25 @@
     </div>
 </section>
 
-<!-- Sambutan Kepala Desa -->
+<!-- Sambutan Kepala Kampung -->
 @if(!empty($greeting))
 <section class="sambutan-section">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title">Sambutan Kepala Desa</h2>
+            <h2 class="section-title">Sambutan Kepala Kampung</h2>
         </div>
         <div class="sambutan-card">
             <div class="row no-gutters align-items-center">
                 <div class="col-lg-4">
                     <img src="{{ asset('storage/' . $greeting['image']) }}" 
-                         alt="Kepala Desa" 
+                         alt="Kepala Kampung" 
                          class="sambutan-image"
-                         onerror="this.src='https://via.placeholder.com/400x400/2d5016/ffffff?text=Kepala+Desa'">
+                         onerror="this.src='https://via.placeholder.com/400x400/2d5016/ffffff?text=Kepala+Kampung'">
                 </div>
                 <div class="col-lg-8">
                     <div class="sambutan-content">
                         <h3 class="text-green mb-3">{{ $greeting['name'] }}</h3>
-                        <p class="text-muted mb-4"><em>Kepala Desa Badran Sari</em></p>
+                        <p class="text-muted mb-4"><em>Kepala Kampung Badran Sari</em></p>
                         <div class="text-justify" style="line-height: 1.8;">
                             {{ Str::limit($greeting['message'], 500) }}
                         </div>
@@ -447,7 +447,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="section-title">Berita Terbaru</h2>
-                <p class="text-muted">Informasi dan kegiatan terkini di Desa Badran Sari</p>
+                <p class="text-muted">Informasi dan kegiatan terkini di Kampung Badran Sari</p>
             </div>
             <a href="{{ route('berita.index') }}" class="btn btn-outline-success">
                 Lihat Semua <i class="fas fa-arrow-right ml-2"></i>
@@ -458,7 +458,7 @@
             @forelse($latestNews as $news)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="news-card">
-                        <img src="{{ !empty($news['image']) ? asset('storage/' . $news['image']) : 'https://via.placeholder.com/400x200/2d5016/ffffff?text=Berita+Desa' }}" 
+                        <img src="{{ !empty($news['image']) ? asset('storage/' . $news['image']) : 'https://via.placeholder.com/400x200/2d5016/ffffff?text=Berita+Kampung' }}" 
                              alt="{{ $news['title'] }}" 
                              class="news-image">
                         <div class="news-content">
@@ -486,12 +486,12 @@
     </div>
 </section>
 
-<!-- Peta Desa -->
+<!-- Peta Kampung -->
 <section class="map-section bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title">Peta Wilayah Desa</h2>
-            <p class="text-muted">Lokasi Desa Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
+            <h2 class="section-title">Peta Wilayah Kampung</h2>
+            <p class="text-muted">Lokasi Kampung Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
         </div>
         <div class="map-container" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             <div id="villageMap" style="height: 500px; width: 100%;"></div>
@@ -508,7 +508,7 @@
 <!-- Call to Action -->
 <section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
     <div class="container text-center">
-        <h3 class="text-green mb-3">Butuh Layanan Administrasi Desa?</h3>
+        <h3 class="text-green mb-3">Butuh Layanan Administrasi Kampung?</h3>
         <p class="text-muted mb-4">Ajukan permohonan surat secara online dengan mudah dan cepat</p>
         @auth
             <a href="{{ route('layanan.index') }}" class="btn btn-green btn-lg">
@@ -530,9 +530,9 @@
         $('.alert').fadeOut('slow');
     }, 5000);
 
-    // Initialize Leaflet Map for Desa Badran Sari
+    // Initialize Leaflet Map for Kampung Badran Sari
     document.addEventListener('DOMContentLoaded', function() {
-        // Create map centered on Desa Badran Sari, Kecamatan Punggur
+        // Create map centered on Kampung Badran Sari, Kecamatan Punggur
         var map = L.map('villageMap', {
             center: [-4.9526, 105.1526],
             zoom: 14,
@@ -546,7 +546,7 @@
             maxZoom: 19
         }).addTo(map);
 
-        // Define village boundary polygon (approximate coordinates for Desa Badran Sari)
+        // Define village boundary polygon (approximate coordinates for Kampung Badran Sari)
         // These coordinates create a polygon around the village area
         var villageBoundary = [
             [-4.9420, 105.1420],  // North-West
@@ -566,7 +566,7 @@
         }).addTo(map);
 
         // Add popup to polygon
-        polygon.bindPopup('<div style="text-align: center;"><strong>Desa Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
+        polygon.bindPopup('<div style="text-align: center;"><strong>Kampung Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
 
         // Add marker for village center
         var villageCenter = L.marker([-4.9526, 105.1526], {
@@ -581,7 +581,7 @@
         }).addTo(map);
 
         // Add popup to marker
-        villageCenter.bindPopup('<div style="text-align: center;"><strong>📍 Kantor Desa Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
+        villageCenter.bindPopup('<div style="text-align: center;"><strong>📍 Kantor Kampung Badran Sari</strong><br>Kecamatan Punggur<br>Kabupaten Lampung Tengah</div>');
 
         // Fit map to polygon bounds
         map.fitBounds(polygon.getBounds(), {

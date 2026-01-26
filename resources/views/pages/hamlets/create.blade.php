@@ -93,30 +93,6 @@
                             @enderror
                         </div>
                     </div>
-
-                    <!-- Jumlah KK -->
-                    <div class="col-md-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Jumlah KK</label>
-                            <input type="number" name="total_families" class="form-control @error('total_families') is-invalid @enderror" 
-                                   value="{{ old('total_families', 0) }}" min="0">
-                            @error('total_families')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Jumlah Penduduk -->
-                    <div class="col-md-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Jumlah Penduduk</label>
-                            <input type="number" name="total_residents" class="form-control @error('total_residents') is-invalid @enderror" 
-                                   value="{{ old('total_residents', 0) }}" min="0">
-                            @error('total_residents')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Keterangan -->

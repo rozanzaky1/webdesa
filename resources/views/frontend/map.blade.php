@@ -1,13 +1,13 @@
 @extends('frontend.layout')
 
-@section('title', 'Peta Desa')
+@section('title', 'Peta Kampung')
 
 @section('content')
 <!-- Hero Section -->
 <div class="hero-section" style="background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%); padding: 80px 0; margin-bottom: 50px;">
     <div class="container text-center text-white">
-        <h1 class="display-4 font-weight-bold mb-3">Peta Desa</h1>
-        <p class="lead">Lokasi dan Wilayah Desa Badran Sari</p>
+        <h1 class="display-4 font-weight-bold mb-3">Peta Kampung</h1>
+        <p class="lead">Lokasi dan Wilayah Kampung Badran Sari</p>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
         <div class="col-lg-8 mb-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-white border-bottom">
-                    <h5 class="mb-0"><i class="fas fa-map-marked-alt mr-2"></i> Peta Lokasi Desa</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marked-alt mr-2"></i> Peta Lokasi Kampung</h5>
                 </div>
                 <div class="card-body p-0">
                     <div class="map-container">
@@ -39,29 +39,29 @@
                     <h5 class="mb-0"><i class="fas fa-route mr-2"></i> Panduan Akses</h5>
                 </div>
                 <div class="card-body">
-                    <h6 class="font-weight-bold mb-3">Cara Menuju Desa Badran Sari:</h6>
+                    <h6 class="font-weight-bold mb-3">Cara Menuju Kampung Badran Sari:</h6>
                     <div class="access-guide">
                         <div class="guide-item mb-3">
                             <i class="fas fa-car text-primary mr-2"></i>
                             <strong>Dari Pusat Kota:</strong>
                             <p class="ml-4 mb-0 text-muted">
                                 Ambil jalur utama menuju arah selatan, kemudian belok kanan di pertigaan pasar, 
-                                lanjutkan sekitar 5 km hingga menemukan gerbang desa.
+                                lanjutkan sekitar 5 km hingga menemukan gerbang Kampung.
                             </p>
                         </div>
                         <div class="guide-item mb-3">
                             <i class="fas fa-bus text-success mr-2"></i>
                             <strong>Transportasi Umum:</strong>
                             <p class="ml-4 mb-0 text-muted">
-                                Tersedia angkutan umum jurusan Terminal - Desa dengan rute melewati desa kami. 
-                                Turun di halte Desa Badran Sari.
+                                Tersedia angkutan umum jurusan Terminal - Kampung dengan rute melewati Kampung kami. 
+                                Turun di halte Kampung Badran Sari.
                             </p>
                         </div>
                         <div class="guide-item">
                             <i class="fas fa-motorcycle text-warning mr-2"></i>
                             <strong>Sepeda Motor/Ojek Online:</strong>
                             <p class="ml-4 mb-0 text-muted">
-                                Gunakan aplikasi ojek online dan masukkan tujuan "Kantor Desa Badran Sari" 
+                                Gunakan aplikasi ojek online dan masukkan tujuan "Kantor Kampung Badran Sari" 
                                 atau gunakan koordinat GPS yang tersedia.
                             </p>
                         </div>
@@ -82,7 +82,7 @@
                             <i class="fas fa-map-pin text-danger mr-2"></i>
                             <strong>Alamat</strong>
                             <p class="mb-0 mt-1 text-muted">
-                                {{ $profile['address'] ?? 'Desa Badran Sari, Kecamatan [Nama Kecamatan], Kabupaten [Nama Kabupaten]' }}
+                                {{ $profile['address'] ?? 'Kampung Badran Sari, Kecamatan [Nama Kecamatan], Kabupaten [Nama Kabupaten]' }}
                             </p>
                         </div>
                         
@@ -106,7 +106,7 @@
                             <i class="fas fa-envelope text-info mr-2"></i>
                             <strong>Email</strong>
                             <p class="mb-0 mt-1 text-muted">
-                                {{ $profile['email'] ?? 'info@badransari.desa.id' }}
+                                {{ $profile['email'] ?? 'info@badransari.Kampung.id' }}
                             </p>
                         </div>
                         
@@ -156,7 +156,7 @@
     <!-- Batas Wilayah -->
     <div class="card shadow-sm mt-4">
         <div class="card-header bg-white border-bottom">
-            <h5 class="mb-0"><i class="fas fa-border-style mr-2"></i> Batas Wilayah Desa</h5>
+            <h5 class="mb-0"><i class="fas fa-border-style mr-2"></i> Batas Wilayah Kampung</h5>
         </div>
         <div class="card-body">
             <div class="row">
@@ -164,28 +164,28 @@
                     <div class="border-item p-3 bg-light rounded">
                         <i class="fas fa-arrow-up text-primary mr-2"></i>
                         <strong>Sebelah Utara:</strong>
-                        <p class="mb-0 mt-2">{{ $profile['border_north'] ?? 'Desa [Nama Desa]' }}</p>
+                        <p class="mb-0 mt-2">{{ $profile['border_north'] ?? 'Kampung [Nama Kampung]' }}</p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="border-item p-3 bg-light rounded">
                         <i class="fas fa-arrow-right text-success mr-2"></i>
                         <strong>Sebelah Timur:</strong>
-                        <p class="mb-0 mt-2">{{ $profile['border_east'] ?? 'Desa [Nama Desa]' }}</p>
+                        <p class="mb-0 mt-2">{{ $profile['border_east'] ?? 'Kampung [Nama Kampung]' }}</p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="border-item p-3 bg-light rounded">
                         <i class="fas fa-arrow-down text-warning mr-2"></i>
                         <strong>Sebelah Selatan:</strong>
-                        <p class="mb-0 mt-2">{{ $profile['border_south'] ?? 'Desa [Nama Desa]' }}</p>
+                        <p class="mb-0 mt-2">{{ $profile['border_south'] ?? 'Kampung [Nama Kampung]' }}</p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="border-item p-3 bg-light rounded">
                         <i class="fas fa-arrow-left text-danger mr-2"></i>
                         <strong>Sebelah Barat:</strong>
-                        <p class="mb-0 mt-2">{{ $profile['border_west'] ?? 'Desa [Nama Desa]' }}</p>
+                        <p class="mb-0 mt-2">{{ $profile['border_west'] ?? 'Kampung [Nama Kampung]' }}</p>
                     </div>
                 </div>
             </div>

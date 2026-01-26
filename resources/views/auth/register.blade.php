@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Sistem Informasi Desa</title>
+    <title>Register - Sistem Informasi Kampung</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -138,7 +138,7 @@
                     <i class="fas fa-landmark"></i>
                 </div>
                 <div class="register-title">PENDAFTARAN AKUN WARGA</div>
-                <div class="register-subtitle">Desa Badran Sari - Kec. Punggur - Kab. Lampung Tengah</div>
+                <div class="register-subtitle">Kampung Badran Sari - Kec. Punggur - Kab. Lampung Tengah</div>
             </div>
             
             <div class="register-body">
@@ -292,7 +292,7 @@
                                   id="address" 
                                   name="address" 
                                   rows="3" 
-                                  placeholder="Contoh: Jl. Raya Desa No. 123, RT 02/RW 05"
+                                  placeholder="Contoh: Jl. Raya Kampung No. 123, RT 02/RW 05"
                                   required>{{ old('address') }}</textarea>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -303,13 +303,17 @@
                         <label for="hamlet" class="form-label">
                             Dusun <span class="required">*</span>
                         </label>
-                        <input type="text" 
-                               class="form-control @error('hamlet') is-invalid @enderror" 
-                               id="hamlet" 
-                               name="hamlet" 
-                               value="{{ old('hamlet') }}" 
-                               placeholder="Masukkan nama dusun"
-                               required>
+                        <select class="form-select @error('hamlet') is-invalid @enderror" 
+                                id="hamlet" 
+                                name="hamlet" 
+                                required>
+                            <option value="">Pilih Dusun</option>
+                            @foreach($hamlets ?? [] as $hamlet)
+                                <option value="{{ $hamlet }}" {{ old('hamlet') == $hamlet ? 'selected' : '' }}>
+                                    {{ $hamlet }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('hamlet')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

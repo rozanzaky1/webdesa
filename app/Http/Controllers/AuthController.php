@@ -66,7 +66,20 @@ class AuthController extends Controller
             return $this->redirectBasedOnRole(Auth::user());
         }
         
-        return view('auth.register');
+        // Get hamlets data for dropdown
+        $hamlets = $this->getHamlets();
+        
+        return view('auth.register', compact('hamlets'));
+    }
+    
+    private function getHamlets()
+    {
+        if (!\Illuminate\Support\Facades\Storage::disk('local')->exists('hamlets.json')) {
+            return [];
+        }
+        
+        $hamlets = json_decode(\Illuminate\Support\Facades\Storage::disk('local')->get('hamlets.json'), true) ?? [];
+        return collect($hamlets)->pluck('name')->toArray();
     }
     
     public function register(Request $request)

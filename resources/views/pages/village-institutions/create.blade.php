@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Lembaga Desa')
+@section('title', 'Tambah Lembaga Kampung')
 
 @push('styles')
 <style>
@@ -16,7 +16,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0">Tambah Lembaga Desa</h4>
+        <h4 class="mb-0">Tambah Lembaga Kampung</h4>
         <a href="{{ route('village-institutions.index') }}" class="btn btn-secondary btn-sm">
             <i class="fas fa-arrow-left"></i> Kembali
         </a>

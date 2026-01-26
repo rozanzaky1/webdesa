@@ -399,7 +399,7 @@
         </div>
         <div class="stat-card card-info">
             <h3>{{ $totalMembers }}</h3>
-            <p><i class="fas fa-users mr-1"></i> Total Anggota</p>
+            <p><i class="fas fa-users mr-1"></i> Total Penduduk</p>
         </div>
         <div class="stat-card card-purple">
             <h3>{{ $averageFamilySize }}</h3>

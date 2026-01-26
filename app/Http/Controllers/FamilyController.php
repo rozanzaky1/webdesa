@@ -17,7 +17,10 @@ class FamilyController extends Controller
         
         // Hitung statistik
         $totalFamilies = $families->count();
-        $totalMembers = $families->sum('total_members');
+        
+        // Hitung total penduduk langsung dari tabel residents (bukan dari sum total_members)
+        $totalMembers = Resident::count();
+        
         $averageFamilySize = $totalFamilies > 0 ? round($totalMembers / $totalFamilies, 1) : 0;
 
         return view('pages.families.index', compact(

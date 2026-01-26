@@ -270,7 +270,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1><i class="fas fa-file-alt mr-2"></i>Arsip Surat Keterangan</h1>
-                <p>Kelola arsip surat keterangan di Desa Badran Sari</p>
+                <p>Kelola arsip surat keterangan di Kampung Badran Sari</p>
             </div>
             <a href="{{ route('letter-archive.create') }}" class="btn btn-primary btn-lg">
                 <i class="fas fa-plus mr-2"></i>Tambah Arsip

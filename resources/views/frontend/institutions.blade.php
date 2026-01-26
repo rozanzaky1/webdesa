@@ -1,13 +1,13 @@
 @extends('frontend.layout')
 
-@section('title', 'Lembaga Desa')
+@section('title', 'Lembaga Kampung')
 
 @section('content')
 <!-- Hero Section -->
 <div class="hero-section" style="background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%); padding: 80px 0; margin-bottom: 50px;">
     <div class="container text-center text-white">
-        <h1 class="display-4 font-weight-bold mb-3">Lembaga Desa</h1>
-        <p class="lead">Organisasi dan Lembaga yang Berperan dalam Pembangunan Desa</p>
+        <h1 class="display-4 font-weight-bold mb-3">Lembaga Kampung</h1>
+        <p class="lead">Organisasi dan Lembaga yang Berperan dalam Pembangunan Kampung</p>
     </div>
 </div>
 
@@ -16,7 +16,7 @@
     @if(!empty($profile['organizational_structure']))
     <div class="card shadow-sm mb-5">
         <div class="card-header bg-white border-bottom">
-            <h4 class="mb-0"><i class="fas fa-sitemap mr-2"></i> Struktur Organisasi Pemerintah Desa</h4>
+            <h4 class="mb-0"><i class="fas fa-sitemap mr-2"></i> Struktur Organisasi Pemerintah Kampung</h4>
         </div>
         <div class="card-body text-center p-4">
             <img src="{{ asset($profile['organizational_structure']) }}" 
@@ -28,7 +28,7 @@
     @endif
 
     <!-- Daftar Lembaga -->
-    <h3 class="mb-4"><i class="fas fa-building mr-2"></i> Daftar Lembaga Desa</h3>
+    <h3 class="mb-4"><i class="fas fa-building mr-2"></i> Daftar Lembaga Kampung</h3>
     
     @if(count($institutions) > 0)
     <div class="row">
@@ -109,21 +109,21 @@
     <div class="card shadow-sm">
         <div class="card-body text-center py-5">
             <i class="fas fa-building fa-4x text-muted mb-3"></i>
-            <h5 class="text-muted">Data Lembaga Desa Belum Tersedia</h5>
-            <p class="text-muted">Informasi lembaga desa akan segera ditambahkan</p>
+            <h5 class="text-muted">Data Lembaga Kampung Belum Tersedia</h5>
+            <p class="text-muted">Informasi lembaga Kampung akan segera ditambahkan</p>
         </div>
     </div>
     @endif
 
     <!-- Info Tambahan -->
     <div class="alert alert-info mt-5">
-        <h5 class="mb-3"><i class="fas fa-info-circle mr-2"></i> Tentang Lembaga Desa</h5>
+        <h5 class="mb-3"><i class="fas fa-info-circle mr-2"></i> Tentang Lembaga Kampung</h5>
         <p class="mb-2">
-            Lembaga desa adalah organisasi atau kelembagaan yang dibentuk atas prakarsa masyarakat 
-            sesuai dengan kebutuhan dan merupakan mitra pemerintah desa dalam memberdayakan masyarakat.
+            Lembaga Kampung adalah organisasi atau kelembagaan yang dibentuk atas prakarsa masyarakat 
+            sesuai dengan kebutuhan dan merupakan mitra pemerintah Kampung dalam memberdayakan masyarakat.
         </p>
         <p class="mb-0">
-            Lembaga-lembaga ini memiliki peran penting dalam pembangunan desa dan peningkatan 
+            Lembaga-lembaga ini memiliki peran penting dalam pembangunan Kampung dan peningkatan 
             kesejahteraan masyarakat melalui berbagai program dan kegiatan.
         </p>
     </div>

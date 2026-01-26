@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Profil Desa')
+@section('title', 'Edit Profil Kampung')
 
 @push('styles')
 <style>
@@ -68,7 +68,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0">Edit Profil Desa</h4>
+        <h4 class="mb-0">Edit Profil Kampung</h4>
         <a href="{{ route('village-profile.index') }}" class="btn btn-secondary btn-sm">
             <i class="fas fa-arrow-left"></i> Kembali
         </a>
@@ -83,7 +83,7 @@
             <h5>Informasi Umum</h5>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="village_name" class="form-label">Nama Desa <span class="text-danger">*</span></label>
+                    <label for="village_name" class="form-label">Nama Kampung <span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('village_name') is-invalid @enderror" 
                            id="village_name" name="village_name" 
                            value="{{ old('village_name', $profile['village_name']) }}" required>
@@ -132,11 +132,11 @@
 
         <!-- Visi -->
         <div class="form-section">
-            <h5>Visi Desa</h5>
+            <h5>Visi Kampung</h5>
             <div class="mb-3">
                 <textarea class="form-control @error('vision') is-invalid @enderror" 
                           id="vision" name="vision" rows="4" 
-                          placeholder="Masukkan visi desa...">{{ old('vision', $profile['vision']) }}</textarea>
+                          placeholder="Masukkan visi Kampung...">{{ old('vision', $profile['vision']) }}</textarea>
                 @error('vision')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -145,11 +145,11 @@
 
         <!-- Misi -->
         <div class="form-section">
-            <h5>Misi Desa</h5>
+            <h5>Misi Kampung</h5>
             <div class="mb-3">
                 <textarea class="form-control @error('mission') is-invalid @enderror" 
                           id="mission" name="mission" rows="6" 
-                          placeholder="Masukkan misi desa (pisahkan dengan enter untuk setiap poin)...">{{ old('mission', $profile['mission']) }}</textarea>
+                          placeholder="Masukkan misi Kampung (pisahkan dengan enter untuk setiap poin)...">{{ old('mission', $profile['mission']) }}</textarea>
                 @error('mission')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -159,11 +159,11 @@
 
         <!-- Sejarah -->
         <div class="form-section">
-            <h5>Sejarah Desa</h5>
+            <h5>Sejarah Kampung</h5>
             <div class="mb-3">
                 <textarea class="form-control @error('history') is-invalid @enderror" 
                           id="history" name="history" rows="8" 
-                          placeholder="Masukkan sejarah desa...">{{ old('history', $profile['history']) }}</textarea>
+                          placeholder="Masukkan sejarah Kampung...">{{ old('history', $profile['history']) }}</textarea>
                 @error('history')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -172,7 +172,7 @@
 
         <!-- Struktur Organisasi -->
         <div class="form-section">
-            <h5>Struktur Organisasi Desa</h5>
+            <h5>Struktur Organisasi Kampung</h5>
             @if(!empty($profile['structure_image']))
                 <div class="mb-3">
                     <label class="form-label">Gambar Saat Ini:</label>

@@ -1,6 +1,6 @@
 @extends('frontend.layout')
 
-@section('title', 'Berita Desa')
+@section('title', 'Berita Kampung')
 
 @push('styles')
 <style>
@@ -106,8 +106,8 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <h1 class="page-title">Berita Desa</h1>
-        <p class="mb-0">Informasi dan kegiatan terkini di Desa Badran Sari</p>
+        <h1 class="page-title">Berita Kampung</h1>
+        <p class="mb-0">Informasi dan kegiatan terkini di Kampung Badran Sari</p>
     </div>
 </div>
 
@@ -149,7 +149,7 @@
         @forelse($news as $item)
             <div class="col-lg-4 col-md-6">
                 <div class="news-card">
-                    <img src="{{ !empty($item['image']) ? asset('storage/' . $item['image']) : 'https://via.placeholder.com/400x220/2d5016/ffffff?text=Berita+Desa' }}" 
+                    <img src="{{ !empty($item['image']) ? asset('storage/' . $item['image']) : 'https://via.placeholder.com/400x220/2d5016/ffffff?text=Berita+Kampung' }}" 
                          alt="{{ $item['title'] }}" 
                          class="news-image">
                     <div class="news-content">

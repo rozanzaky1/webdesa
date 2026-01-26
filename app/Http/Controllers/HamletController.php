@@ -33,7 +33,11 @@ class HamletController extends Controller
             });
         }
         
-        return view('pages.hamlets.index', compact('hamlets'));
+        // Hitung total penduduk dan keluarga langsung dari database untuk konsistensi
+        $totalResidents = Resident::count();
+        $totalFamilies = Family::count();
+        
+        return view('pages.hamlets.index', compact('hamlets', 'totalResidents', 'totalFamilies'));
     }
     
     public function create()
@@ -50,8 +54,6 @@ class HamletController extends Controller
             'head_phone' => 'nullable|string|max:20',
             'total_rt' => 'required|integer|min:1',
             'total_rw' => 'required|integer|min:1',
-            'total_families' => 'nullable|integer|min:0',
-            'total_residents' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
         ]);
         
@@ -88,8 +90,6 @@ class HamletController extends Controller
             'head_phone' => 'nullable|string|max:20',
             'total_rt' => 'required|integer|min:1',
             'total_rw' => 'required|integer|min:1',
-            'total_families' => 'nullable|integer|min:0',
-            'total_residents' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
         ]);
         

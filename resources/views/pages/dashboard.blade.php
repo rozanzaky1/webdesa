@@ -203,13 +203,13 @@
 
     <!-- Stats Grid -->
     <div class="stats-grid">
-        <!-- Wilayah Desa Card -->
+        <!-- Wilayah Kampung Card -->
         <div class="stat-card card-purple">
             <div class="stat-card-body">
                 <div class="stat-content">
                     <div class="stat-text">
                         <div class="stat-value">{{ $hamletCount ?? 0 }}</div>
-                        <div class="stat-label">Wilayah Desa (Dusun)</div>
+                        <div class="stat-label">Dusun</div>
                     </div>
                     <i class="fas fa-map-marker-alt stat-icon"></i>
                 </div>
@@ -227,10 +227,10 @@
             <div class="stat-card-body">
                 <div class="stat-content">
                     <div class="stat-text">
-                        <div class="stat-value">{{ $totalResidents ?? 201 }}</div>
+                        <div class="stat-value">{{ $totalResidents ?? 0 }}</div>
                         <div class="stat-label">Penduduk</div>
                     </div>
-                    <i class="fas fa-user stat-icon"></i>
+                    <i class="fas fa-users stat-icon"></i>
                 </div>
             </div>
             <div class="stat-card-footer">
@@ -246,10 +246,10 @@
             <div class="stat-card-body">
                 <div class="stat-content">
                     <div class="stat-text">
-                        <div class="stat-value">{{ $familyCount ?? 50 }}</div>
+                        <div class="stat-value">{{ $familyCount ?? 0 }}</div>
                         <div class="stat-label">Keluarga</div>
                     </div>
-                    <i class="fas fa-users stat-icon"></i>
+                    <i class="fas fa-home stat-icon"></i>
                 </div>
             </div>
             <div class="stat-card-footer">
@@ -260,19 +260,19 @@
             </div>
         </div>
 
-        <!-- Surat Tercetak Card -->
+        <!-- Lembaga Card -->
         <div class="stat-card card-orange">
             <div class="stat-card-body">
                 <div class="stat-content">
                     <div class="stat-text">
-                        <div class="stat-value">{{ $printedLetters ?? 0 }}</div>
-                        <div class="stat-label">Surat Tercetak</div>
+                        <div class="stat-value">{{ $institutionsCount ?? 0 }}</div>
+                        <div class="stat-label">Lembaga</div>
                     </div>
-                    <i class="fas fa-file-alt stat-icon"></i>
+                    <i class="fas fa-building stat-icon"></i>
                 </div>
             </div>
             <div class="stat-card-footer">
-                <a href="{{ route('online-submission.index') }}?status=approved,completed">
+                <a href="{{ route('village-institutions.index') }}">
                     <span>Lihat Detail</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -291,7 +291,7 @@
                 </div>
             </div>
             <div class="stat-card-footer">
-                <a href="{{ route('online-submission.index') }}?status=pending">
+                <a href="{{ route('online-submission.index') }}">
                     <span>Lihat Detail</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -310,7 +310,7 @@
                 </div>
             </div>
             <div class="stat-card-footer">
-                <a href="{{ route('user-verification.index') }}?status=pending">
+                <a href="{{ route('user-verification.index') }}">
                     <span>Lihat Detail</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>

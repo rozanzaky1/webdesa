@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profil Desa')
+@section('title', 'Profil Kampung')
 
 @push('styles')
 <style>
@@ -74,7 +74,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0">Profil Desa</h4>
+        <h4 class="mb-0">Profil Kampung</h4>
         <a href="{{ route('village-profile.edit') }}" class="btn btn-primary btn-sm">
             <i class="fas fa-edit"></i> Edit Profil
         </a>
@@ -94,7 +94,7 @@
         <h5>Informasi Umum</h5>
         <div class="profile-info">
             <div class="info-item">
-                <div class="info-label">Nama Desa</div>
+                <div class="info-label">Nama Kampung</div>
                 <div class="info-value">{{ $profile['village_name'] ?? '-' }}</div>
             </div>
             <div class="info-item">
@@ -118,37 +118,37 @@
 
     <!-- Visi -->
     <div class="profile-section">
-        <h5>Visi Desa</h5>
+        <h5>Visi Kampung</h5>
         @if(!empty($profile['vision']))
             <p style="line-height: 1.8; color: #444;">{{ $profile['vision'] }}</p>
         @else
-            <div class="empty-state">Visi desa belum diisi</div>
+            <div class="empty-state">Visi Kampung belum diisi</div>
         @endif
     </div>
 
     <!-- Misi -->
     <div class="profile-section">
-        <h5>Misi Desa</h5>
+        <h5>Misi Kampung</h5>
         @if(!empty($profile['mission']))
             <div style="line-height: 1.8; color: #444; white-space: pre-line;">{{ $profile['mission'] }}</div>
         @else
-            <div class="empty-state">Misi desa belum diisi</div>
+            <div class="empty-state">Misi Kampung belum diisi</div>
         @endif
     </div>
 
     <!-- Sejarah -->
     <div class="profile-section">
-        <h5>Sejarah Desa</h5>
+        <h5>Sejarah Kampung</h5>
         @if(!empty($profile['history']))
             <div style="line-height: 1.8; color: #444; white-space: pre-line;">{{ $profile['history'] }}</div>
         @else
-            <div class="empty-state">Sejarah desa belum diisi</div>
+            <div class="empty-state">Sejarah Kampung belum diisi</div>
         @endif
     </div>
 
     <!-- Struktur Organisasi -->
     <div class="profile-section">
-        <h5>Struktur Organisasi Desa</h5>
+        <h5>Struktur Organisasi Kampung</h5>
         @if(!empty($profile['structure_image']))
             <img src="{{ asset('storage/' . $profile['structure_image']) }}" alt="Struktur Organisasi" class="structure-image">
         @else

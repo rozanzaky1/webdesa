@@ -74,6 +74,13 @@ Route::delete('/hamlets/{id}', [App\Http\Controllers\HamletController::class, 'd
 
 // Letters - Surat
 Route::get('/letters', [LetterController::class, 'index'])->name('letters.index');
+Route::get('/letters/create', [LetterController::class, 'create'])->name('letters.create');
+Route::post('/letters', [LetterController::class, 'store'])->name('letters.store');
+Route::get('/letters/{id}', [LetterController::class, 'show'])->name('letters.show');
+Route::get('/letters/{id}/edit', [LetterController::class, 'edit'])->name('letters.edit');
+Route::put('/letters/{id}', [LetterController::class, 'update'])->name('letters.update');
+Route::get('/letters/list', [LetterController::class, 'list'])->name('letters.list');
+Route::get('/letters/resident/{id}', [LetterController::class, 'getResidentData'])->name('letters.resident-data');
 
 // Verifications - Verifikasi
 Route::get('/verifications', [VerificationController::class, 'index'])->name('verifications.index');

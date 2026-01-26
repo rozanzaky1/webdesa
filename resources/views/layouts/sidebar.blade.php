@@ -3,11 +3,11 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}" style="flex-direction: column; padding: 0.8rem 0; height: auto; min-height: 4.375rem;">
-        <div class="sidebar-brand-icon" style="margin-bottom: 0.3rem;">
-            <i class="fas fa-landmark" style="font-size: 1.5rem;"></i>
+        <div class="sidebar-brand-icon" style="margin-bottom: 0.5rem;">
+            <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah" style="width: 50px; height: 50px; object-fit: contain;">
         </div>
         <div class="sidebar-brand-text" style="font-size: 0.7rem; line-height: 1.2; text-align: center; padding: 0 0.5rem;">
-            <div style="font-weight: 700; margin-bottom: 0.1rem;">DESA BADRAN SARI</div>
+            <div style="font-weight: 700; margin-bottom: 0.1rem;">Kampung BADRAN SARI</div>
             <div style="font-size: 0.6rem; font-weight: 400; opacity: 0.9;">Kecamatan Punggur</div>
             <div style="font-size: 0.6rem; font-weight: 400; opacity: 0.9;">Kabupaten Lampung Tengah</div>
         </div>
@@ -28,21 +28,21 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Data Desa
+        Data Kampung
     </div>
 
-    <!-- Nav Item - Profil Desa -->
+    <!-- Nav Item - Profil Kampung -->
     <li class="nav-item {{ Request::is('village-profile*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('village-profile.index') }}">
             <i class="fas fa-fw fa-building"></i>
-            <span>Profil Desa</span></a>
+            <span>Profil Kampung</span></a>
     </li>
 
-    <!-- Nav Item - Lembaga Desa -->
+    <!-- Nav Item - Lembaga Kampung -->
     <li class="nav-item {{ Request::is('village-institutions*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('village-institutions.index') }}">
             <i class="fas fa-fw fa-handshake"></i>
-            <span>Lembaga Desa</span></a>
+            <span>Lembaga Kampung</span></a>
     </li>
 
     <!-- Nav Item - Berita -->
@@ -85,14 +85,15 @@
     </div>
 
     <!-- Nav Item - Layanan Collapse Menu -->
-    <li class="nav-item {{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'active' : '' }}">
-        <a class="nav-link {{ Request::is('letter-archive*') || Request::is('online-submission*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseLayanan"
-            aria-expanded="{{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'true' : 'false' }}" aria-controls="collapseLayanan">
+    <li class="nav-item {{ Request::is('letters*') || Request::is('letter-archive*') || Request::is('online-submission*') ? 'active' : '' }}">
+        <a class="nav-link {{ Request::is('letters*') || Request::is('letter-archive*') || Request::is('online-submission*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseLayanan"
+            aria-expanded="{{ Request::is('letters*') || Request::is('letter-archive*') || Request::is('online-submission*') ? 'true' : 'false' }}" aria-controls="collapseLayanan">
             <i class="fas fa-fw fa-file-alt"></i>
             <span>Surat & Dokumen</span>
         </a>
-        <div id="collapseLayanan" class="collapse {{ Request::is('letter-archive*') || Request::is('online-submission*') ? 'show' : '' }}" aria-labelledby="headingLayanan" data-parent="#accordionSidebar">
+        <div id="collapseLayanan" class="collapse {{ Request::is('letters*') || Request::is('letter-archive*') || Request::is('online-submission*') ? 'show' : '' }}" aria-labelledby="headingLayanan" data-parent="#accordionSidebar">
             <div class="bg-white py-1 collapse-inner rounded">
+                <a class="collapse-item {{ Request::is('letters*') ? 'active' : '' }}" href="{{ route('letters.index') }}">Buat Surat</a>
                 <a class="collapse-item {{ Request::is('letter-archive*') ? 'active' : '' }}" href="{{ route('letter-archive.index') }}">Arsip Surat</a>
                 <a class="collapse-item {{ Request::is('online-submission*') ? 'active' : '' }}" href="{{ route('online-submission.index') }}">Pengajuan Online</a>
             </div>

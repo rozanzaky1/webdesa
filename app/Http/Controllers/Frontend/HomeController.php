@@ -14,10 +14,7 @@ class HomeController extends Controller
         // Statistics
         $stats = [
             'total_residents' => Resident::where('status', 'active')->count(),
-            'total_families' => Resident::where('status', 'active')
-                ->distinct('family_card_number')
-                ->whereNotNull('family_card_number')
-                ->count('family_card_number'),
+            'total_families' => $this->getFamiliesCount(),
             'total_hamlets' => $this->getHamletsCount(),
             'total_institutions' => $this->getInstitutionsCount(),
         ];
@@ -41,6 +38,15 @@ class HomeController extends Controller
     {
         $institutions = $this->getInstitutions();
         return view('frontend.institutions', compact('institutions'));
+    }
+
+    private function getFamiliesCount()
+    {
+        if (!Storage::disk('local')->exists('families.json')) {
+            return \App\Models\Family::count();
+        }
+        $families = json_decode(Storage::disk('local')->get('families.json'), true) ?? [];
+        return count($families);
     }
 
     private function getHamletsCount()

@@ -419,7 +419,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1><i class="fas fa-map-marked-alt mr-2"></i>Data Dusun</h1>
-                <p>Kelola data dusun di Desa Badran Sari</p>
+                <p>Kelola data dusun di Kampung Badran Sari</p>
             </div>
             <a href="{{ route('hamlets.create') }}" class="btn btn-light btn-lg">
                 <i class="fas fa-plus mr-2"></i>Tambah Dusun
@@ -443,11 +443,11 @@
             <p><i class="fas fa-map-marked-alt mr-1"></i> Total Dusun</p>
         </div>
         <div class="stat-card card-info">
-            <h3>{{ collect($hamlets)->sum('total_families') }}</h3>
+            <h3>{{ $totalFamilies }}</h3>
             <p><i class="fas fa-home mr-1"></i> Total Keluarga</p>
         </div>
         <div class="stat-card card-purple">
-            <h3>{{ collect($hamlets)->sum('total_residents') }}</h3>
+            <h3>{{ $totalResidents }}</h3>
             <p><i class="fas fa-users mr-1"></i> Total Penduduk</p>
         </div>
     </div>

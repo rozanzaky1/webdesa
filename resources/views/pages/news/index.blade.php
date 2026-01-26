@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Berita Desa')
+@section('title', 'Berita Kampung')
 
 @push('styles')
 <style>
@@ -148,7 +148,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0">Berita Desa</h4>
+        <h4 class="mb-0">Berita Kampung</h4>
         <a href="{{ route('news.create') }}" class="btn btn-primary btn-sm">
             <i class="fas fa-plus"></i> Tulis Berita
         </a>

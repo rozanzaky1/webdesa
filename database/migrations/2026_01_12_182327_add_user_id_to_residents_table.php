@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('residents', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable()->after('id');
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // Check if column already exists
+            if (!Schema::hasColumn('residents', 'user_id')) {
+                $table->unsignedBigInteger('user_id')->nullable()->after('id');
+                
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            }
         });
     }
 

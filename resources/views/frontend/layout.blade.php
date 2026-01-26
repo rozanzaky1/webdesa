@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Website Resmi Desa Badran Sari">
-    <title>@yield('title', 'Beranda') - Desa Badran Sari</title>
+    <meta name="description" content="Website Resmi Kampung Badran Sari">
+    <title>@yield('title', 'Beranda') - Kampung Badran Sari</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -313,9 +313,9 @@
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%232d5016%22/%3E%3Ctext x=%2250%22 y=%2260%22 font-size=%2240%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22%3EDS%3C/text%3E%3C/svg%3E'">
+                <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%232d5016%22/%3E%3Ctext x=%2250%22 y=%2260%22 font-size=%2240%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22%3EDS%3C/text%3E%3C/svg%3E'">
                 <div class="brand-text">
-                    <span class="brand-name">Desa Badran Sari</span>
+                    <span class="brand-name">Kampung Badran Sari</span>
                     <span class="brand-location">Kec. Punggur, Kab. Lampung Tengah</span>
                 </div>
             </a>
@@ -331,7 +331,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('profil-desa') ? 'active' : '' }}" href="{{ route('profil-desa') }}">
-                            <i class="fas fa-info-circle"></i> Profil Desa
+                            <i class="fas fa-info-circle"></i> Profil Kampung
                         </a>
                     </li>
                     <li class="nav-item">
@@ -398,8 +398,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5><i class="fas fa-map-marker-alt"></i> Desa Badran Sari</h5>
-                    <p class="mb-3">Website resmi Pemerintah Desa Badran Sari sebagai media informasi dan pelayanan kepada masyarakat.</p>
+                    <h5><i class="fas fa-map-marker-alt"></i> Kampung Badran Sari</h5>
+                    <p class="mb-3">Website resmi Pemerintah Kampung Badran Sari sebagai media informasi dan pelayanan kepada masyarakat.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -411,23 +411,23 @@
                     <h5><i class="fas fa-link"></i> Tautan Cepat</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ route('home') }}"><i class="fas fa-angle-right"></i> Beranda</a></li>
-                        <li class="mb-2"><a href="{{ route('profil-desa') }}"><i class="fas fa-angle-right"></i> Profil Desa</a></li>
+                        <li class="mb-2"><a href="{{ route('profil-desa') }}"><i class="fas fa-angle-right"></i> Profil Kampung</a></li>
                         <li class="mb-2"><a href="{{ route('berita.index') }}"><i class="fas fa-angle-right"></i> Berita</a></li>
-                        <li class="mb-2"><a href="{{ route('lembaga-desa') }}"><i class="fas fa-angle-right"></i> Lembaga Desa</a></li>
+                        <li class="mb-2"><a href="{{ route('lembaga-desa') }}"><i class="fas fa-angle-right"></i> Lembaga Kampung</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 mb-4">
                     <h5><i class="fas fa-phone"></i> Kontak</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-map-marker-alt"></i> Desa Badran Sari, Kecamatan XXX</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt"></i> Kampung Badran Sari, Kecamatan XXX</li>
                         <li class="mb-2"><i class="fas fa-phone"></i> (0274) 123-4567</li>
-                        <li class="mb-2"><i class="fas fa-envelope"></i> info@badransari.desa.id</li>
+                        <li class="mb-2"><i class="fas fa-envelope"></i> info@badransari.Kampung.id</li>
                         <li class="mb-2"><i class="fas fa-clock"></i> Senin - Jumat: 08.00 - 16.00 WIB</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} Desa Badran Sari. All Rights Reserved.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} Kampung Badran Sari. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

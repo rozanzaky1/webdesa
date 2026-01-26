@@ -89,7 +89,7 @@
                                 <div class="timeline-content">
                                     <h6>Siap Diambil</h6>
                                     @if($submission['status'] == 'completed')
-                                        <small class="text-muted">Surat siap diambil di kantor desa</small>
+                                        <small class="text-muted">Surat siap diambil di kantor Kampung</small>
                                     @else
                                         <small class="text-muted">Menunggu proses selesai</small>
                                     @endif
@@ -195,7 +195,7 @@
                             </h6>
                             <p class="mb-0">
                                 <i class="fas fa-info-circle mr-2"></i>
-                                Silakan datang ke kantor desa untuk mengambil surat dengan membawa:
+                                Silakan datang ke kantor Kampung untuk mengambil surat dengan membawa:
                             </p>
                             <ul class="mb-0 mt-2">
                                 <li>KTP asli dan fotokopi</li>

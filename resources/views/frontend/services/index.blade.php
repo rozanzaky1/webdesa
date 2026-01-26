@@ -57,7 +57,7 @@
 @section('content')
 <div class="page-header">
     <div class="container">
-        <h1 class="display-4 font-weight-bold">Layanan Administrasi Desa</h1>
+        <h1 class="display-4 font-weight-bold">Layanan Administrasi Kampung</h1>
         <p class="mb-0">Ajukan permohonan surat secara online dengan mudah dan cepat</p>
     </div>
 </div>

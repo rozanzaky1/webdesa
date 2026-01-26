@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lembaga Desa')
+@section('title', 'Lembaga Kampung')
 
 @push('styles')
 <style>
@@ -117,7 +117,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-0">Lembaga Desa</h4>
+        <h4 class="mb-0">Lembaga Kampung</h4>
         <a href="{{ route('village-institutions.create') }}" class="btn btn-primary btn-sm">
             <i class="fas fa-plus"></i> Tambah Lembaga
         </a>
@@ -231,8 +231,8 @@
     @empty
         <div class="empty-state">
             <i class="fas fa-building"></i>
-            <h5>Belum Ada Lembaga Desa</h5>
-            <p>Klik tombol "Tambah Lembaga" untuk menambahkan lembaga desa pertama.</p>
+            <h5>Belum Ada Lembaga Kampung</h5>
+            <p>Klik tombol "Tambah Lembaga" untuk menambahkan lembaga Kampung pertama.</p>
         </div>
     @endforelse
 </div>

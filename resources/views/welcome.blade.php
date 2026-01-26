@@ -19,7 +19,21 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen flex-col">
+        <!-- Header Bar dengan Logo -->
+        <div style="width: 100%; background: linear-gradient(135deg, #0f7b2a 0%, #1a5f3a 100%); padding: 30px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+            <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 25px; padding: 0 20px;">
+                <div style="background: white; padding: 12px; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.2); flex-shrink: 0;">
+                    <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah" style="width: 80px; height: 80px; object-fit: contain; display: block;">
+                </div>
+                <div style="color: white; text-align: center;">
+                    <h1 style="font-size: 2rem; font-weight: 700; margin: 0 0 8px 0; letter-spacing: 0.5px;">Kampung BADRAN SARI</h1>
+                    <p style="font-size: 1rem; margin: 0; opacity: 0.95; font-weight: 500;">Kecamatan Punggur - Kabupaten Lampung Tengah</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex p-6 lg:p-8 items-center lg:justify-center" style="min-height: calc(100vh - 180px);">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
@@ -268,6 +282,7 @@
                     <div class="absolute inset-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"></div>
                 </div>
             </main>
+        </div>
         </div>
 
         @if (Route::has('login'))

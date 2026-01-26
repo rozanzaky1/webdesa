@@ -29,13 +29,16 @@ class DashboardController extends Controller
             return ($submission['status'] ?? '') === 'pending';
         }));
         
+        // Get institutions count
+        $institutionsCount = count($this->getInstitutions());
+        
         // User verification statistics
         $pendingUsers = \App\Models\User::where('role', 'user')->where('is_approved', false)->count();
         $approvedUsers = \App\Models\User::where('role', 'user')->where('is_approved', true)->count();
         $totalUsers = \App\Models\User::where('role', 'user')->count();
         
         // Hitung statistik dari database
-        $totalResidents = Resident::count();
+        $totalResidents = Resident::where('status', 'active')->count();
         
         // Hitung jumlah keluarga dari tabel families
         $familyCount = Family::count();
@@ -86,6 +89,7 @@ class DashboardController extends Controller
             'ageGroups',
             'hamlets',
             'hamletCount',
+            'institutionsCount',
             'printedLetters',
             'pendingVerifications',
             'pendingUsers',
@@ -101,6 +105,15 @@ class DashboardController extends Controller
         }
         
         return json_decode(Storage::disk('local')->get('hamlets.json'), true) ?? [];
+    }
+    
+    private function getInstitutions()
+    {
+        if (!Storage::disk('local')->exists('village_institutions.json')) {
+            return [];
+        }
+        
+        return json_decode(Storage::disk('local')->get('village_institutions.json'), true) ?? [];
     }
     
     private function getAllSubmissions()

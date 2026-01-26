@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Wilayah Desa')
+@section('title', 'Dashboard Wilayah Kampung')
 
 @push('styles')
 <style>
@@ -287,7 +287,7 @@
     <!-- Page Header -->
     <div class="page-header">
         <div>
-            <h1><i class="fas fa-map-marker-alt text-primary"></i> Wilayah Desa</h1>
+            <h1><i class="fas fa-map-marker-alt text-primary"></i> Wilayah Kampung</h1>
             <p class="text-muted mb-0">Kelola data wilayah dan pembagian RT/RW</p>
         </div>
     </div>

@@ -98,28 +98,62 @@
         }
         
         .header {
-            text-align: center;
             border-bottom: 3px solid #000;
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 0;
+        }
+        
+        .header table {
+            width: 100%;
+        }
+        
+        .header img {
+            width: 80px;
+            height: auto;
+        }
+        
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 3px 0;
+            color: #000;
         }
         
         .header h3 {
-            margin: 5px 0;
-            font-size: 16pt;
-            text-transform: uppercase;
+            margin: 2px 0;
+            font-size: 14pt;
+            font-weight: normal;
+            color: #000;
         }
         
         .header p {
-            margin: 2px 0;
-            font-size: 11pt;
+            margin: 3px 0 8px 0;
+            font-size: 9pt;
+            font-style: italic;
+            color: #000;
+        }
+        
+        .header-line {
+            border: none;
+            border-top: 1px solid #000;
+            margin: 0 0 20px 0;
+        }
+        
+        .letter-title {
+            text-align: center;
+            margin: 10px 0 15px 0;
+            font-weight: normal;
+            font-size: 14pt;
+            text-decoration: underline;
+            color: #000;
         }
         
         .letter-number {
             text-align: center;
-            margin: 30px 0;
-            font-weight: bold;
-            text-decoration: underline;
+            margin: 0 0 20px 0;
+            font-weight: normal;
+            font-size: 12pt;
+            color: #000;
         }
         
         .content {
@@ -225,81 +259,96 @@
 
     <div class="paper" id="letterContent">
         <div class="header">
-            <h3>PEMERINTAH KABUPATEN LAMPUNG TENGAH</h3>
-            <h3>KECAMATAN PUNGGUR</h3>
-            <h3>KANTOR DESA BADRAN SARI</h3>
-            <p>Jl. Raya Punggur KM. 5, Badran Sari, Kec. Punggur</p>
-            <p>Email: desabadransari@gmail.com | Telp: (0725) 123456</p>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="90px" style="vertical-align: top; padding: 5px 0;">
+                        <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo">
+                    </td>
+                    <td style="text-align: center; padding: 5px 0;">
+                        <h3>PEMERINTAH KABUPATEN LAMPUNG TENGAH</h3>
+                        <h3>KECAMATAN PUNGGUR</h3>
+                        <h1>KAMPUNG BADRAN SARI</h1>
+                        <p>Alamat: Jl. Raya Punggur Km. 5, Badran Sari, Punggur, Lampung Tengah</p>
+                    </td>
+                    <td width="90px"></td>
+                </tr>
+            </table>
+        </div>
+        <hr class="header-line">
+
+        <div class="letter-title">
+            <input type="text" class="editable" id="letter_type" value="{{ strtoupper($submission['letter_type']) }}" readonly style="text-align: center; width: 400px; font-size: 14pt; border: none; text-decoration: underline;">
         </div>
 
         <div class="letter-number">
-            <p>NOMOR: <input type="text" class="editable" id="letter_number" value="{{ $submission['letter_number'] ?? '..../..../.../.....' }}" readonly style="width: 200px;"></p>
-            <h4><input type="text" class="editable" id="letter_type" value="{{ strtoupper($submission['letter_type']) }}" readonly style="text-align: center; width: 400px; font-size: 14pt; font-weight: bold;"></h4>
+            <p style="margin: 0;">Nomor: <input type="text" class="editable" id="letter_number" value="{{ $submission['letter_number'] ?? '..../..../.../.....' }}" readonly style="width: 180px; border: none; text-align: center;"></p>
         </div>
 
         <div class="content">
-            <p style="text-indent: 50px;">
-                Yang bertanda tangan di bawah ini Kepala Desa Badran Sari, Kecamatan Punggur, 
-                Kabupaten Lampung Tengah, dengan ini menerangkan bahwa:
+            <p style="text-indent: 40px; line-height: 1.8;">
+                Yang bertanda tangan di bawah ini Kepala Kampung Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah, dengan ini menerangkan bahwa:
             </p>
 
-            <table style="margin: 20px 0 20px 80px; line-height: 2; width: 80%;">
+            <table style="margin: 15px 0; line-height: 1.6; width: 100%; font-size: 12pt;">
                 <tr>
-                    <td width="150">Nama</td>
-                    <td width="20">:</td>
-                    <td><strong><input type="text" class="editable" id="name" value="{{ $submission['name'] ?? $submission['applicant_name'] ?? '-' }}" readonly style="font-weight: bold; width: 100%;"></strong></td>
+                    <td width="160">Nama Lengkap</td>
+                    <td width="15">:</td>
+                    <td><input type="text" class="editable" id="name" value="{{ $submission['name'] ?? $submission['applicant_name'] ?? '-' }}" readonly style="width: 100%; border: none;"></td>
                 </tr>
                 <tr>
                     <td>NIK</td>
                     <td>:</td>
-                    <td><input type="text" class="editable" id="nik" value="{{ $submission['nik'] ?? $submission['applicant_nik'] ?? '-' }}" readonly style="width: 100%;"></td>
+                    <td><input type="text" class="editable" id="nik" value="{{ $submission['nik'] ?? $submission['applicant_nik'] ?? '-' }}" readonly style="width: 100%; border: none;"></td>
                 </tr>
                 <tr>
-                    <td>Tempat/Tgl. Lahir</td>
+                    <td>Tempat, Tanggal Lahir</td>
                     <td>:</td>
                     <td>
-                        <input type="text" class="editable" id="birth_place" value="{{ $submission['birth_place'] ?? '.....................' }}" readonly style="width: 45%;">, 
-                        <input type="text" class="editable" id="birth_date" value="{{ $submission['birth_date'] ?? '.../.../......' }}" readonly style="width: 45%;">
+                        <input type="text" class="editable" id="birth_place" value="{{ $submission['birth_place'] ?? '.....................' }}" readonly style="width: 40%; border: none;">, 
+                        <input type="text" class="editable" id="birth_date" value="{{ $submission['birth_date'] ?? '.../.../......' }}" readonly style="width: 45%; border: none;">
                     </td>
                 </tr>
                 <tr>
                     <td>Jenis Kelamin</td>
                     <td>:</td>
-                    <td><input type="text" class="editable" id="gender" value="{{ $submission['gender'] ?? '................' }}" readonly style="width: 100%;"></td>
+                    <td><input type="text" class="editable" id="gender" value="{{ $submission['gender'] ?? '................' }}" readonly style="width: 100%; border: none;"></td>
+                </tr>
+                <tr>
+                    <td>Agama</td>
+                    <td>:</td>
+                    <td><input type="text" class="editable" id="religion" value="{{ $submission['religion'] ?? '................' }}" readonly style="width: 100%; border: none;"></td>
                 </tr>
                 <tr>
                     <td>Pekerjaan</td>
                     <td>:</td>
-                    <td><input type="text" class="editable" id="occupation" value="{{ $submission['occupation'] ?? '................' }}" readonly style="width: 100%;"></td>
+                    <td><input type="text" class="editable" id="occupation" value="{{ $submission['occupation'] ?? '................' }}" readonly style="width: 100%; border: none;"></td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top;">Alamat</td>
                     <td style="vertical-align: top;">:</td>
-                    <td><textarea class="editable" id="address" readonly>{{ $submission['address'] ?? 'Desa Badran Sari, Kec. Punggur, Kab. Lampung Tengah' }}</textarea></td>
+                    <td><textarea class="editable" id="address" readonly style="border: none; font-family: inherit; font-size: inherit; line-height: inherit;">{{ $submission['address'] ?? 'Way Kandis, Dusun Kembang Sari, Kampung Badran Sari, Dusun Kembang Sari, Kampung Badran Sari' }}</textarea></td>
                 </tr>
             </table>
 
-            <p style="text-indent: 50px;">
-                Adalah benar warga Desa Badran Sari dan surat keterangan ini dibuat untuk keperluan:
+            <p style="text-indent: 40px; line-height: 1.8; margin: 15px 0;">
+                Surat keterangan ini dibuat untuk keperluan:
             </p>
 
-            <p style="margin: 20px 0 20px 80px;">
-                <textarea class="editable" id="purpose" readonly style="text-transform: uppercase; font-weight: bold;">{{ $submission['purpose'] }}</textarea>
+            <p style="text-align: center; margin: 15px 0; font-size: 13pt;">
+                <strong>" <input type="text" class="editable" id="purpose" readonly style="text-transform: uppercase; font-weight: bold; border: none; text-align: center; width: 300px;" value="{{ strtoupper($submission['purpose']) }}"> "</strong>
             </p>
 
-            <p style="text-indent: 50px;">
-                Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan 
-                sebagaimana mestinya.
+            <p style="text-indent: 40px; line-height: 1.8; margin-top: 15px;">
+                Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.
             </p>
         </div>
 
-        <div class="signature">
-            <div class="signature-box">
-                <p>Badran Sari, <input type="text" class="editable" id="letter_date" value="{{ date('d F Y') }}" readonly style="width: 150px; text-align: center;"></p>
-                <p style="font-weight: bold;">Kepala Desa Badran Sari</p>
-                <div class="signature-line">
-                    <p style="font-weight: bold;"><input type="text" class="editable" id="signer_name" value="Pak Suronto" readonly style="font-weight: bold; width: 200px; text-align: center;"></p>
-                </div>
+        <div class="signature" style="margin-top: 30px;">
+            <div class="signature-box" style="font-size: 12pt;">
+                <p style="margin: 0;">Badran Sari, {{ date('d F Y') }}</p>
+                <p style="margin: 5px 0;">Kepala Kampung Badran Sari</p>
+                <div style="height: 60px;"></div>
+                <p style="margin: 0; font-weight: bold; text-decoration: underline;">Wibowo, S.H.</p>
             </div>
         </div>
     </div>
