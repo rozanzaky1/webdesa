@@ -1,0 +1,82 @@
+name: Deploy to Domainesia via FTP
+
+on:
+  push:
+    branches:
+      - main  # Ganti dengan branch yang ingin Anda deploy
+  workflow_dispatch:  # Memungkinkan manual trigger dari GitHub UI
+
+jobs:
+  deploy:
+    name: Deploy to Domainesia
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'  # Sesuaikan dengan versi PHP di hosting Anda
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, dom, filter, gd, json, zip
+          coverage: none
+      
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-dev --no-interaction --no-progress --optimize-autoloader
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'  # Atau versi Node yang Anda gunakan
+      
+      - name: Install NPM dependencies
+        run: npm ci
+      
+      - name: Build assets
+        run: npm run build
+      
+      - name: Create .env file
+        run: |
+          echo "APP_NAME=\"${{ secrets.APP_NAME }}\"" > .env
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_URL=${{ secrets.APP_URL }}" >> .env
+          echo "" >> .env
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "" >> .env
+          echo "MAIL_MAILER=${{ secrets.MAIL_MAILER }}" >> .env
+          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
+          echo "MAIL_PORT=${{ secrets.MAIL_PORT }}" >> .env
+          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
+          echo "MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}" >> .env
+          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
+          echo "MAIL_FROM_NAME=\"${{ secrets.MAIL_FROM_NAME }}\"" >> .env
+      
+      - name: Prepare deployment files
+        run: |
+          # Hapus file yang tidak perlu di-deploy
+          rm -rf .git .github tests node_modules .env.example .gitignore .gitattributes phpunit.xml
+          
+      - name: Deploy to Domainesia via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}  # Biasanya /public_html/ atau /
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            storage/**
+            .env.example
