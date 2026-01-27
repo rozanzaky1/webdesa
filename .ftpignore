@@ -1,0 +1,14 @@
+# File dan folder yang tidak perlu di-upload via FTP
+.git/
+.github/
+node_modules/
+tests/
+.env.example
+.gitignore
+.gitattributes
+phpunit.xml
+README.md
+*.md
+package-lock.json
+composer.lock
+vite.config.js
