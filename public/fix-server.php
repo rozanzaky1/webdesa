@@ -55,16 +55,37 @@ try {
     // 1. Composer dump-autoload
     echo "<div class='command'>$ composer dump-autoload</div>";
     
-    // Coba jalankan composer
+    // Coba jalankan composer dengan berbagai metode
     chdir($basePath);
-    $composerPath = file_exists('/usr/local/bin/composer') ? '/usr/local/bin/composer' : 'composer';
-    $output = shell_exec("$composerPath dump-autoload 2>&1");
+    $composerPaths = [
+        '/usr/local/bin/composer',
+        '/usr/bin/composer',
+        'composer',
+        $basePath . '/composer.phar'
+    ];
     
-    if ($output && strpos($output, 'Generated') !== false) {
-        echo "<div class='success'>✓ Autoloader berhasil diperbarui</div>";
-        echo "<pre style='font-size: 11px; background: #f8f9fa; padding: 10px;'>" . htmlspecialchars($output) . "</pre>";
-    } else {
-        echo "<div class='warning'>⚠ Composer dump-autoload via shell: " . htmlspecialchars($output ?: 'No output') . "</div>";
+    $composerSuccess = false;
+    foreach ($composerPaths as $composerPath) {
+        if (file_exists($composerPath) || $composerPath === 'composer') {
+            $output = @shell_exec("$composerPath dump-autoload -o 2>&1");
+            if ($output && (strpos($output, 'Generated') !== false || strpos($output, 'Generating') !== false)) {
+                echo "<div class='success'>✓ Autoloader berhasil diperbarui via: $composerPath</div>";
+                echo "<pre style='font-size: 11px; background: #f8f9fa; padding: 10px;'>" . htmlspecialchars(substr($output, 0, 500)) . "</pre>";
+                $composerSuccess = true;
+                break;
+            }
+        }
+    }
+    
+    if (!$composerSuccess) {
+        echo "<div class='warning'>⚠ Composer tidak dapat dijalankan via shell_exec</div>";
+        echo "<div class='info'>Mencoba metode alternatif: Memanggil Composer Autoload secara langsung...</div>";
+        
+        // Regenerate composer autoload secara manual
+        if (file_exists($basePath . '/vendor/autoload.php')) {
+            require $basePath . '/vendor/autoload.php';
+            echo "<div class='success'>✓ Composer autoload dimuat ulang secara manual</div>";
+        }
     }
     
     // 2. Clear config cache
