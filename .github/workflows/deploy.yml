@@ -67,6 +67,33 @@ jobs:
           # Hapus file yang tidak perlu di-deploy
           rm -rf .git .github tests node_modules .env.example .gitignore .gitattributes phpunit.xml
           
+      - name: Create cache clear script
+        run: |
+          cat > clear-cache.php << 'EOF'
+          <?php
+          // Auto clear cache after deployment
+          $commands = [
+              'view:clear',
+              'cache:clear',
+              'config:clear',
+              'route:clear'
+          ];
+          
+          foreach ($commands as $command) {
+              echo "Running: php artisan $command\n";
+              $output = shell_exec("php artisan $command 2>&1");
+              echo $output . "\n";
+          }
+          
+          echo "\n=== Cache cleared successfully! ===\n";
+          
+          // Auto delete this file after execution
+          if (file_exists(__FILE__)) {
+              unlink(__FILE__);
+              echo "Script auto-deleted.\n";
+          }
+          EOF
+      
       - name: Deploy to Domainesia via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
