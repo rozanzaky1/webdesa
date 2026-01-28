@@ -185,16 +185,27 @@
         
         /* Responsive Navbar */
         @media (max-width: 991px) {
+            .navbar-custom {
+                padding: 0.3rem 0;
+            }
             .navbar-nav .nav-link {
                 margin: 5px 0;
                 justify-content: flex-start;
+                padding: 10px 16px !important;
+            }
+            .navbar-collapse {
+                margin-top: 15px;
+                padding: 15px 0;
+                border-top: 1px solid rgba(255,255,255,0.2);
             }
             .btn-login {
                 margin-top: 10px;
                 display: inline-flex;
+                width: 100%;
+                justify-content: center;
             }
             .brand-name {
-                font-size: 1.15rem;
+                font-size: 1.1rem;
             }
             .brand-location {
                 font-size: 0.7rem;
@@ -204,9 +215,12 @@
                 width: 45px;
                 margin-right: 12px;
             }
+            .dropdown-menu {
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
         }
         
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .brand-name {
                 font-size: 1rem;
             }
@@ -218,8 +232,43 @@
                 width: 40px;
                 margin-right: 10px;
             }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar-custom {
+                padding: 0.25rem 0;
+            }
+            .brand-name {
+                font-size: 0.9rem;
+                line-height: 1.2;
+            }
+            .brand-location {
+                font-size: 0.6rem;
+            }
+            .navbar-brand img {
+                height: 35px;
+                width: 35px;
+                margin-right: 8px;
+            }
             .navbar-nav .nav-link {
                 font-size: 0.9rem;
+                padding: 8px 12px !important;
+            }
+            .navbar-nav .nav-link i {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .brand-name {
+                font-size: 0.85rem;
+            }
+            .brand-location {
+                font-size: 0.55rem;
+            }
+            .navbar-brand img {
+                height: 32px;
+                width: 32px;
             }
         }
         
@@ -235,17 +284,28 @@
             font-weight: 700;
             margin-bottom: 20px;
             color: #fff;
+            font-size: 1.1rem;
+        }
+        
+        .footer p, .footer ul {
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
         
         .footer a {
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             transition: all 0.3s;
+            display: inline-block;
         }
         
         .footer a:hover {
             color: #fff;
             padding-left: 5px;
+        }
+        
+        .footer ul.list-unstyled li {
+            margin-bottom: 10px;
         }
         
         .footer-bottom {
@@ -254,6 +314,7 @@
             padding-top: 20px;
             text-align: center;
             color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
         }
         
         .social-links a {
@@ -265,6 +326,7 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             margin-right: 10px;
+            margin-bottom: 10px;
             transition: all 0.3s;
         }
         
@@ -274,9 +336,65 @@
             transform: translateY(-3px);
         }
         
+        /* Footer Responsive */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+                margin-top: 40px;
+            }
+            .footer h5 {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            .footer p, .footer ul {
+                font-size: 0.9rem;
+            }
+            .footer .col-lg-4 {
+                margin-bottom: 30px;
+            }
+            .footer-bottom {
+                font-size: 0.85rem;
+                padding-top: 15px;
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer {
+                padding: 30px 0 15px;
+            }
+            .footer h5 {
+                font-size: 0.95rem;
+            }
+            .footer p, .footer ul {
+                font-size: 0.85rem;
+            }
+            .social-links a {
+                width: 36px;
+                height: 36px;
+                margin-right: 8px;
+            }
+        }
+        
         /* Content Spacing */
         .content-wrapper {
             min-height: calc(100vh - 400px);
+        }
+        
+        /* Container Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
         }
         
         /* Utility Classes */
@@ -296,6 +414,7 @@
             border-radius: 25px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-block;
         }
         
         .btn-green:hover {
@@ -303,6 +422,37 @@
             color: #fff;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+        }
+        
+        /* Button Responsive */
+        @media (max-width: 576px) {
+            .btn-green {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Image Responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Table Responsive */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Card Responsive */
+        .card {
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 15px;
+            }
         }
     </style>
     

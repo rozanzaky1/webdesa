@@ -47,8 +47,9 @@
         transform: translate(-50%, -50%);
         z-index: 2;
         width: 90%;
-        max-width: 800px;
+        max-width: 900px;
         text-align: center;
+        padding: 0 15px;
     }
     
     .hero-section {
@@ -71,12 +72,14 @@
         font-weight: 700;
         margin-bottom: 20px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        line-height: 1.2;
     }
     
     .hero-subtitle {
         font-size: 1.3rem;
         margin-bottom: 30px;
         opacity: 0.95;
+        line-height: 1.5;
     }
     
     @keyframes fadeInUp {
@@ -87,6 +90,74 @@
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+    
+    /* Hero Responsive */
+    @media (max-width: 992px) {
+        .hero-carousel,
+        .hero-carousel .carousel-item {
+            height: 500px;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-carousel,
+        .hero-carousel .carousel-item {
+            height: 450px;
+        }
+        .hero-title {
+            font-size: 2rem;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+        .hero-carousel .carousel-caption {
+            width: 95%;
+        }
+        .btn-lg {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-carousel,
+        .hero-carousel .carousel-item {
+            height: 400px;
+        }
+        .hero-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .hero-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .btn-lg {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            margin: 5px !important;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .hero-carousel,
+        .hero-carousel .carousel-item {
+            height: 350px;
+        }
+        .hero-title {
+            font-size: 1.25rem;
+        }
+        .hero-subtitle {
+            font-size: 0.85rem;
         }
     }
     
@@ -111,6 +182,23 @@
         border-radius: 2px;
     }
     
+    /* Section Responsive */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 1.6rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .section-title {
+            font-size: 1.4rem;
+        }
+        .section-title::after {
+            width: 50px;
+            height: 3px;
+        }
+    }
+    
     /* Sambutan Kepala Kampung */
     .sambutan-section {
         padding: 60px 0;
@@ -132,6 +220,41 @@
     
     .sambutan-content {
         padding: 40px;
+    }
+    
+    /* Sambutan Responsive */
+    @media (max-width: 992px) {
+        .sambutan-image {
+            height: 350px;
+        }
+        .sambutan-content {
+            padding: 30px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .sambutan-section {
+            padding: 40px 0;
+        }
+        .sambutan-image {
+            height: 300px;
+        }
+        .sambutan-content {
+            padding: 25px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .sambutan-section {
+            padding: 30px 0;
+        }
+        .sambutan-image {
+            height: 250px;
+        }
+        .sambutan-content {
+            padding: 20px;
+            font-size: 0.9rem;
+        }
     }
     
     /* Berita Card */
@@ -195,6 +318,52 @@
         font-weight: 500;
     }
     
+    /* News Card Responsive */
+    @media (max-width: 992px) {
+        .news-image {
+            height: 180px;
+        }
+        .news-content {
+            padding: 18px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .news-card {
+            margin-bottom: 20px;
+        }
+        .news-image {
+            height: 200px;
+        }
+        .news-title {
+            font-size: 1.05rem;
+        }
+        .news-content {
+            padding: 16px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .news-card {
+            margin-bottom: 15px;
+        }
+        .news-image {
+            height: 180px;
+        }
+        .news-title {
+            font-size: 1rem;
+        }
+        .news-meta {
+            font-size: 0.8rem;
+        }
+        .news-excerpt {
+            font-size: 0.85rem;
+        }
+        .news-content {
+            padding: 15px;
+        }
+    }
+    
     /* Statistik Kampung */
     .stats-section {
         background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
@@ -217,11 +386,66 @@
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 10px;
+        line-height: 1;
     }
     
     .stat-label {
         font-size: 1rem;
         opacity: 0.9;
+    }
+    
+    /* Stats Responsive */
+    @media (max-width: 992px) {
+        .stats-section {
+            padding: 50px 0;
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+        }
+        .stat-label {
+            font-size: 0.95rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .stats-section {
+            padding: 40px 0;
+        }
+        .stat-card {
+            padding: 25px 15px;
+            margin-bottom: 20px;
+        }
+        .stat-icon {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .stat-number {
+            font-size: 2rem;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .stats-section {
+            padding: 30px 0;
+        }
+        .stat-card {
+            padding: 20px 10px;
+        }
+        .stat-icon {
+            font-size: 2rem;
+        }
+        .stat-number {
+            font-size: 1.8rem;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+        }
     }
     
     /* Peta Section */
@@ -233,18 +457,87 @@
         border-radius: 15px;
         overflow: hidden;
         box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        height: 500px;
     }
     
-    /* Responsive */
+    /* Map Responsive */
     @media (max-width: 768px) {
-        .hero-title {
-            font-size: 2rem;
+        .map-section {
+            padding: 40px 0;
         }
-        .hero-subtitle {
-            font-size: 1rem;
+        .map-container {
+            height: 400px;
         }
-        .section-title {
-            font-size: 1.5rem;
+    }
+    
+    @media (max-width: 576px) {
+        .map-section {
+            padding: 30px 0;
+        }
+        .map-container {
+            height: 350px;
+            border-radius: 10px;
+        }
+    }
+    
+    /* General Section Padding Responsive */
+    @media (max-width: 768px) {
+        section {
+            padding: 40px 0 !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        section {
+            padding: 30px 0 !important;
+        }
+    }
+    
+    /* Utility Spacing Responsive */
+    @media (max-width: 768px) {
+        .mb-4, .my-4 {
+            margin-bottom: 1.25rem !important;
+        }
+        .mb-5, .my-5 {
+            margin-bottom: 2rem !important;
+        }
+        .pt-5, .py-5 {
+            padding-top: 2rem !important;
+        }
+        .pb-5, .py-5 {
+            padding-bottom: 2rem !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .mb-4, .my-4 {
+            margin-bottom: 1rem !important;
+        }
+        .mb-5, .my-5 {
+            margin-bottom: 1.5rem !important;
+        }
+        .pt-5, .py-5 {
+            padding-top: 1.5rem !important;
+        }
+        .pb-5, .py-5 {
+            padding-bottom: 1.5rem !important;
+        }
+    }
+    
+    /* Alert Responsive */
+    @media (max-width: 768px) {
+        .alert {
+            min-width: 250px;
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .alert {
+            min-width: 200px;
+            font-size: 0.85rem;
+            top: 70px !important;
+            right: 10px !important;
         }
     }
 </style>

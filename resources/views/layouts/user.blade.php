@@ -38,6 +38,51 @@
             background: rgba(255,255,255,0.3);
             color: white;
         }
+        
+        /* Responsive User Dashboard */
+        @media (max-width: 991px) {
+            .navbar-brand {
+                font-size: 16px;
+            }
+            .nav-link {
+                padding: 0.5rem 1rem;
+            }
+            .navbar-collapse {
+                margin-top: 1rem;
+                padding: 1rem 0;
+                border-top: 1px solid rgba(255,255,255,0.2);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 15px;
+            }
+            .navbar-brand i {
+                font-size: 14px;
+            }
+            main.py-4 {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 14px;
+            }
+            .nav-link {
+                font-size: 0.9rem;
+            }
+            main.py-4 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
     </style>
     
     @stack('styles')
@@ -50,7 +95,7 @@
                 SID - Kampung Badran Sari
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">

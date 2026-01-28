@@ -127,6 +127,186 @@
         .sidebar-brand:hover {
             background-color: rgba(255, 255, 255, 0.05);
         }
+        
+        /* Responsive Admin Dashboard */
+        @media (max-width: 768px) {
+            #wrapper #content-wrapper {
+                overflow-x: hidden;
+            }
+            
+            .container-fluid {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .card {
+                margin-bottom: 1rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.375rem 0.75rem;
+            }
+            
+            .page-heading {
+                font-size: 1.5rem;
+            }
+            
+            .sidebar {
+                width: 14rem !important;
+            }
+            
+            .sidebar.toggled {
+                width: 0 !important;
+            }
+            
+            .topbar .nav-item .nav-link {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .topbar .dropdown-list {
+                width: 18rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container-fluid {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            .card-body {
+                padding: 0.75rem;
+            }
+            
+            .page-heading {
+                font-size: 1.25rem;
+            }
+            
+            h1, .h1 {
+                font-size: 1.75rem;
+            }
+            
+            h2, .h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3, .h3 {
+                font-size: 1.25rem;
+            }
+            
+            h4, .h4 {
+                font-size: 1.1rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.325rem 0.65rem;
+            }
+            
+            .btn-sm {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+            
+            .topbar .dropdown-list {
+                width: calc(100vw - 2rem);
+            }
+            
+            /* Stack cards on mobile */
+            .row > [class*='col-'] {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .container-fluid {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .card-body {
+                padding: 0.5rem;
+            }
+            
+            .page-heading {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+        
+        /* Table Responsive Improvements */
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        @media (max-width: 768px) {
+            .table thead {
+                font-size: 0.85rem;
+            }
+            
+            .table td, .table th {
+                padding: 0.5rem;
+                white-space: nowrap;
+            }
+        }
+        
+        /* Form Responsive */
+        @media (max-width: 576px) {
+            .form-group label {
+                font-size: 0.9rem;
+            }
+            
+            .form-control {
+                font-size: 0.9rem;
+            }
+            
+            select.form-control {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Modal Responsive */
+        @media (max-width: 576px) {
+            .modal-header {
+                padding: 0.75rem;
+            }
+            
+            .modal-body {
+                padding: 0.75rem;
+            }
+            
+            .modal-footer {
+                padding: 0.5rem;
+            }
+            
+            .modal-title {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 
     @stack('styles')
