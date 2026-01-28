@@ -10,6 +10,10 @@
     <meta name="author" content="">
 
     <title>Sidesa - Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-lampung-tengah.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-lampung-tengah.png') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset ('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

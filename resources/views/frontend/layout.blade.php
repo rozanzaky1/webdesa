@@ -6,6 +6,10 @@
     <meta name="description" content="Website Resmi Kampung Badran Sari">
     <title>@yield('title', 'Beranda') - Kampung Badran Sari</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-lampung-tengah.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-lampung-tengah.png') }}">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
