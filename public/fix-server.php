@@ -47,6 +47,9 @@ try {
     require $basePath . '/vendor/autoload.php';
     $app = require_once $basePath . '/bootstrap/app.php';
     
+    // Boot the application
+    $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+    
     echo "<div class='success'>✓ Laravel berhasil dimuat</div>";
     
     // Jalankan perintah perbaikan
@@ -90,23 +93,39 @@ try {
     
     // 2. Clear config cache
     echo "<div class='command'>$ php artisan config:clear</div>";
-    Artisan::call('config:clear');
-    echo "<div class='success'>✓ Config cache berhasil dihapus</div>";
+    try {
+        $kernel->call('config:clear');
+        echo "<div class='success'>✓ Config cache berhasil dihapus</div>";
+    } catch (Exception $e) {
+        echo "<div class='warning'>⚠ " . $e->getMessage() . "</div>";
+    }
     
     // 3. Clear route cache
     echo "<div class='command'>$ php artisan route:clear</div>";
-    Artisan::call('route:clear');
-    echo "<div class='success'>✓ Route cache berhasil dihapus</div>";
+    try {
+        $kernel->call('route:clear');
+        echo "<div class='success'>✓ Route cache berhasil dihapus</div>";
+    } catch (Exception $e) {
+        echo "<div class='warning'>⚠ " . $e->getMessage() . "</div>";
+    }
     
     // 4. Clear view cache
     echo "<div class='command'>$ php artisan view:clear</div>";
-    Artisan::call('view:clear');
-    echo "<div class='success'>✓ View cache berhasil dihapus</div>";
+    try {
+        $kernel->call('view:clear');
+        echo "<div class='success'>✓ View cache berhasil dihapus</div>";
+    } catch (Exception $e) {
+        echo "<div class='warning'>⚠ " . $e->getMessage() . "</div>";
+    }
     
     // 5. Optimize untuk production
     echo "<div class='command'>$ php artisan optimize</div>";
-    Artisan::call('optimize');
-    echo "<div class='success'>✓ Aplikasi berhasil dioptimalkan</div>";
+    try {
+        $kernel->call('optimize');
+        echo "<div class='success'>✓ Aplikasi berhasil dioptimalkan</div>";
+    } catch (Exception $e) {
+        echo "<div class='warning'>⚠ " . $e->getMessage() . "</div>";
+    }
     
     // 6. Cek apakah ResidentController ada
     echo "<h2>Verifikasi Controller...</h2>";
@@ -128,7 +147,10 @@ try {
     // 7. Test route residents
     echo "<h2>Testing Route...</h2>";
     try {
-        $routes = Route::getRoutes();
+        // Boot Laravel untuk mendapatkan routes
+        $app->make('Illuminate\Contracts\Http\Kernel')->bootstrap();
+        
+        $routes = app('router')->getRoutes();
         $residentRoute = $routes->getByName('residents.index');
         
         if ($residentRoute) {
