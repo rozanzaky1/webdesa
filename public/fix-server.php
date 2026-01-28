@@ -54,21 +54,17 @@ try {
     
     // 1. Composer dump-autoload
     echo "<div class='command'>$ composer dump-autoload</div>";
-    $composerPath = 'composer'; // Atau gunakan '/usr/local/bin/composer' jika perlu
-    $output = [];
-    $returnVar = 0;
     
     // Coba jalankan composer
     chdir($basePath);
-    exec("$composerPath dump-autoload 2>&1", $output, $returnVar);
+    $composerPath = file_exists('/usr/local/bin/composer') ? '/usr/local/bin/composer' : 'composer';
+    $output = shell_exec("$composerPath dump-autoload 2>&1");
     
-    if ($returnVar === 0) {
+    if ($output && strpos($output, 'Generated') !== false) {
         echo "<div class='success'>✓ Autoloader berhasil diperbarui</div>";
+        echo "<pre style='font-size: 11px; background: #f8f9fa; padding: 10px;'>" . htmlspecialchars($output) . "</pre>";
     } else {
-        echo "<div class='warning'>⚠ Composer mungkin tidak tersedia via exec, mencoba alternatif...</div>";
-        // Fallback: regenerate classmap secara manual
-        include $basePath . '/vendor/composer/autoload_classmap.php';
-        echo "<div class='success'>✓ Classmap dimuat ulang</div>";
+        echo "<div class='warning'>⚠ Composer dump-autoload via shell: " . htmlspecialchars($output ?: 'No output') . "</div>";
     }
     
     // 2. Clear config cache
