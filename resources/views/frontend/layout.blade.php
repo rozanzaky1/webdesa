@@ -574,7 +574,7 @@
                     <h5><i class="fas fa-phone"></i> Kontak</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><i class="fas fa-map-marker-alt"></i> Kampung Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</li>
-                        <li class="mb-2"><i class="fas fa-phone"></i> +62 815-4003-4883</li>
+                        <li class="mb-2"><i class="fas fa-phone"></i> +6285832682557</li>
                         <li class="mb-2"><i class="fas fa-envelope"></i> kampungbadransari1@gmail.com</li>
                         <li class="mb-2"><i class="fas fa-clock"></i> Senin - Jumat: 08.00 - 14.00 WIB</li>
                     </ul>
