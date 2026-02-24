@@ -27,7 +27,7 @@
                     <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah" style="width: 80px; height: 80px; object-fit: contain; display: block;">
                 </div>
                 <div style="color: white; text-align: center;">
-                    <h1 style="font-size: 2rem; font-weight: 700; margin: 0 0 8px 0; letter-spacing: 0.5px;">Kampung BADRAN SARI</h1>
+                    <h1 style="font-size: 2rem; font-weight: 700; margin: 0 0 8px 0; letter-spacing: 0.5px;">Kampung KEDATON SARI</h1>
                     <p style="font-size: 1rem; margin: 0; opacity: 0.95; font-weight: 500;">Kecamatan Punggur - Kabupaten Lampung Tengah</p>
                 </div>
             </div>

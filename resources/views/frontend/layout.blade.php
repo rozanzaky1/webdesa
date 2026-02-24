@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Website Resmi Kampung Kedaton Sari">
-    <title>@yield('title', 'Beranda') - Kampung Badran Sari</title>
+    <title>@yield('title', 'Beranda') - Kampung Kedaton Sari</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo-lampung-tengah.png') }}">
@@ -469,7 +469,7 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%232d5016%22/%3E%3Ctext x=%2250%22 y=%2260%22 font-size=%2240%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22%3EDS%3C/text%3E%3C/svg%3E'">
                 <div class="brand-text">
-                    <span class="brand-name">Kampung Badran Sari</span>
+                    <span class="brand-name">Kampung Kedaton Sari</span>
                     <span class="brand-location">Kec. Punggur, Kab. Lampung Tengah</span>
                 </div>
             </a>
@@ -552,8 +552,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5><i class="fas fa-map-marker-alt"></i> Kampung Badran Sari</h5>
-                    <p class="mb-3">Website resmi Pemerintah Kampung Badran Sari sebagai media informasi dan pelayanan kepada masyarakat.</p>
+                    <h5><i class="fas fa-map-marker-alt"></i> Kampung Kedaton Sari</h5>
+                    <p class="mb-3">Website resmi Pemerintah Kampung Kedaton Sari sebagai media informasi dan pelayanan kepada masyarakat.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -573,7 +573,7 @@
                 <div class="col-lg-4 mb-4">
                     <h5><i class="fas fa-phone"></i> Kontak</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-map-marker-alt"></i> Kampung Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt"></i> Kampung Kedaton Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</li>
                         <li class="mb-2"><i class="fas fa-phone"></i> +62 815-4003-4883</li>
                         <li class="mb-2"><i class="fas fa-envelope"></i> kampungbadransari1@gmail.com</li>
                         <li class="mb-2"><i class="fas fa-clock"></i> Senin - Jumat: 08.00 - 14.00 WIB</li>
@@ -581,7 +581,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; {{ date('Y') }} Kampung Badran Sari. All Rights Reserved.</p>
+                <p class="mb-0">&copy; {{ date('Y') }} Kampung Kedaton Sari. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
