@@ -88,6 +88,16 @@
                         </div>
                     </div>
                 </div>
+                @if(!empty($institution['structure_image']))
+                <div class="card-footer bg-white border-top">
+                    <h6 class="mb-3"><i class="fas fa-sitemap mr-2"></i>Struktur Organisasi</h6>
+                    <img src="{{ asset('storage/' . $institution['structure_image']) }}" 
+                         alt="Struktur {{ $institution['name'] }}" 
+                         class="img-fluid rounded shadow-sm"
+                         style="max-width: 100%; height: auto;">
+                </div>
+                @endif
+                
                 @if(!empty($institution['programs']) && is_array($institution['programs']))
                 <div class="card-footer bg-light">
                     <small class="text-muted">
