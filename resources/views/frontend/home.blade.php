@@ -569,7 +569,7 @@
             <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=600&fit=crop" alt="Pemandangan Kampung" class="d-block w-100">
             <div class="carousel-caption">
                 <div class="hero-content">
-                    <h1 class="hero-title">Selamat Datang di Website<br>Kampung Kedaton Sari</h1>
+                    <h1 class="hero-title">Selamat Datang di Website<br>Kampung Badran Sari</h1>
                     <p class="hero-subtitle">Portal Informasi & Layanan Digital untuk Masyarakat Kampung</p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
                         @auth
@@ -717,7 +717,7 @@
                 <div class="col-lg-8">
                     <div class="sambutan-content">
                         <h3 class="text-green mb-3">{{ $greeting['name'] }}</h3>
-                        <p class="text-muted mb-4"><em>Kepala Kampung Kedaton Sari</em></p>
+                        <p class="text-muted mb-4"><em>Kepala Kampung Badran Sari</em></p>
                         <div class="text-justify" style="line-height: 1.8;">
                             {{ Str::limit($greeting['message'], 500) }}
                         </div>
@@ -740,7 +740,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="section-title">Berita Terbaru</h2>
-                <p class="text-muted">Informasi dan kegiatan terkini di Kampung Kedaton Sari</p>
+                <p class="text-muted">Informasi dan kegiatan terkini di Kampung Badran Sari</p>
             </div>
             <a href="{{ route('berita.index') }}" class="btn btn-outline-success">
                 Lihat Semua <i class="fas fa-arrow-right ml-2"></i>
@@ -784,7 +784,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title">Peta Wilayah Kampung</h2>
-            <p class="text-muted">Lokasi Kampung Kedaton Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
+            <p class="text-muted">Lokasi Kampung Badran Sari, Kecamatan Punggur, Kabupaten Lampung Tengah</p>
         </div>
         <div class="map-container" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             <div id="villageMap" style="height: 500px; width: 100%;"></div>
