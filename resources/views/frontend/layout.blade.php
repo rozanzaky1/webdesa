@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Website Resmi Kampung Badran Sari">
+    <meta name="description" content="Website Resmi Kampung Kedaton Sari">
     <title>@yield('title', 'Beranda') - Kampung Badran Sari</title>
     
     <!-- Favicon -->
