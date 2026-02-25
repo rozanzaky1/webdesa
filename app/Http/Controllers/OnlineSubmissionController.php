@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Services\WhatsAppService;
+use App\Models\User;
 
 class OnlineSubmissionController extends Controller
 {
@@ -88,6 +90,19 @@ class OnlineSubmissionController extends Controller
         // Auto-archive when status is completed
         if ($request->status === 'completed' && !empty($submissions[$index]['letter_number'])) {
             $this->archiveLetter($submissions[$index]);
+            
+            // Kirim notifikasi WhatsApp ke user
+            try {
+                $user = User::find($submissions[$index]['user_id']);
+                if ($user && $user->phone) {
+                    $whatsapp = new WhatsAppService();
+                    $letterType = $this->getLetterTypeName($submissions[$index]['letter_type']);
+                    $whatsapp->sendLetterCompleted($user, $letterType, $submissions[$index]['letter_number']);
+                }
+            } catch (\Exception $e) {
+                // Log error but don't stop the process
+                \Log::error('Failed to send WhatsApp notification: ' . $e->getMessage());
+            }
         }
 
         Storage::disk('local')->put($this->submissionsPath, json_encode(array_values($submissions), JSON_PRETTY_PRINT));
@@ -252,5 +267,24 @@ class OnlineSubmissionController extends Controller
         // Add to archives
         $archives[] = $newArchive;
         Storage::disk('local')->put($archivePath, json_encode($archives, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * Get human readable letter type name
+     */
+    private function getLetterTypeName($letterType)
+    {
+        $types = [
+            'skck' => 'Surat Keterangan Catatan Kepolisian (SKCK)',
+            'domisili' => 'Surat Keterangan Domisili',
+            'usaha' => 'Surat Keterangan Usaha',
+            'tidak_mampu' => 'Surat Keterangan Tidak Mampu',
+            'nikah' => 'Surat Pengantar Nikah',
+            'kematian' => 'Surat Keterangan Kematian',
+            'kelahiran' => 'Surat Keterangan Kelahiran',
+            'pindah' => 'Surat Keterangan Pindah',
+        ];
+
+        return $types[$letterType] ?? ucwords(str_replace('_', ' ', $letterType));
     }
 }

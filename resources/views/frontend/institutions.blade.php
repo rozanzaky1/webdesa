@@ -38,9 +38,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start">
                         <div class="institution-icon mr-3">
-                            <img src="{{ asset('images/logo-lampung-tengah.png') }}" 
-                                 alt="Logo Lampung Tengah" 
-                                 style="width: 60px; height: 60px; object-fit: contain;">
+                            <i class="fas fa-{{ $institution['icon'] ?? 'building' }} fa-2x"></i>
                         </div>
                         <div class="flex-grow-1">
                             <h5 class="card-title mb-2" style="color: #2d5016;">

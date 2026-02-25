@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\AccountApprovedNotification;
+use App\Services\WhatsAppService;
 
 class UserVerificationController extends Controller
 {
@@ -60,12 +61,18 @@ class UserVerificationController extends Controller
             'approved_by' => Auth::id(),
         ]);
         
-        // Kirim email notifikasi ke user
+        // Kirim notifikasi WhatsApp ke user
         try {
-            $user->notify(new AccountApprovedNotification());
-            return redirect()->back()->with('success', 'User ' . $user->name . ' berhasil disetujui dan email notifikasi telah dikirim!');
+            $whatsapp = new WhatsAppService();
+            $sent = $whatsapp->sendAccountApproval($user);
+            
+            if ($sent) {
+                return redirect()->back()->with('success', 'User ' . $user->name . ' berhasil disetujui dan notifikasi WhatsApp telah dikirim!');
+            } else {
+                return redirect()->back()->with('success', 'User ' . $user->name . ' berhasil disetujui! (Notifikasi WhatsApp gagal dikirim)');
+            }
         } catch (\Exception $e) {
-            return redirect()->back()->with('success', 'User ' . $user->name . ' berhasil disetujui! (Email notifikasi gagal dikirim: ' . $e->getMessage() . ')');
+            return redirect()->back()->with('success', 'User ' . $user->name . ' berhasil disetujui! (Notifikasi WhatsApp gagal: ' . $e->getMessage() . ')');
         }
     }
     
