@@ -196,11 +196,16 @@
                     </div>
 
                     <div class="mb-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                            <label class="form-check-label" for="remember">
-                                Ingat Saya
-                            </label>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                <label class="form-check-label" for="remember">
+                                    Ingat Saya
+                                </label>
+                            </div>
+                            <a href="{{ route('password.request') }}" class="text-decoration-none small" style="color: #0f7b2a;">
+                                <i class="fas fa-key me-1"></i>Lupa Password?
+                            </a>
                         </div>
                     </div>
 

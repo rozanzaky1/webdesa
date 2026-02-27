@@ -223,6 +223,99 @@ class AuthController extends Controller
         }
     }
     
+    // Forgot Password Methods
+    public function showForgotPassword()
+    {
+        return view('auth.forgot-password');
+    }
+    
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email'
+        ], [
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.exists' => 'Email tidak terdaftar dalam sistem'
+        ]);
+        
+        // Generate token
+        $token = \Illuminate\Support\Str::random(64);
+        
+        // Delete old tokens for this email
+        \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->delete();
+        
+        // Insert new token
+        \Illuminate\Support\Facades\DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => \Illuminate\Support\Facades\Hash::make($token),
+            'created_at' => now()
+        ]);
+        
+        // Create reset link
+        $resetLink = route('password.reset', ['token' => $token, 'email' => $request->email]);
+        
+        // Send notification (simplified - storing link in session for now)
+        // In production, send via email using Mail facade
+        return back()->with('status', 'Link reset password: ' . $resetLink . ' (Salin link ini untuk reset password Anda)');
+    }
+    
+    public function showResetPassword(Request $request, $token)
+    {
+        return view('auth.reset-password', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+    }
+    
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6|confirmed',
+        ], [
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.exists' => 'Email tidak terdaftar',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 6 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak cocok'
+        ]);
+        
+        // Check if token exists and not expired (24 hours)
+        $passwordReset = \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->first();
+        
+        if (!$passwordReset) {
+            return back()->withErrors(['email' => 'Token reset password tidak valid atau sudah expired']);
+        }
+        
+        // Check if token expired (24 hours)
+        if (now()->diffInHours($passwordReset->created_at) > 24) {
+            \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+                ->where('email', $request->email)
+                ->delete();
+            return back()->withErrors(['email' => 'Token reset password sudah expired. Silakan request ulang.']);
+        }
+        
+        // Update user password
+        $user = \App\Models\User::where('email', $request->email)->first();
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
+        
+        // Delete token
+        \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->delete();
+        
+        return redirect()->route('login')->with('success', 'Password berhasil direset! Silakan login dengan password baru Anda.');
+    }
+    
     private function redirectBasedOnRole($user)
     {
         if ($user->role === 'admin') {

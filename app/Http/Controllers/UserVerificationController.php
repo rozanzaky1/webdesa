@@ -110,4 +110,22 @@ class UserVerificationController extends Controller
         
         return redirect()->back()->with('success', 'User ' . $userName . ' berhasil dihapus!');
     }
+    
+    public function resetPassword($id)
+    {
+        $user = User::findOrFail($id);
+        
+        if ($user->role === 'admin') {
+            return redirect()->back()->with('error', 'Tidak bisa reset password admin!');
+        }
+        
+        // Generate random password
+        $newPassword = 'user' . rand(1000, 9999);
+        
+        $user->update([
+            'password' => bcrypt($newPassword)
+        ]);
+        
+        return redirect()->back()->with('success', 'Password user ' . $user->name . ' berhasil direset! Password baru: ' . $newPassword . ' (Harap dicatat)');
+    }
 }

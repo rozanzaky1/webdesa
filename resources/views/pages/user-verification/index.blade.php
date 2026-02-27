@@ -616,6 +616,13 @@
                                         </button>
                                     @endif
                                     <button type="button"
+                                            class="btn btn-info btn-action"
+                                            data-toggle="modal"
+                                            data-target="#resetPasswordModal{{ $user->id }}"
+                                            title="Reset Password">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                    <button type="button"
                                             class="btn btn-danger btn-action"
                                             data-toggle="modal"
                                             data-target="#deleteModal{{ $user->id }}"
@@ -877,6 +884,40 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-danger">
                                 <i class="fas fa-trash mr-2"></i>Ya, Hapus
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Reset Password -->
+        <div class="modal fade" id="resetPasswordModal{{ $user->id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content shadow-lg border-0">
+                    <form action="{{ route('user-verification.reset-password', $user->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title"><i class="fas fa-key mr-2"></i>Reset Password</h5>
+                            <button type="button" class="close text-white" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Apakah Anda yakin ingin mereset password user berikut?</p>
+                            <div class="mt-3 p-3 bg-light rounded border">
+                                <strong>{{ $user->name }}</strong><br>
+                                <small class="text-muted">{{ $user->email }}</small>
+                            </div>
+                            <div class="alert alert-warning mt-3 mb-0 d-flex align-items-start">
+                                <i class="fas fa-info-circle mr-2 mt-1"></i>
+                                <small>Password akan direset menjadi password random. Password baru akan ditampilkan setelah reset berhasil. Harap dicatat!</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fas fa-key mr-2"></i>Ya, Reset Password
                             </button>
                         </div>
                     </form>

@@ -17,6 +17,12 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Forgot Password Routes
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
 // Frontend Routes (Public Access)
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
@@ -111,6 +117,7 @@ Route::patch('/news/{id}/toggle-featured', [App\Http\Controllers\NewsController:
 Route::get('/user-verification', [App\Http\Controllers\UserVerificationController::class, 'index'])->name('user-verification.index');
 Route::post('/user-verification/{id}/approve', [App\Http\Controllers\UserVerificationController::class, 'approve'])->name('user-verification.approve');
 Route::post('/user-verification/{id}/reject', [App\Http\Controllers\UserVerificationController::class, 'reject'])->name('user-verification.reject');
+Route::post('/user-verification/{id}/reset-password', [App\Http\Controllers\UserVerificationController::class, 'resetPassword'])->name('user-verification.reset-password');
 Route::delete('/user-verification/{id}', [App\Http\Controllers\UserVerificationController::class, 'destroy'])->name('user-verification.destroy');
 
 // Letter Archive - Arsip Surat Keterangan
