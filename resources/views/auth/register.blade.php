@@ -39,10 +39,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8px;
         }
-        .register-logo i {
-            font-size: 35px;
-            color: #0f7b2a;
+        .register-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .register-title {
             font-size: 22px;
@@ -135,7 +137,7 @@
         <div class="register-card">
             <div class="register-header">
                 <div class="register-logo">
-                    <i class="fas fa-landmark"></i>
+                    <img src="{{ asset('images/logo-lampung-tengah.png') }}" alt="Logo Lampung Tengah">
                 </div>
                 <div class="register-title">PENDAFTARAN AKUN WARGA</div>
                 <div class="register-subtitle">Kampung Badran Sari - Kec. Punggur - Kab. Lampung Tengah</div>

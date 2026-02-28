@@ -87,7 +87,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             // Data User & Akun
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
             
@@ -107,6 +107,7 @@ class AuthController extends Controller
         ], [
             // User validation messages
             'name.required' => 'Nama harus diisi',
+            'name.regex' => 'Nama hanya boleh mengandung huruf dan spasi',
             'email.required' => 'Email harus diisi',
             'email.email' => 'Format email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
