@@ -28,7 +28,7 @@
         .navbar-custom {
             background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            padding: 0.5rem 0;
+            padding: 0.3rem 0;
             transition: all 0.3s ease;
         }
         
@@ -36,13 +36,13 @@
             color: #fff !important;
             display: flex;
             align-items: center;
-            padding: 0.5rem 0;
+            padding: 0.3rem 0;
         }
         
         .navbar-brand img {
-            height: 50px;
-            width: 50px;
-            margin-right: 15px;
+            height: 45px;
+            width: 45px;
+            margin-right: 12px;
             transition: transform 0.3s ease;
         }
         
@@ -57,19 +57,19 @@
         }
         
         .brand-name {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #fff;
-            letter-spacing: 0.5px;
-            line-height: 1.3;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
         }
         
         .brand-location {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 400;
             color: rgba(255,255,255,0.85);
-            margin-top: 2px;
-            line-height: 1.2;
+            margin-top: 1px;
+            line-height: 1.1;
         }
         
         .navbar-nav {
@@ -79,11 +79,11 @@
         .navbar-nav .nav-link {
             color: rgba(255,255,255,0.9) !important;
             font-weight: 500;
-            font-size: 0.95rem;
-            margin: 0 5px;
-            padding: 8px 16px !important;
+            font-size: 0.9rem;
+            margin: 0 3px;
+            padding: 6px 14px !important;
             transition: all 0.3s ease;
-            border-radius: 8px;
+            border-radius: 6px;
             position: relative;
             display: flex;
             align-items: center;

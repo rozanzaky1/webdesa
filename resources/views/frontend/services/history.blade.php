@@ -79,11 +79,6 @@
                                class="btn btn-sm btn-info">
                                 <i class="fas fa-eye mr-1"></i> Detail
                             </a>
-                            @if(in_array($submission['status'], ['approved', 'completed']))
-                                <a href="#" class="btn btn-sm btn-success" onclick="alert('Fitur cetak dalam pengembangan')">
-                                    <i class="fas fa-print mr-1"></i> Cetak
-                                </a>
-                            @endif
                         </div>
                     </div>
                 </div>
