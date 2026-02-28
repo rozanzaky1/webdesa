@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\ResetPasswordNotification;
 
 class AuthController extends Controller
 {
@@ -257,9 +258,18 @@ class AuthController extends Controller
         // Create reset link
         $resetLink = route('password.reset', ['token' => $token, 'email' => $request->email]);
         
-        // Send notification (simplified - storing link in session for now)
-        // In production, send via email using Mail facade
-        return back()->with('status', 'Link reset password: ' . $resetLink . ' (Salin link ini untuk reset password Anda)');
+        // Get user
+        $user = \App\Models\User::where('email', $request->email)->first();
+        
+        // Send email notification
+        try {
+            $user->notify(new ResetPasswordNotification($resetLink, $user->name));
+            return back()->with('status', 'Link reset password telah dikirim ke email Anda. Silakan cek inbox atau folder spam.');
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send reset password email: ' . $e->getMessage());
+            // Fallback: show link if email fails
+            return back()->with('status', 'Link reset password: ' . $resetLink . ' (Email gagal dikirim, gunakan link ini untuk reset password)');
+        }
     }
     
     public function showResetPassword(Request $request, $token)
