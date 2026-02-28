@@ -4,113 +4,53 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="hero-section" style="background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%); padding: 80px 0; margin-bottom: 50px;">
+<div class="hero-section" style="background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%); padding: 50px 0 40px; margin-bottom: 40px;">
     <div class="container text-center text-white">
-        <h1 class="display-4 font-weight-bold mb-3">Lembaga Kampung</h1>
-        <p class="lead">Organisasi dan Lembaga yang Berperan dalam Pembangunan Kampung</p>
+        <h1 class="font-weight-bold mb-2" style="font-size: 2rem;">Lembaga Kampung</h1>
+        <p class="mb-0" style="font-size: 0.95rem;">Organisasi dan Lembaga yang Berperan dalam Pembangunan Kampung</p>
     </div>
 </div>
 
 <div class="container pb-5">
-    <!-- Struktur Organisasi -->
-    @if(!empty($profile['organizational_structure']))
-    <div class="card shadow-sm mb-5">
-        <div class="card-header bg-white border-bottom">
-            <h4 class="mb-0"><i class="fas fa-sitemap mr-2"></i> Struktur Organisasi Pemerintah Kampung</h4>
-        </div>
-        <div class="card-body text-center p-4">
-            <img src="{{ asset($profile['organizational_structure']) }}" 
-                 alt="Struktur Organisasi" 
-                 class="img-fluid rounded shadow"
-                 style="max-width: 100%; height: auto;">
-        </div>
-    </div>
-    @endif
 
     <!-- Daftar Lembaga -->
-    <h3 class="mb-4"><i class="fas fa-building mr-2"></i> Daftar Lembaga Kampung</h3>
+    <h3 class="mb-3" style="font-size: 1.5rem;"><i class="fas fa-building mr-2"></i> Daftar Lembaga Kampung</h3>
     
     @if(count($institutions) > 0)
     <div class="row">
         @foreach($institutions as $institution)
         <div class="col-md-6 mb-4">
             <div class="card h-100 shadow-sm institution-card">
-                <div class="card-body">
-                    <div class="d-flex align-items-start">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start mb-3">
                         <div class="institution-icon mr-3">
                             <i class="fas fa-{{ $institution['icon'] ?? 'building' }} fa-2x"></i>
                         </div>
                         <div class="flex-grow-1">
-                            <h5 class="card-title mb-2" style="color: #2d5016;">
+                            <h5 class="card-title mb-2" style="color: #2d5016; font-size: 1.15rem;">
                                 <strong>{{ $institution['name'] }}</strong>
                             </h5>
                             
                             @if(!empty($institution['description']))
-                            <p class="text-muted mb-3">{{ $institution['description'] }}</p>
+                            <p class="text-muted mb-0" style="font-size: 0.9rem; line-height: 1.5;">{{ $institution['description'] }}</p>
                             @endif
-                            
-                            <div class="institution-details">
-                                @if(!empty($institution['chairman']))
-                                <div class="mb-2">
-                                    <i class="fas fa-user-tie mr-2 text-primary"></i>
-                                    <strong>Ketua:</strong> {{ $institution['chairman'] }}
-                                </div>
-                                @endif
-                                
-                                @if(!empty($institution['secretary']))
-                                <div class="mb-2">
-                                    <i class="fas fa-user mr-2 text-success"></i>
-                                    <strong>Sekretaris:</strong> {{ $institution['secretary'] }}
-                                </div>
-                                @endif
-                                
-                                @if(!empty($institution['treasurer']))
-                                <div class="mb-2">
-                                    <i class="fas fa-wallet mr-2 text-warning"></i>
-                                    <strong>Bendahara:</strong> {{ $institution['treasurer'] }}
-                                </div>
-                                @endif
-                                
-                                @if(!empty($institution['members_count']))
-                                <div class="mb-2">
-                                    <i class="fas fa-users mr-2 text-info"></i>
-                                    <strong>Jumlah Anggota:</strong> {{ $institution['members_count'] }} orang
-                                </div>
-                                @endif
-                                
-                                @if(!empty($institution['established_date']))
-                                <div class="mb-2">
-                                    <i class="far fa-calendar mr-2 text-secondary"></i>
-                                    <strong>Dibentuk:</strong> {{ \Carbon\Carbon::parse($institution['established_date'])->format('d F Y') }}
-                                </div>
-                                @endif
-                            </div>
                         </div>
                     </div>
+                    
+                    @if(!empty($institution['structure_image']))
+                    <div class="mt-3 mb-3">
+                        <h6 class="mb-2" style="font-size: 0.95rem;"><i class="fas fa-sitemap mr-1"></i> Struktur Organisasi</h6>
+                        <div class="structure-image-wrapper" style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $institution['structure_image']) }}" 
+                                 alt="Struktur {{ $institution['name'] }}" 
+                                 class="img-fluid rounded zoom-image"
+                                 style="width: 100%; height: auto; cursor: pointer;"
+                                 onclick="openImageModal(this.src, '{{ $institution['name'] }}')">
+                            <small class="text-muted d-block mt-2 text-center"><i class="fas fa-search-plus"></i> Klik gambar untuk memperbesar</small>
+                        </div>
+                    </div>
+                    @endif
                 </div>
-                @if(!empty($institution['structure_image']))
-                <div class="card-footer bg-white border-top">
-                    <h6 class="mb-3"><i class="fas fa-sitemap mr-2"></i>Struktur Organisasi</h6>
-                    <img src="{{ asset('storage/' . $institution['structure_image']) }}" 
-                         alt="Struktur {{ $institution['name'] }}" 
-                         class="img-fluid rounded shadow-sm"
-                         style="max-width: 100%; height: auto;">
-                </div>
-                @endif
-                
-                @if(!empty($institution['programs']) && is_array($institution['programs']))
-                <div class="card-footer bg-light">
-                    <small class="text-muted">
-                        <i class="fas fa-tasks mr-1"></i> 
-                        <strong>Program:</strong>
-                    </small>
-                    <ul class="mb-0 mt-2 pl-3">
-                        @foreach($institution['programs'] as $program)
-                        <li><small>{{ $program }}</small></li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
             </div>
         </div>
         @endforeach
@@ -120,62 +60,78 @@
         <div class="card-body text-center py-5">
             <i class="fas fa-building fa-4x text-muted mb-3"></i>
             <h5 class="text-muted">Data Lembaga Kampung Belum Tersedia</h5>
-            <p class="text-muted">Informasi lembaga Kampung akan segera ditambahkan</p>
+            <p class="text-muted mb-0">Informasi lembaga Kampung akan segera ditambahkan</p>
         </div>
     </div>
     @endif
+</div>
 
-    <!-- Info Tambahan -->
-    <div class="alert alert-info mt-5">
-        <h5 class="mb-3"><i class="fas fa-info-circle mr-2"></i> Tentang Lembaga Kampung</h5>
-        <p class="mb-2">
-            Lembaga Kampung adalah organisasi atau kelembagaan yang dibentuk atas prakarsa masyarakat 
-            sesuai dengan kebutuhan dan merupakan mitra pemerintah Kampung dalam memberdayakan masyarakat.
-        </p>
-        <p class="mb-0">
-            Lembaga-lembaga ini memiliki peran penting dalam pembangunan Kampung dan peningkatan 
-            kesejahteraan masyarakat melalui berbagai program dan kegiatan.
-        </p>
+<!-- Modal Zoom Image -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="imageModalTitle">Struktur Organisasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center p-4">
+                <img id="modalImage" src="" alt="Struktur Organisasi" class="img-fluid" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
     </div>
 </div>
 
+<script>
+function openImageModal(imageSrc, title) {
+    document.getElementById('modalImage').src = imageSrc;
+    document.getElementById('imageModalTitle').textContent = 'Struktur Organisasi ' + title;
+    $('#imageModal').modal('show');
+}
+</script>
+
 <style>
 .institution-card {
-    border: none;
+    border: 1px solid #e0e0e0;
     border-radius: 10px;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .institution-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important;
+    border-color: #c8e6c9;
 }
 
 .institution-icon {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-    border-radius: 50%;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #2d5016;
+    flex-shrink: 0;
 }
 
-.institution-details {
-    font-size: 0.95rem;
+.structure-image-wrapper {
+    border: 2px solid #e0e0e0;
+    transition: all 0.2s ease;
 }
 
-.institution-details i {
-    width: 20px;
+.structure-image-wrapper:hover {
+    border-color: #2d5016;
 }
 
-.card-footer {
-    border-top: 1px solid #dee2e6;
+.zoom-image {
+    transition: all 0.2s ease;
 }
 
-.card-footer ul {
-    list-style-type: disc;
+.zoom-image:hover {
+    opacity: 0.9;
 }
 
 .hero-section {
@@ -196,12 +152,26 @@
 
 @media (max-width: 768px) {
     .hero-section {
-        padding: 50px 0 !important;
+        padding: 35px 0 30px !important;
     }
     
     .hero-section h1 {
-        font-size: 2rem;
+        font-size: 1.5rem !important;
+    }
+    
+    .hero-section p {
+        font-size: 0.85rem !important;
+    }
+    
+    .institution-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .institution-icon i {
+        font-size: 1.3rem !important;
     }
 }
+</style>
 </style>
 @endsection
