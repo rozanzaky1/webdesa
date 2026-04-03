@@ -229,34 +229,6 @@ class ResidentController extends Controller
         }
     }
     
-    public function importForm()
-    {
-        return view('pages.residents.import');
-    }
-
-    public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|file|mimes:xlsx,xls,csv'
-        ], [
-            'file.required' => 'Silakan pilih file Excel terlebih dahulu',
-            'file.mimes' => 'File harus berformat Excel (.xlsx, .xls) atau CSV'
-        ]);
-
-        try {
-            $imported = \Maatwebsite\Excel\Facades\Excel::import(
-                new \App\Imports\ResidentsImport,
-                $request->file('file')
-            );
-
-            return redirect()->route('residents.index')
-                ->with('success', 'Data penduduk berhasil diimport!');
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Gagal mengimport file: ' . $e->getMessage());
-        }
-    }
-    
     private function getHamlets()
     {
         if (!Storage::disk('local')->exists('hamlets.json')) {
