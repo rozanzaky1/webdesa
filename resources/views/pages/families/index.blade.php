@@ -434,8 +434,6 @@
                         <th>No. KK</th>
                         <th>Kepala Keluarga</th>
                         <th>NIK Kepala</th>
-                        <th>Dusun</th>
-                        <th>RT/RW</th>
                         <th>Alamat</th>
                         <th>Jumlah Anggota</th>
                         <th class="text-center">Detail</th>
@@ -450,8 +448,6 @@
                             <td><strong>{{ $family->kk }}</strong></td>
                             <td>{{ $family->head_name }}</td>
                             <td>{{ $family->head_nik ?? '-' }}</td>
-                            <td>{{ $family->hamlet ?? '-' }}</td>
-                            <td>{{ $family->rt ?? '-' }}/{{ $family->rw ?? '-' }}</td>
                             <td>{{ $family->address }}</td>
                             <td>
                                 <span class="badge badge-primary">{{ $family->total_members }} Orang</span>
@@ -535,8 +531,7 @@
                                     <strong>NIK:</strong> {{ $family->head_nik ?? '-' }}
                                 </div>
                                 <div class="col-md-6">
-                                    <strong>Alamat:</strong> {{ $family->address }}<br>
-                                    <strong>Dusun:</strong> {{ $family->hamlet ?? '-' }}
+                                    <strong>Alamat:</strong> {{ $family->address }}
                                 </div>
                             </div>
                         </div>

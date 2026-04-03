@@ -53,48 +53,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <!-- Dusun -->
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Dusun <span class="text-danger">*</span></label>
-                            <select name="hamlet" class="form-control @error('hamlet') is-invalid @enderror" required>
-                                <option value="">Pilih Dusun</option>
-                                @foreach($hamlets as $hamlet)
-                                    <option value="{{ $hamlet }}" {{ old('hamlet') == $hamlet ? 'selected' : '' }}>{{ $hamlet }}</option>
-                                @endforeach
-                            </select>
-                            @error('hamlet')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- RT -->
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label class="form-label">RT <span class="text-danger">*</span></label>
-                            <input type="text" name="rt" class="form-control @error('rt') is-invalid @enderror" 
-                                   value="{{ old('rt') }}" placeholder="Contoh: 001" required>
-                            @error('rt')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- RW -->
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label class="form-label">RW <span class="text-danger">*</span></label>
-                            <input type="text" name="rw" class="form-control @error('rw') is-invalid @enderror" 
-                                   value="{{ old('rw') }}" placeholder="Contoh: 001" required>
-                            @error('rw')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Alamat -->
                 <div class="form-group mb-3">
                     <label class="form-label">Alamat Lengkap <span class="text-danger">*</span></label>
