@@ -729,9 +729,9 @@
                                 <p class="font-weight-bold">
                                     @switch($item->marital_status)
                                         @case('Single') Belum Menikah @break
-                                        @case('Married') Menikah @break
-                                        @case('Divorced') Cerai @break
-                                        @case('Widowed') Janda/Duda @break
+                                        @case('Married') Sudah Menikah @break
+                                        @case('Divorced') Pernah Menikah @break
+                                        @case('Widowed') Pernah Menikah @break
                                         @default {{ $item->marital_status }}
                                     @endswitch
                                 </p>

@@ -28,6 +28,15 @@
                  <div class="card shadow">
                     <div class="card-body">
                       <div class="form-group mb-3">
+                        <label for="family_card_number">Nomor Kartu Keluarga (KK)</label>
+                        <input type="number" name="family_card_number" id="family_card_number" value="{{ old('family_card_number') }}" class="form-control @error('family_card_number') is-invalid @enderror" max="9999999999999999" inputmode="numeric" required style="appearance: textfield; -moz-appearance: textfield;">
+                        <small class="text-muted">Harus tepat 16 digit</small>
+                        @error('family_card_number')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="nik">NIK</label>
                         <input type="number" name="nik" id="nik" value="{{ old('nik') }}" class="form-control @error('nik') is-invalid @enderror" inputmode="numeric" max="9999999999999999" required style="appearance: textfield; -moz-appearance: textfield;">
                         <small class="text-muted">Harus tepat 16 digit</small>
@@ -95,15 +104,6 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="family_card_number">Nomor Kartu Keluarga (KK)</label>
-                            <input type="number" name="family_card_number" id="family_card_number" value="{{ old('family_card_number') }}" class="form-control @error('family_card_number') is-invalid @enderror" max="9999999999999999" inputmode="numeric" required style="appearance: textfield; -moz-appearance: textfield;">
-                            <small class="text-muted">Harus tepat 16 digit</small>
-                            @error('family_card_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
                             <label for="religion">Agama</label>
                             <select name="religion" id="religion" class="form-control @error('religion') is-invalid @enderror" required>
                                 <option value="">-- Pilih Agama --</option>
@@ -125,8 +125,7 @@
                                 <option value="">-- Pilih Status Perkawinan --</option>
                                 <option value="Single" {{ old('marital_status') == 'Single' ? 'selected' : '' }}>Belum Menikah</option>
                                 <option value="Married" {{ old('marital_status') == 'Married' ? 'selected' : '' }}>Sudah Menikah</option>
-                                <option value="Divorced" {{ old('marital_status') == 'Divorced' ? 'selected' : '' }}>Cerai</option>
-                                <option value="Widowed" {{ old('marital_status') == 'Widowed' ? 'selected' : '' }}>Duda/Janda</option>
+                                <option value="Divorced" {{ old('marital_status') == 'Divorced' ? 'selected' : '' }}>Pernah Menikah</option>
                             </select>
                             @error('marital_status')
                                 <div class="invalid-feedback">{{ $message }}</div>
