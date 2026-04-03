@@ -495,9 +495,14 @@
                 <h1><i class="fas fa-users mr-2"></i>Data Penduduk</h1>
                 <p>Kelola data penduduk Kampung Badran Sari</p>
             </div>
-            <a href="{{ route('residents.create') }}" class="btn btn-light btn-lg">
-                <i class="fas fa-plus mr-2"></i> Tambah Penduduk
-            </a>
+            <div>
+                <a href="{{ route('residents.create') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-plus mr-2"></i> Tambah Penduduk
+                </a>
+                <a href="{{ route('residents.import-form') }}" class="btn btn-info btn-lg">
+                    <i class="fas fa-file-excel mr-2"></i> Import Excel
+                </a>
+            </div>
         </div>
     </div>
 

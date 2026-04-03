@@ -54,6 +54,8 @@ Route::middleware(['admin'])->group(function () {
 // Residents - Penduduk
 Route::get('/residents', [ResidentController::class, 'index'])->name('residents.index');
 Route::get('/residents/create', [ResidentController::class, 'create'])->name('residents.create');
+Route::get('/residents/import', [ResidentController::class, 'importForm'])->name('residents.import-form');
+Route::post('/residents/import', [ResidentController::class, 'import'])->name('residents.import');
 Route::post('/residents', [ResidentController::class, 'store'])->name('residents.store');
 Route::get('/residents/{id}/edit', [ResidentController::class, 'edit'])->name('residents.edit');
 Route::put('/residents/{id}', [ResidentController::class, 'update'])->name('residents.update');
