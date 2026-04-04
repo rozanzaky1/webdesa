@@ -425,7 +425,7 @@
             background: #4a7c2c;
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+            box-shadow: 0 4px 12px rba(45, 80, 22, 0.3);
         }
         
         /* Button Responsive */
