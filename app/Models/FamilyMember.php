@@ -18,8 +18,6 @@ class FamilyMember extends Model
         'birth_date',
         'address',
         'hamlet',
-        'rt',
-        'rw',
         'religion',
         'marital_status',
         'occupation',

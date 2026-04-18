@@ -21,8 +21,6 @@ class Resident extends Model
         'birth_place',
         'address',
         'hamlet',
-        'rt',
-        'rw',
         'religion',
         'marital_status',
         'occupation',
