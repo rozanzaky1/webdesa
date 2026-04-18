@@ -11,6 +11,12 @@ class Family extends Model
 
     protected $table = 'families';
 
+    protected $primaryKey = 'kk';
+    
+    public $keyType = 'string';
+    
+    public $incrementing = false;
+
     protected $fillable = [
         'kk',
         'head_name',

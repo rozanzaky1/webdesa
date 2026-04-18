@@ -52,19 +52,19 @@ class FamilyController extends Controller
         return redirect()->route('families.index')->with('success', 'Data keluarga berhasil ditambahkan');
     }
 
-    public function edit($id)
+    public function edit($kk)
     {
-        $family = Family::findOrFail($id)->toArray();
+        $family = Family::findOrFail($kk)->toArray();
         $hamlets = $this->getHamlets();
         return view('pages.families.edit', compact('family', 'hamlets'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $kk)
     {
-        $family = Family::findOrFail($id);
+        $family = Family::findOrFail($kk);
 
         $validated = $request->validate([
-            'kk' => 'required|string|max:25|unique:families,kk,' . $id,
+            'kk' => 'required|string|max:25|unique:families,kk,' . $kk,
             'head_name' => 'required|string|max:100',
             'head_nik' => 'nullable|string|max:20',
             'hamlet' => 'nullable|string|max:100',
@@ -76,9 +76,9 @@ class FamilyController extends Controller
         return redirect()->route('families.index')->with('success', 'Data keluarga berhasil diperbarui');
     }
 
-    public function destroy($id)
+    public function destroy($kk)
     {
-        $family = Family::findOrFail($id);
+        $family = Family::findOrFail($kk);
         $family->delete();
 
         return redirect()->route('families.index')->with('success', 'Data keluarga berhasil dihapus');

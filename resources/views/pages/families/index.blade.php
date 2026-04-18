@@ -456,18 +456,18 @@
                                 <button type="button"
                                         class="btn btn-info btn-sm btn-action"
                                         data-toggle="modal"
-                                        data-target="#detailModal{{ $family->id }}"
+                                        data-target="#detailModal{{ $family->kk }}"
                                         title="Lihat Anggota">
                                     <i class="fas fa-users"></i>
                                 </button>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('families.edit', $family->id) }}" 
+                                <a href="{{ route('families.edit', $family->kk) }}" 
                                    class="btn btn-warning btn-sm btn-action"
                                    title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('families.destroy', $family->id) }}" 
+                                <form action="{{ route('families.destroy', $family->kk) }}" 
                                       method="POST" 
                                       style="display: inline-block;"
                                       onsubmit="return confirm('Yakin ingin menghapus data keluarga ini?')">
@@ -512,7 +512,7 @@
     </div>
     <!-- Modal Detail Anggota Keluarga -->
     @foreach ($families as $family)
-        <div class="modal fade" id="detailModal{{ $family->id }}" tabindex="-1" role="dialog">
+        <div class="modal fade" id="detailModal{{ $family->kk }}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content shadow-lg border-0">
                     <div class="modal-header bg-info text-white">

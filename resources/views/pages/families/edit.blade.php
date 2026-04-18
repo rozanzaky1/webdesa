@@ -14,7 +14,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Form Edit Data Keluarga</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('families.update', $family['id']) }}" method="POST">
+            <form action="{{ route('families.update', $family['kk']) }}" method="POST">
                 @csrf
                 @method('PUT')
                 
