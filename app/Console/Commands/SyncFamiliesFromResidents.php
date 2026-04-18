@@ -77,18 +77,20 @@ class SyncFamiliesFromResidents extends Command
                         'hamlet' => $headResident->hamlet ?? null,
                         'total_members' => $totalMembers,
                     ]);
-                    $this->line("✓ Created family KK {$familyCardNumber} with {$totalMembers} members");
+                    $this->line("✓ Created family KK {$familyCardNumber}: head={$headResident->name}, members={$totalMembers}");
                     $created++;
                 } catch (\Exception $e) {
                     $this->error("✗ Error creating family KK {$familyCardNumber}: {$e->getMessage()}");
                 }
             } else {
-                // Update existing family
+                // Update existing family - update BOTH head and total_members
                 try {
                     Family::where('kk', $familyCardNumber)->update([
+                        'head_name' => $headResident->name,
+                        'head_nik' => $headResident->nik,
                         'total_members' => $totalMembers,
                     ]);
-                    $this->line("✓ Updated family KK {$familyCardNumber}: {$totalMembers} members");
+                    $this->line("✓ Updated family KK {$familyCardNumber}: head={$headResident->name}, members={$totalMembers}");
                     $updated++;
                 } catch (\Exception $e) {
                     $this->error("✗ Error updating family KK {$familyCardNumber}: {$e->getMessage()}");
