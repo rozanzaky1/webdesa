@@ -105,9 +105,21 @@ class BadransariSeeder extends Seeder
                 ->get();
 
             // Find oldest male, or oldest person
-            $headResident = $residents
-                ->where('gender', 'Male')
-                ->first() ?? $residents->first();
+            $headResident = null;
+            
+            // Try to find oldest male first (handle different gender formats: M, Male, male)
+            foreach ($residents as $resident) {
+                $gender = strtoupper(trim($resident->gender));
+                if ($gender === 'M' || $gender === 'MALE') {
+                    $headResident = $resident;
+                    break; // Found oldest male (already sorted by birth_date asc)
+                }
+            }
+            
+            // If no male found, use oldest person
+            if (!$headResident) {
+                $headResident = $residents->first();
+            }
 
             if ($headResident) {
                 $family->update([

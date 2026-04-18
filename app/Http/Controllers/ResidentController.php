@@ -206,15 +206,24 @@ class ResidentController extends Controller
         if (!$family) {
             // Jika belum ada, buat data keluarga baru
             // Cari kepala keluarga: laki-laki paling tua, jika tidak ada ambil yang paling tua
-            $headResident = Resident::where('family_card_number', $resident->family_card_number)
+            $headResident = null;
+            
+            // Try to find oldest male first (handle different gender formats: M, Male, male)
+            $residents = Resident::where('family_card_number', $resident->family_card_number)
                 ->orderBy('birth_date', 'asc')
-                ->get()
-                ->where('gender', 'Male')
-                ->first() 
-                ?? 
-                Resident::where('family_card_number', $resident->family_card_number)
-                    ->orderBy('birth_date', 'asc')
-                    ->first();
+                ->get();
+            foreach ($residents as $res) {
+                $gender = strtoupper(trim($res->gender));
+                if ($gender === 'M' || $gender === 'MALE') {
+                    $headResident = $res;
+                    break; // Found oldest male (already sorted)
+                }
+            }
+            
+            // If no male found, use oldest person
+            if (!$headResident) {
+                $headResident = $residents->first();
+            }
             
             // Hitung total anggota keluarga
             $totalMembers = Resident::where('family_card_number', $resident->family_card_number)->count();
@@ -231,15 +240,22 @@ class ResidentController extends Controller
             $totalMembers = Resident::where('family_card_number', $resident->family_card_number)->count();
             
             // Update head of family jika berubah
-            $headResident = Resident::where('family_card_number', $resident->family_card_number)
+            $residents = Resident::where('family_card_number', $resident->family_card_number)
                 ->orderBy('birth_date', 'asc')
-                ->get()
-                ->where('gender', 'Male')
-                ->first() 
-                ?? 
-                Resident::where('family_card_number', $resident->family_card_number)
-                    ->orderBy('birth_date', 'asc')
-                    ->first();
+                ->get();
+            
+            $headResident = null;
+            foreach ($residents as $res) {
+                $gender = strtoupper(trim($res->gender));
+                if ($gender === 'M' || $gender === 'MALE') {
+                    $headResident = $res;
+                    break; // Found oldest male
+                }
+            }
+            
+            if (!$headResident) {
+                $headResident = $residents->first();
+            }
             
             $family->update([
                 'total_members' => $totalMembers,
