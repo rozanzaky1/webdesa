@@ -41,8 +41,6 @@ class FamilyMembersSeeder extends Seeder
                         'birth_date' => !empty($row[5]) ? date('Y-m-d', strtotime($row[5])) : null,
                         'address' => $row[6] ?? null,
                         'hamlet' => $row[7] ?? null,
-                        'rt' => $row[8] ?? null,
-                        'rw' => $row[9] ?? null,
                         'religion' => $row[10] ?? null,
                         'marital_status' => $row[11] ?? null,
                         'occupation' => $row[12] ?? null,
@@ -63,9 +61,6 @@ class FamilyMembersSeeder extends Seeder
                             'head_name' => $data['name'] ?? 'Unknown',
                             'head_nik' => $data['nik'] ?? null,
                             'hamlet' => $data['hamlet'] ?? null,
-                            'rt' => $data['rt'] ?? null,
-                            'rw' => $data['rw'] ?? null,
-                            'address' => $data['address'] ?? null,
                         ]);
                     }
 

@@ -38,8 +38,6 @@ class BadransariSeeder extends Seeder
             if (!empty($data['hamlet']) && !isset($hamlets[$data['hamlet']])) {
                 $hamlets[$data['hamlet']] = [
                     'name' => $data['hamlet'],
-                    'rt' => $data['rt'],
-                    'rw' => $data['rw'],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -52,8 +50,6 @@ class BadransariSeeder extends Seeder
                     'head_name' => null, // Will be updated later if possible
                     'head_nik' => null, // Will be updated later if possible
                     'hamlet' => $data['hamlet'],
-                    'rt' => $data['rt'],
-                    'rw' => $data['rw'],
                     'total_members' => 0, // Will be calculated later
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -70,8 +66,6 @@ class BadransariSeeder extends Seeder
                 'birth_date' => $data['birth_date'],
                 'address' => $data['address'],
                 'hamlet' => $data['hamlet'],
-                'rt' => $data['rt'],
-                'rw' => $data['rw'],
                 'religion' => $data['religion'],
                 'marital_status' => $data['marital_status'],
                 'occupation' => $data['occupation'],
