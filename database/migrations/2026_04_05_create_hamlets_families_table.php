@@ -12,22 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         // Create Hamlets (Dusun) Table
-        Schema::create('hamlets', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique()->index();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('hamlets')) {
+            Schema::create('hamlets', function (Blueprint $table) {
+                $table->id();
+                $table->string('name')->unique()->index();
+                $table->timestamps();
+            });
+        }
 
         // Create Families Table
-        Schema::create('families', function (Blueprint $table) {
-            $table->id();
-            $table->string('kk', 25)->unique()->primary()->index();
-            $table->string('head_name')->nullable();
-            $table->string('head_nik', 20)->nullable()->unique();
-            $table->string('hamlet')->nullable();
-            $table->integer('total_members')->default(0);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('families')) {
+            Schema::create('families', function (Blueprint $table) {
+                $table->id();
+                $table->string('kk', 25)->unique()->primary()->index();
+                $table->string('head_name')->nullable();
+                $table->string('head_nik', 20)->nullable()->unique();
+                $table->string('hamlet')->nullable();
+                $table->integer('total_members')->default(0);
+                $table->timestamps();
+            });
+        }
 
         // Add foreign key to residents if column doesn't exist
         if (!Schema::hasColumn('residents', 'family_card_number')) {
