@@ -15,12 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            BadransariSeeder::class,
+        ]);
+
         // Create admin user
         User::create([
             'name' => 'Admin',
             'email' => 'admin@webdesa.com',
             'role' => 'admin',
             'password' => bcrypt('admin123'),
+            'is_approved' => true,
+            'approved_at' => now(),
         ]);
 
         // Create sample user
@@ -30,6 +36,8 @@ class DatabaseSeeder extends Seeder
             'nik' => '1234567890123456',
             'role' => 'user',
             'password' => bcrypt('user123'),
+            'is_approved' => true,
+            'approved_at' => now(),
         ]);
     }
 }

@@ -30,4 +30,12 @@ class Family extends Model
     {
         return $this->hasMany(Resident::class, 'family_card_number', 'kk');
     }
+
+    /**
+     * Get all family members details
+     */
+    public function familyMembers()
+    {
+        return $this->hasMany(FamilyMember::class, 'family_card_number', 'kk');
+    }
 }
