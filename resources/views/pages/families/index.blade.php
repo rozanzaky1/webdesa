@@ -434,7 +434,7 @@
                         <th>No. KK</th>
                         <th>Kepala Keluarga</th>
                         <th>NIK Kepala</th>
-                        <th>Alamat</th>
+                        <th>Dusun</th>
                         <th>Jumlah Anggota</th>
                         <th class="text-center">Detail</th>
                         <th class="text-center">Aksi</th>
@@ -448,7 +448,7 @@
                             <td><strong>{{ $family->kk }}</strong></td>
                             <td>{{ $family->head_name }}</td>
                             <td>{{ $family->head_nik ?? '-' }}</td>
-                            <td>{{ $family->address }}</td>
+                            <td>{{ $family->hamlet ?? '-' }}</td>
                             <td>
                                 <span class="badge badge-primary">{{ $family->total_members }} Orang</span>
                             </td>
@@ -531,7 +531,7 @@
                                     <strong>NIK:</strong> {{ $family->head_nik ?? '-' }}
                                 </div>
                                 <div class="col-md-6">
-                                    <strong>Alamat:</strong> {{ $family->address }}
+                                    <strong>Dusun:</strong> {{ $family->hamlet ?? '-' }}
                                 </div>
                             </div>
                         </div>
