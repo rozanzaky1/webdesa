@@ -53,24 +53,18 @@
                     </div>
                 </div>
 
-                <!-- Alamat -->
-                <div class="form-group mb-3">
-                    <label class="form-label">Alamat Lengkap <span class="text-danger">*</span></label>
-                    <textarea name="address" class="form-control @error('address') is-invalid @enderror" 
-                              rows="3" required>{{ old('address') }}</textarea>
-                    @error('address')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
                 <div class="row">
-                    <!-- Kode Pos -->
+                    <!-- Dusun -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label class="form-label">Kode Pos</label>
-                            <input type="text" name="postal_code" class="form-control @error('postal_code') is-invalid @enderror" 
-                                   value="{{ old('postal_code') }}">
-                            @error('postal_code')
+                            <label class="form-label">Dusun</label>
+                            <select name="hamlet" class="form-control @error('hamlet') is-invalid @enderror">
+                                <option value="">-- Pilih Dusun --</option>
+                                @foreach($hamlets as $hamlet)
+                                    <option value="{{ $hamlet }}" {{ old('hamlet') == $hamlet ? 'selected' : '' }}>{{ $hamlet }}</option>
+                                @endforeach
+                            </select>
+                            @error('hamlet')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

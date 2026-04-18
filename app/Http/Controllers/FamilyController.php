@@ -40,14 +40,10 @@ class FamilyController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kk' => 'required|string|max:20|unique:families,kk',
-            'head_name' => 'required|string|max:150',
-            'head_nik' => 'nullable|string|max:16',
+            'kk' => 'required|string|max:25|unique:families,kk',
+            'head_name' => 'required|string|max:100',
+            'head_nik' => 'nullable|string|max:20',
             'hamlet' => 'nullable|string|max:100',
-            'rt' => 'nullable|string|max:10',
-            'rw' => 'nullable|string|max:10',
-            'address' => 'required|string',
-            'postal_code' => 'nullable|string|max:10',
             'total_members' => 'required|integer|min:1',
         ]);
 
@@ -68,14 +64,10 @@ class FamilyController extends Controller
         $family = Family::findOrFail($id);
 
         $validated = $request->validate([
-            'kk' => 'required|string|max:20|unique:families,kk,' . $id,
-            'head_name' => 'required|string|max:150',
-            'head_nik' => 'nullable|string|max:16',
+            'kk' => 'required|string|max:25|unique:families,kk,' . $id,
+            'head_name' => 'required|string|max:100',
+            'head_nik' => 'nullable|string|max:20',
             'hamlet' => 'nullable|string|max:100',
-            'rt' => 'nullable|string|max:10',
-            'rw' => 'nullable|string|max:10',
-            'address' => 'required|string',
-            'postal_code' => 'nullable|string|max:10',
             'total_members' => 'required|integer|min:1',
         ]);
 

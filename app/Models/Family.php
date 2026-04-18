@@ -16,10 +16,6 @@ class Family extends Model
         'head_name',
         'head_nik',
         'hamlet',
-        'rt',
-        'rw',
-        'address',
-        'postal_code',
         'total_members',
     ];
     
