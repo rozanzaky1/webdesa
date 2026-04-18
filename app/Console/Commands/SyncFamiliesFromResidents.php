@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Family;
 use App\Models\Resident;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SyncFamiliesFromResidents extends Command
 {
@@ -41,14 +42,15 @@ class SyncFamiliesFromResidents extends Command
         $updated = 0;
 
         foreach ($uniqueFamilies as $familyCardNumber) {
-            // Get all residents for this family
-            $residents = Resident::where('family_card_number', $familyCardNumber)->get();
+            // Get all residents for this family, sorted by birth_date (oldest first)
+            $residents = Resident::where('family_card_number', $familyCardNumber)
+                ->orderBy('birth_date', 'asc')
+                ->get();
             $totalMembers = $residents->count();
 
-            // Try to find head of family (prefer Male/Married, else first resident)
+            // Find head of family: prefer oldest male, else oldest person
             $headResident = $residents
                 ->where('gender', 'Male')
-                ->where('marital_status', 'Married')
                 ->first() ?? $residents->first();
 
             $familyExists = Family::where('kk', $familyCardNumber)->exists();

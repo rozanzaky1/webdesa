@@ -95,6 +95,28 @@ class BadransariSeeder extends Seeder
             Family::where('kk', $count->family_card_number)->update(['total_members' => $count->total]);
         }
 
+        // --- 5. Update head of family: oldest male, or oldest person if no male ---
+        $this->command->info('Updating head of families...');
+        $families = Family::all();
+        foreach ($families as $family) {
+            // Get all residents for this family, sorted by birth_date (oldest first)
+            $residents = Resident::where('family_card_number', $family->kk)
+                ->orderBy('birth_date', 'asc')
+                ->get();
+
+            // Find oldest male, or oldest person
+            $headResident = $residents
+                ->where('gender', 'Male')
+                ->first() ?? $residents->first();
+
+            if ($headResident) {
+                $family->update([
+                    'head_name' => $headResident->name,
+                    'head_nik' => $headResident->nik,
+                ]);
+            }
+        }
+
         // Re-enable foreign key checks
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 

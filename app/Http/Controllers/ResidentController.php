@@ -205,11 +205,16 @@ class ResidentController extends Controller
         
         if (!$family) {
             // Jika belum ada, buat data keluarga baru
-            // Cari kepala keluarga (biasanya yang pertama atau status Married/Male)
+            // Cari kepala keluarga: laki-laki paling tua, jika tidak ada ambil yang paling tua
             $headResident = Resident::where('family_card_number', $resident->family_card_number)
+                ->orderBy('birth_date', 'asc')
+                ->get()
                 ->where('gender', 'Male')
-                ->where('marital_status', 'Married')
-                ->first() ?? $resident;
+                ->first() 
+                ?? 
+                Resident::where('family_card_number', $resident->family_card_number)
+                    ->orderBy('birth_date', 'asc')
+                    ->first();
             
             // Hitung total anggota keluarga
             $totalMembers = Resident::where('family_card_number', $resident->family_card_number)->count();
@@ -222,9 +227,25 @@ class ResidentController extends Controller
                 'total_members' => $totalMembers,
             ]);
         } else {
-            // Jika sudah ada, update jumlah anggota
+            // Jika sudah ada, update jumlah anggota dan head jika diperlukan
             $totalMembers = Resident::where('family_card_number', $resident->family_card_number)->count();
-            $family->update(['total_members' => $totalMembers]);
+            
+            // Update head of family jika berubah
+            $headResident = Resident::where('family_card_number', $resident->family_card_number)
+                ->orderBy('birth_date', 'asc')
+                ->get()
+                ->where('gender', 'Male')
+                ->first() 
+                ?? 
+                Resident::where('family_card_number', $resident->family_card_number)
+                    ->orderBy('birth_date', 'asc')
+                    ->first();
+            
+            $family->update([
+                'total_members' => $totalMembers,
+                'head_name' => $headResident->name,
+                'head_nik' => $headResident->nik,
+            ]);
         }
     }
     
