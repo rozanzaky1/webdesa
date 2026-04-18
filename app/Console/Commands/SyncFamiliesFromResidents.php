@@ -33,8 +33,7 @@ class SyncFamiliesFromResidents extends Command
         // Get all unique family_card_numbers from residents
         $uniqueFamilies = Resident::whereNotNull('family_card_number')
             ->distinct('family_card_number')
-            ->pluck('family_card_number')
-            ->toArray();
+            ->pluck('family_card_number');
 
         $this->info("Found {$uniqueFamilies->count()} unique families in residents table");
 
