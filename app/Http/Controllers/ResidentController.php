@@ -89,8 +89,6 @@ class ResidentController extends Controller
             'marital_status.in' => 'Status perkawinan tidak valid',
             'address.required' => 'Alamat wajib diisi',
             'hamlet.max' => 'Dusun maksimal 100 karakter',
-            'rt.max' => 'RT maksimal 50 karakter',
-            'rw.max' => 'RW maksimal 50 karakter',
             'family_card_number.required' => 'Nomor KK wajib diisi',
             'family_card_number.min' => 'Nomor KK harus tepat 16 digit',
             'family_card_number.max' => 'Nomor KK harus tepat 16 digit',
@@ -221,7 +219,6 @@ class ResidentController extends Controller
                 'head_name' => $headResident->name,
                 'head_nik' => $headResident->nik,
                 'hamlet' => $resident->hamlet,
-                'address' => $resident->address,
                 'total_members' => $totalMembers,
             ]);
         } else {
