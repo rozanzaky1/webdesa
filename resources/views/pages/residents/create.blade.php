@@ -103,23 +103,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="rt">RT</label>
-                            <input type="text" name="rt" id="rt" value="{{ old('rt') }}" class="form-control @error('rt') is-invalid @enderror" maxlength="50">
-                            <small class="text-muted">Opsional - Rukun Tetangga</small>
-                            @error('rt')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        <div class="form-group mb-3">
-                            <label for="rw">RW</label>
-                            <input type="text" name="rw" id="rw" value="{{ old('rw') }}" class="form-control @error('rw') is-invalid @enderror" maxlength="50">
-                            <small class="text-muted">Opsional - Rukun Warga</small>
-                            @error('rw')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
                         <div class="form-group mb-3">
                             <label for="religion">Agama</label>
